@@ -6,7 +6,7 @@ export class Employee{
         public position: string,
         public mobile_phone: string,
         public email: string,
-        public date_birth: Date,
+        public date_birth: string,
         public img: string,
         public status: string
     ){}

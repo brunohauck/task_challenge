@@ -14,7 +14,8 @@ import { EmployeeComponent } from './employee/employee.component';
 import { FormsModule } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import { BrMasker4Module } from 'brmasker4';
+
+import { MyDatePickerModule } from 'mydatepicker';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { BrMasker4Module } from 'brmasker4';
     BrowserModule,
     HttpModule,
     FormsModule,
-    BrMasker4Module,
+    MyDatePickerModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES)
   ],

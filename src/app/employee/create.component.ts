@@ -4,6 +4,7 @@ import { Employee } from '../domain/employee/employee';
 import { Router } from '@angular/router';
 import { UploadComponent } from './upload.component';
 import { ActivatedRoute } from '@angular/router';
+import {IMyDpOptions, IMyDateModel} from 'mydatepicker';
 
 @Component({
   selector: 'app-create',
@@ -16,6 +17,14 @@ export class CreateComponent implements OnInit {
   public http;
   public employee: Employee;
   private id: string;
+  public myDatePickerOptions: IMyDpOptions = {
+    // other options...
+      dateFormat: 'dd/mm/yyyy',
+  };
+
+  // Initialized to specific date (09.10.2018).
+  public model: any
+
   constructor(http:Http, private router: Router, private rout: ActivatedRoute) { 
     this.data = {};
     this.data.response = '';
@@ -38,7 +47,6 @@ export class CreateComponent implements OnInit {
       !this.employee.first_name ||
       !this.employee.surname ||
       !this.employee.email ||
-      !this.employee.date_birth ||
       !this.employee.mobile_phone ||
       !this.employee.position
     ){
@@ -54,8 +62,10 @@ export class CreateComponent implements OnInit {
       }
       
       var data = JSON.stringify(this.employee);
+      console.log(data);
       this.http.post(link, data)
         .subscribe( data => {
+
           this.data.response = data._body;
           var validate = this.data.response.split("|");
           if(validate[1] == "sucesso"){
@@ -66,6 +76,10 @@ export class CreateComponent implements OnInit {
         });
 
     }
+  }
+  onDateChanged(event: IMyDateModel) {
+    this.employee.date_birth = event.formatted;
+    console.log('onDateChanged(): ', event.date, ' - jsdate: ', new Date(event.jsdate).toLocaleDateString(), ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
   }
   requestHttpEmployee(){
     this.http

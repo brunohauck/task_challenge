@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,7 @@ export class UploadComponent implements OnInit {
 
   selectedFile: File = null;  
   private id: string;
-  constructor(private http: HttpClient, private router: ActivatedRoute) {
+  constructor(private http: HttpClient, private route: Router, private router: ActivatedRoute) {
     this.id = router.snapshot.params['id'];
     console.log(this.id);
    }
@@ -33,6 +34,7 @@ export class UploadComponent implements OnInit {
     fd.append('image', this.selectedFile, name);
     this.http.post("http://www.softwareon.com.br/upload/image.php",fd)
         .subscribe(res => {
+          this.route.navigate(['employee']);
            console.log(res);
     });
   }

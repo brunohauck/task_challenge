@@ -7,30 +7,29 @@
         </div>
         <div class="col-md-8">
           <div class="row">
-            <h4>{{ employee.first_name }}</h4>
+            <h4>Name: {{ employee.first_name }}</h4>
           </div>
           <div class="row">
-            <h5>{{ employee.surname }}</h5>
+            <h5>Surname: {{ employee.surname }}</h5>
           </div>
           <div class="row">
-            <p>{{ employee.position }}</p>
+            <p>Position: {{ employee.position }}</p>
           </div>
           <div class="row">
-            <p>{{ employee.mobile_phone }}</p>
+            <p>Mobile Phone: {{ employee.mobile_phone }}</p>
           </div>
           <div class="row">
-            <p>{{ employee.email }}</p>
+            <p>Email: {{ employee.email }}</p>
           </div>
           <div class="row">
-            <p>{{ employee.date_birth }}</p>
+            <p>Date of birth: {{ employee.date_birth }}</p>
           </div>
           <div class="row">
             <button class="btn btn-space btn-outline-success" (click)="editEmployee(employee)" >Edit</button>
-            <button class="btn btn-space btn btn-danger" (click)="deleteEmployee(employee)" >Excluir</button>
+            <button class="btn btn-space btn btn-danger" (click)="deleteEmployee(employee)" >Delete</button>
           </div>
         </div>
       </div>
-  
       <hr />
     </div>
     <br />

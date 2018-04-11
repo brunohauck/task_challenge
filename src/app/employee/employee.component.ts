@@ -25,26 +25,31 @@ export class EmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
-	  this._http
-            .get(this.url)
-            .map( res => res.json())
-            .toPromise()
-            .then( employees => {
-                this.employees = employees;
-                console.log(employees);
-            })
-            .catch(err =>{
-                console.log(err);
-            });
+    this.httpRequest();
+  }
+  httpRequest(){
+    this._http
+    .get(this.url)
+    .map( res => res.json())
+    .toPromise()
+    .then( employees => {
+        this.employees = employees;
+        console.log(employees);
+    })
+    .catch(err =>{
+        console.log(err);
+    });
+
   }
   deleteEmployee(employee){
       var deleteUrl = "http://marmita.idsgeo.com/index.php/employee/delete";
       var data = JSON.stringify({ id: employee.id });
-    
       this._http.post(deleteUrl, data)
         .subscribe( data => {
           var response = data["_body"];
           if(response == "deleted"){
+            alert('Logical Delete on the database');
+            this.httpRequest();
           }
         }, error =>{
           console.log("Ocorreu algum erro!");
