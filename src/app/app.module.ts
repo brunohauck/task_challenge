@@ -14,8 +14,12 @@ import { EmployeeComponent } from './employee/employee.component';
 import { FormsModule } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
 
 import { MyDatePickerModule } from 'mydatepicker';
+import { AutoComponent } from './autocomplete/auto.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,8 @@ import { MyDatePickerModule } from 'mydatepicker';
     RodapeComponent,
     CreateComponent,
     UploadComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    AutoComponent
   ],
   imports: [
     BrowserModule,

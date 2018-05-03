@@ -1,243 +1,5 @@
 webpackJsonp(["vendor"],{
 
-/***/ "../../../../brmasker4/dist/app.module.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BrMasker4Module; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common__ = __webpack_require__("../../../common/esm5/common.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives_brmasker4__ = __webpack_require__("../../../../brmasker4/dist/directives/brmasker4.js");
-
-
-
-var BrMasker4Module = (function () {
-    function BrMasker4Module() {
-    }
-    return BrMasker4Module;
-}());
-
-BrMasker4Module.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["J" /* NgModule */], args: [{
-                declarations: [
-                    __WEBPACK_IMPORTED_MODULE_2__directives_brmasker4__["a" /* BrMaskerDirective */]
-                ],
-                exports: [
-                    __WEBPACK_IMPORTED_MODULE_2__directives_brmasker4__["a" /* BrMaskerDirective */]
-                ],
-                imports: [
-                    __WEBPACK_IMPORTED_MODULE_0__angular_common__["b" /* CommonModule */]
-                ],
-                schemas: [
-                    __WEBPACK_IMPORTED_MODULE_1__angular_core__["j" /* CUSTOM_ELEMENTS_SCHEMA */]
-                ]
-            },] },
-];
-/** @nocollapse */
-BrMasker4Module.ctorParameters = function () { return []; };
-//# sourceMappingURL=app.module.js.map
-
-/***/ }),
-
-/***/ "../../../../brmasker4/dist/directives/brmasker4.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export BrModel */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BrMaskerDirective; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
-
-
-var BrModel = (function () {
-    function BrModel() {
-    }
-    return BrModel;
-}());
-
-var BrMaskerDirective = (function () {
-    function BrMaskerDirective(_renderer, _elementRef) {
-        this._renderer = _renderer;
-        this._elementRef = _elementRef;
-        this.brmasker = new BrModel();
-    }
-    BrMaskerDirective.prototype.inputKeyup = function (event) {
-        event.target.value = this.returnValue(event.target.value);
-        this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', this.returnValue(event.target.value));
-    };
-    BrMaskerDirective.prototype.inputOnblur = function (event) {
-        event.target.value = this.returnValue(event.target.value);
-        this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', this.returnValue(event.target.value));
-    };
-    BrMaskerDirective.prototype.inputFocus = function (event) {
-        event.target.value = this.returnValue(event.target.value);
-        this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', this.returnValue(event.target.value));
-    };
-    BrMaskerDirective.prototype.ngOnInit = function () {
-    };
-    BrMaskerDirective.prototype.writeValue = function (fn) {
-        this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', this.returnValue(fn));
-    };
-    BrMaskerDirective.prototype.registerOnChange = function (fn) {
-    };
-    BrMaskerDirective.prototype.registerOnTouched = function (fn) {
-    };
-    BrMaskerDirective.prototype.returnValue = function (value) {
-        if (!this.brmasker.mask) {
-            this.brmasker.mask = '';
-        }
-        if (value) {
-            if (this.brmasker.money) {
-                return this.moneyMask(this.onInput(value));
-            }
-            if (this.brmasker.phone) {
-                return this.phoneMask(value);
-            }
-            if (this.brmasker.person) {
-                return this.peapollMask(value);
-            }
-            return this.onInput(value);
-        }
-        else {
-            return '';
-        }
-    };
-    BrMaskerDirective.prototype.phoneMask = function (v) {
-        var n = v;
-        if (v.length > 14) {
-            this.brmasker.len = 15;
-            this.brmasker.mask = '(99) 99999-9999';
-            n = n.replace(/\D/g, '');
-            n = n.replace(/(\d{2})(\d)/, '$1 $2');
-            n = n.replace(/(\d{5})(\d)/, '$1-$2');
-            n = n.replace(/(\d{4})(\d)/, '$1$2');
-        }
-        else {
-            this.brmasker.len = 14;
-            this.brmasker.mask = '(99) 9999-9999';
-            n = n.replace(/\D/g, '');
-            n = n.replace(/(\d{2})(\d)/, '$1 $2');
-            n = n.replace(/(\d{4})(\d)/, '$1-$2');
-            n = n.replace(/(\d{4})(\d)/, '$1$2');
-        }
-        return this.onInput(n);
-    };
-    BrMaskerDirective.prototype.peapollMask = function (v) {
-        var n = v;
-        if (v.length > 14) {
-            this.brmasker.len = 18;
-            this.brmasker.mask = '99.999.999/9999-99';
-            n = n.replace(/\D/g, '');
-            n = n.replace(/(\d{2})(\d)/, '$1.$2');
-            n = n.replace(/(\d{3})(\d)/, '$1.$2');
-            n = n.replace(/(\d{3})(\d)/, '$1/$2');
-            n = n.replace(/(\d{4})(\d{1,4})$/, '$1-$2');
-            n = n.replace(/(\d{2})(\d{1,2})$/, '$1$2');
-        }
-        else {
-            this.brmasker.len = 14;
-            this.brmasker.mask = '999.999.999-99';
-            n = n.replace(/\D/g, '');
-            n = n.replace(/(\d{3})(\d)/, '$1.$2');
-            n = n.replace(/(\d{3})(\d)/, '$1.$2');
-            n = n.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-        }
-        return this.onInput(n);
-    };
-    BrMaskerDirective.prototype.moneyMask = function (v) {
-        var tmp = v;
-        tmp = tmp.replace(/([0-9]{2})$/g, ',$1');
-        return tmp;
-    };
-    BrMaskerDirective.prototype.onInput = function (value) {
-        var ret = this.formataCampo(value, this.brmasker.mask, this.brmasker.len);
-        return ret;
-        // if (ret) {
-        //   this.element.nativeElement.value = ret;
-        // }
-    };
-    BrMaskerDirective.prototype.formataCampo = function (campo, Mascara, tamanho) {
-        if (!tamanho) {
-            tamanho = 99999999999;
-        }
-        var boleanoMascara;
-        var exp = /\-|\.|\/|\(|\)|\,|\*|\+|\@|\#|\$|\&|\%| /g;
-        var campoSoNumeros = campo.toString().replace(exp, '');
-        var posicaoCampo = 0;
-        var NovoValorCampo = '';
-        var TamanhoMascara = campoSoNumeros.length;
-        for (var i = 0; i < TamanhoMascara; i++) {
-            if (i < tamanho) {
-                boleanoMascara = ((Mascara.charAt(i) === '-') || (Mascara.charAt(i) === '.') || (Mascara.charAt(i) === '/'));
-                boleanoMascara = boleanoMascara || ((Mascara.charAt(i) === '(') || (Mascara.charAt(i) === ')') || (Mascara.charAt(i) === ' '));
-                boleanoMascara = boleanoMascara || ((Mascara.charAt(i) === ',') || (Mascara.charAt(i) === '*') || (Mascara.charAt(i) === '+'));
-                boleanoMascara = boleanoMascara || ((Mascara.charAt(i) === '@') || (Mascara.charAt(i) === '#'));
-                boleanoMascara = boleanoMascara || ((Mascara.charAt(i) === '$') || (Mascara.charAt(i) === '&') || (Mascara.charAt(i) === '%'));
-                if (boleanoMascara) {
-                    NovoValorCampo += Mascara.charAt(i);
-                    TamanhoMascara++;
-                }
-                else {
-                    NovoValorCampo += campoSoNumeros.charAt(posicaoCampo);
-                    posicaoCampo++;
-                }
-            }
-        }
-        return NovoValorCampo;
-    };
-    return BrMaskerDirective;
-}());
-
-BrMaskerDirective.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* Directive */], args: [{
-                selector: '[brmasker]',
-                providers: [{
-                        provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* NG_VALUE_ACCESSOR */],
-                        useExisting: BrMaskerDirective,
-                        multi: true
-                    }]
-            },] },
-];
-/** @nocollapse */
-BrMaskerDirective.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["W" /* Renderer */], },
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */], },
-]; };
-BrMaskerDirective.propDecorators = {
-    'brmasker': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
-    'inputKeyup': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* HostListener */], args: ['keyup', ['$event'],] },],
-    'inputOnblur': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* HostListener */], args: ['blur', ['$event'],] },],
-    'inputFocus': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* HostListener */], args: ['focus', ['$event'],] },],
-};
-//# sourceMappingURL=brmasker4.js.map
-
-/***/ }),
-
-/***/ "../../../../brmasker4/dist/directives/index.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__brmasker4__ = __webpack_require__("../../../../brmasker4/dist/directives/brmasker4.js");
-/* unused harmony namespace reexport */
-
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-
-/***/ "../../../../brmasker4/dist/index.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_module__ = __webpack_require__("../../../../brmasker4/dist/app.module.js");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__app_module__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives__ = __webpack_require__("../../../../brmasker4/dist/directives/index.js");
-/* unused harmony namespace reexport */
-
-
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-
 /***/ "../../../../css-loader/lib/css-base.js":
 /***/ (function(module, exports) {
 
@@ -317,6 +79,1613 @@ function toComment(sourceMap) {
 
 	return '/*# ' + data + ' */';
 }
+
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/directives/my-date-picker.focus.directive.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FocusDirective; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+
+var FocusDirective = (function () {
+    function FocusDirective(el, renderer) {
+        this.el = el;
+        this.renderer = renderer;
+    }
+    FocusDirective.prototype.ngAfterViewInit = function () {
+        if (this.value === "0") {
+            return;
+        }
+        this.renderer.invokeElementMethod(this.el.nativeElement, "focus", []);
+    };
+    FocusDirective.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* Directive */], args: [{
+                    selector: "[mydpfocus]"
+                },] },
+    ];
+    FocusDirective.ctorParameters = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["V" /* Renderer */], },
+    ];
+    FocusDirective.propDecorators = {
+        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */], args: ["mydpfocus",] },],
+    };
+    return FocusDirective;
+}());
+//# sourceMappingURL=my-date-picker.focus.directive.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/interfaces/my-calendar-view-changed.interface.js":
+/***/ (function(module, exports) {
+
+//# sourceMappingURL=my-calendar-view-changed.interface.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/interfaces/my-date-model.interface.js":
+/***/ (function(module, exports) {
+
+//# sourceMappingURL=my-date-model.interface.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/interfaces/my-date-range.interface.js":
+/***/ (function(module, exports) {
+
+//# sourceMappingURL=my-date-range.interface.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/interfaces/my-date.interface.js":
+/***/ (function(module, exports) {
+
+//# sourceMappingURL=my-date.interface.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/interfaces/my-day-labels.interface.js":
+/***/ (function(module, exports) {
+
+//# sourceMappingURL=my-day-labels.interface.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/interfaces/my-default-month.interface.js":
+/***/ (function(module, exports) {
+
+//# sourceMappingURL=my-default-month.interface.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/interfaces/my-input-field-changed.interface.js":
+/***/ (function(module, exports) {
+
+//# sourceMappingURL=my-input-field-changed.interface.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/interfaces/my-input-focus-blur.interface.js":
+/***/ (function(module, exports) {
+
+//# sourceMappingURL=my-input-focus-blur.interface.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/interfaces/my-marked-date.interface.js":
+/***/ (function(module, exports) {
+
+//# sourceMappingURL=my-marked-date.interface.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/interfaces/my-marked-dates.interface.js":
+/***/ (function(module, exports) {
+
+//# sourceMappingURL=my-marked-dates.interface.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/interfaces/my-month-labels.interface.js":
+/***/ (function(module, exports) {
+
+//# sourceMappingURL=my-month-labels.interface.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/interfaces/my-options.interface.js":
+/***/ (function(module, exports) {
+
+//# sourceMappingURL=my-options.interface.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/interfaces/my-selector.interface.js":
+/***/ (function(module, exports) {
+
+//# sourceMappingURL=my-selector.interface.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/interfaces/my-weekday.interface.js":
+/***/ (function(module, exports) {
+
+//# sourceMappingURL=my-weekday.interface.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/my-date-picker.component.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export MYDP_VALUE_ACCESSOR */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyDatePicker; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_my_date_picker_locale_service__ = __webpack_require__("../../../../mydatepicker/dist/services/my-date-picker.locale.service.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_my_date_picker_util_service__ = __webpack_require__("../../../../mydatepicker/dist/services/my-date-picker.util.service.js");
+
+
+
+
+var MYDP_VALUE_ACCESSOR = {
+    provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* NG_VALUE_ACCESSOR */],
+    useExisting: Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_15" /* forwardRef */])(function () { return MyDatePicker; }),
+    multi: true
+};
+var CalToggle;
+(function (CalToggle) {
+    CalToggle[CalToggle["Open"] = 1] = "Open";
+    CalToggle[CalToggle["CloseByDateSel"] = 2] = "CloseByDateSel";
+    CalToggle[CalToggle["CloseByCalBtn"] = 3] = "CloseByCalBtn";
+    CalToggle[CalToggle["CloseByOutClick"] = 4] = "CloseByOutClick";
+    CalToggle[CalToggle["CloseByEsc"] = 5] = "CloseByEsc";
+    CalToggle[CalToggle["CloseByApi"] = 6] = "CloseByApi";
+})(CalToggle || (CalToggle = {}));
+var Year;
+(function (Year) {
+    Year[Year["min"] = 1000] = "min";
+    Year[Year["max"] = 9999] = "max";
+})(Year || (Year = {}));
+var InputFocusBlur;
+(function (InputFocusBlur) {
+    InputFocusBlur[InputFocusBlur["focus"] = 1] = "focus";
+    InputFocusBlur[InputFocusBlur["blur"] = 2] = "blur";
+})(InputFocusBlur || (InputFocusBlur = {}));
+var KeyCode;
+(function (KeyCode) {
+    KeyCode[KeyCode["enter"] = 13] = "enter";
+    KeyCode[KeyCode["esc"] = 27] = "esc";
+    KeyCode[KeyCode["space"] = 32] = "space";
+})(KeyCode || (KeyCode = {}));
+var MonthId;
+(function (MonthId) {
+    MonthId[MonthId["prev"] = 1] = "prev";
+    MonthId[MonthId["curr"] = 2] = "curr";
+    MonthId[MonthId["next"] = 3] = "next";
+})(MonthId || (MonthId = {}));
+var MMM = "mmm";
+var MyDatePicker = (function () {
+    function MyDatePicker(elem, renderer, cdr, localeService, utilService) {
+        this.elem = elem;
+        this.renderer = renderer;
+        this.cdr = cdr;
+        this.localeService = localeService;
+        this.utilService = utilService;
+        this.dateChanged = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */]();
+        this.inputFieldChanged = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */]();
+        this.calendarViewChanged = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */]();
+        this.calendarToggle = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */]();
+        this.inputFocusBlur = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */]();
+        this.onChangeCb = function () { };
+        this.onTouchedCb = function () { };
+        this.showSelector = false;
+        this.visibleMonth = { monthTxt: "", monthNbr: 0, year: 0 };
+        this.selectedMonth = { monthTxt: "", monthNbr: 0, year: 0 };
+        this.selectedDate = { year: 0, month: 0, day: 0 };
+        this.weekDays = [];
+        this.dates = [];
+        this.months = [];
+        this.years = [];
+        this.selectionDayTxt = "";
+        this.invalidDate = false;
+        this.disableTodayBtn = false;
+        this.dayIdx = 0;
+        this.selectMonth = false;
+        this.selectYear = false;
+        this.prevMonthDisabled = false;
+        this.nextMonthDisabled = false;
+        this.prevYearDisabled = false;
+        this.nextYearDisabled = false;
+        this.prevYearsDisabled = false;
+        this.nextYearsDisabled = false;
+        this.prevMonthId = MonthId.prev;
+        this.currMonthId = MonthId.curr;
+        this.nextMonthId = MonthId.next;
+        this.opts = {
+            dayLabels: {},
+            monthLabels: {},
+            dateFormat: "",
+            showTodayBtn: true,
+            todayBtnTxt: "",
+            firstDayOfWeek: "",
+            satHighlight: false,
+            sunHighlight: true,
+            highlightDates: [],
+            markCurrentDay: true,
+            markCurrentMonth: true,
+            markCurrentYear: true,
+            disableUntil: { year: 0, month: 0, day: 0 },
+            disableSince: { year: 0, month: 0, day: 0 },
+            disableDays: [],
+            enableDays: [],
+            markDates: [],
+            markWeekends: {},
+            disableDateRanges: [],
+            disableWeekends: false,
+            disableWeekdays: [],
+            showWeekNumbers: false,
+            height: "34px",
+            width: "100%",
+            selectionTxtFontSize: "14px",
+            selectorHeight: "232px",
+            selectorWidth: "252px",
+            allowDeselectDate: false,
+            inline: false,
+            showClearDateBtn: true,
+            showDecreaseDateBtn: false,
+            showIncreaseDateBtn: false,
+            alignSelectorRight: false,
+            openSelectorTopOfInput: false,
+            indicateInvalidDate: true,
+            editableDateField: true,
+            monthSelector: true,
+            yearSelector: true,
+            disableHeaderButtons: true,
+            minYear: Year.min,
+            maxYear: Year.max,
+            componentDisabled: false,
+            showSelectorArrow: true,
+            showInputField: true,
+            openSelectorOnInputClick: false,
+            allowSelectionOnlyInCurrentMonth: true,
+            ariaLabelInputField: "Date input field",
+            ariaLabelClearDate: "Clear Date",
+            ariaLabelDecreaseDate: "Decrease Date",
+            ariaLabelIncreaseDate: "Increase Date",
+            ariaLabelOpenCalendar: "Open Calendar",
+            ariaLabelPrevMonth: "Previous Month",
+            ariaLabelNextMonth: "Next Month",
+            ariaLabelPrevYear: "Previous Year",
+            ariaLabelNextYear: "Next Year"
+        };
+        this.setLocaleOptions();
+    }
+    MyDatePicker.prototype.setLocaleOptions = function () {
+        var _this = this;
+        var opts = this.localeService.getLocaleOptions(this.locale);
+        Object.keys(opts).forEach(function (k) {
+            _this.opts[k] = opts[k];
+        });
+    };
+    MyDatePicker.prototype.setOptions = function () {
+        var _this = this;
+        if (this.options !== undefined) {
+            Object.keys(this.options).forEach(function (k) {
+                _this.opts[k] = _this.options[k];
+            });
+        }
+        if (this.opts.minYear < Year.min) {
+            this.opts.minYear = Year.min;
+        }
+        if (this.opts.maxYear > Year.max) {
+            this.opts.maxYear = Year.max;
+        }
+        if (this.disabled !== undefined) {
+            this.opts.componentDisabled = this.disabled;
+        }
+    };
+    MyDatePicker.prototype.getSelectorTopPosition = function () {
+        if (this.opts.openSelectorTopOfInput) {
+            return this.elem.nativeElement.children[0].offsetHeight + "px";
+        }
+    };
+    MyDatePicker.prototype.resetMonthYearSelect = function () {
+        this.selectMonth = false;
+        this.selectYear = false;
+    };
+    MyDatePicker.prototype.onSelectMonthClicked = function (event) {
+        event.stopPropagation();
+        this.selectMonth = !this.selectMonth;
+        this.selectYear = false;
+        this.cdr.detectChanges();
+        if (this.selectMonth) {
+            var today = this.getToday();
+            this.months.length = 0;
+            for (var i = 1; i <= 12; i += 3) {
+                var row = [];
+                for (var j = i; j < i + 3; j++) {
+                    var disabled = this.utilService.isMonthDisabledByDisableUntil({ year: this.visibleMonth.year, month: j, day: this.daysInMonth(j, this.visibleMonth.year) }, this.opts.disableUntil)
+                        || this.utilService.isMonthDisabledByDisableSince({ year: this.visibleMonth.year, month: j, day: 1 }, this.opts.disableSince);
+                    row.push({ nbr: j, name: this.opts.monthLabels[j], currMonth: j === today.month && this.visibleMonth.year === today.year, selected: j === this.visibleMonth.monthNbr, disabled: disabled });
+                }
+                this.months.push(row);
+            }
+        }
+    };
+    MyDatePicker.prototype.onMonthCellClicked = function (cell) {
+        var mc = cell.nbr !== this.visibleMonth.monthNbr;
+        this.visibleMonth = { monthTxt: this.monthText(cell.nbr), monthNbr: cell.nbr, year: this.visibleMonth.year };
+        this.generateCalendar(cell.nbr, this.visibleMonth.year, mc);
+        this.selectMonth = false;
+        this.selectorEl.nativeElement.focus();
+    };
+    MyDatePicker.prototype.onMonthCellKeyDown = function (event, cell) {
+        if ((event.keyCode === KeyCode.enter || event.keyCode === KeyCode.space) && !cell.disabled) {
+            event.preventDefault();
+            this.onMonthCellClicked(cell);
+        }
+    };
+    MyDatePicker.prototype.onSelectYearClicked = function (event) {
+        event.stopPropagation();
+        this.selectYear = !this.selectYear;
+        this.selectMonth = false;
+        this.cdr.detectChanges();
+        if (this.selectYear) {
+            this.generateYears(Number(this.visibleMonth.year));
+        }
+    };
+    MyDatePicker.prototype.onYearCellClicked = function (cell) {
+        var yc = cell.year !== this.visibleMonth.year;
+        this.visibleMonth = { monthTxt: this.visibleMonth.monthTxt, monthNbr: this.visibleMonth.monthNbr, year: cell.year };
+        this.generateCalendar(this.visibleMonth.monthNbr, cell.year, yc);
+        this.selectYear = false;
+        this.selectorEl.nativeElement.focus();
+    };
+    MyDatePicker.prototype.onYearCellKeyDown = function (event, cell) {
+        if ((event.keyCode === KeyCode.enter || event.keyCode === KeyCode.space) && !cell.disabled) {
+            event.preventDefault();
+            this.onYearCellClicked(cell);
+        }
+    };
+    MyDatePicker.prototype.onPrevYears = function (event, year) {
+        event.stopPropagation();
+        this.generateYears(Number(year) - 25);
+    };
+    MyDatePicker.prototype.onNextYears = function (event, year) {
+        event.stopPropagation();
+        this.generateYears(Number(year) + 25);
+    };
+    MyDatePicker.prototype.generateYears = function (year) {
+        this.years.length = 0;
+        var today = this.getToday();
+        for (var i = year; i <= 20 + year; i += 5) {
+            var row = [];
+            for (var j = i; j < i + 5; j++) {
+                var disabled = this.utilService.isMonthDisabledByDisableUntil({ year: j, month: this.visibleMonth.monthNbr, day: this.daysInMonth(this.visibleMonth.monthNbr, j) }, this.opts.disableUntil)
+                    || this.utilService.isMonthDisabledByDisableSince({ year: j, month: this.visibleMonth.monthNbr, day: 1 }, this.opts.disableSince);
+                var minMax = j < this.opts.minYear || j > this.opts.maxYear;
+                row.push({ year: j, currYear: j === today.year, selected: j === this.visibleMonth.year, disabled: disabled || minMax });
+            }
+            this.years.push(row);
+        }
+        this.prevYearsDisabled = this.years[0][0].year <= this.opts.minYear || this.utilService.isMonthDisabledByDisableUntil({ year: this.years[0][0].year - 1, month: this.visibleMonth.monthNbr, day: this.daysInMonth(this.visibleMonth.monthNbr, this.years[0][0].year - 1) }, this.opts.disableUntil);
+        this.nextYearsDisabled = this.years[4][4].year >= this.opts.maxYear || this.utilService.isMonthDisabledByDisableSince({ year: this.years[4][4].year + 1, month: this.visibleMonth.monthNbr, day: 1 }, this.opts.disableSince);
+    };
+    MyDatePicker.prototype.onUserDateInput = function (value) {
+        if (value.length === 0) {
+            if (this.utilService.isInitializedDate(this.selectedDate)) {
+                this.clearDate();
+            }
+            else {
+                this.invalidInputFieldChanged(value);
+            }
+        }
+        else {
+            var date = this.utilService.isDateValid(value, this.opts.dateFormat, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableWeekdays, this.opts.disableDays, this.opts.disableDateRanges, this.opts.monthLabels, this.opts.enableDays);
+            if (this.utilService.isInitializedDate(date)) {
+                if (!this.utilService.isSameDate(date, this.selectedDate)) {
+                    this.selectDate(date, CalToggle.CloseByDateSel);
+                }
+                else {
+                    this.updateDateValue(date);
+                }
+            }
+            else {
+                this.invalidInputFieldChanged(value);
+            }
+        }
+    };
+    MyDatePicker.prototype.onFocusInput = function (event) {
+        this.inputFocusBlur.emit({ reason: InputFocusBlur.focus, value: event.target.value });
+    };
+    MyDatePicker.prototype.onBlurInput = function (event) {
+        this.selectionDayTxt = event.target.value;
+        this.onTouchedCb();
+        this.inputFocusBlur.emit({ reason: InputFocusBlur.blur, value: event.target.value });
+    };
+    MyDatePicker.prototype.onCloseSelector = function (event) {
+        if (event.keyCode === KeyCode.esc && this.showSelector && !this.opts.inline) {
+            this.calendarToggle.emit(CalToggle.CloseByEsc);
+            this.showSelector = false;
+        }
+    };
+    MyDatePicker.prototype.invalidInputFieldChanged = function (value) {
+        this.invalidDate = value.length > 0;
+        this.inputFieldChanged.emit({ value: value, dateFormat: this.opts.dateFormat, valid: false });
+        this.onChangeCb(null);
+        this.onTouchedCb();
+    };
+    MyDatePicker.prototype.isTodayDisabled = function () {
+        this.disableTodayBtn = this.utilService.isDisabledDay(this.getToday(), this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableWeekdays, this.opts.disableDays, this.opts.disableDateRanges, this.opts.enableDays);
+    };
+    MyDatePicker.prototype.parseOptions = function () {
+        if (this.locale) {
+            this.setLocaleOptions();
+        }
+        this.setOptions();
+        var weekDays = this.utilService.getWeekDays();
+        this.isTodayDisabled();
+        this.dayIdx = weekDays.indexOf(this.opts.firstDayOfWeek);
+        if (this.dayIdx !== -1) {
+            var idx = this.dayIdx;
+            for (var i = 0; i < weekDays.length; i++) {
+                this.weekDays.push(this.opts.dayLabels[weekDays[idx]]);
+                idx = weekDays[idx] === "sa" ? 0 : idx + 1;
+            }
+        }
+    };
+    MyDatePicker.prototype.writeValue = function (value) {
+        if (value && (value["date"] || value["jsdate"] || value["formatted"])) {
+            this.selectedDate = value["date"] ? this.parseSelectedDate(value["date"]) : value["jsdate"] ? this.parseSelectedDate(this.jsDateToMyDate(value["jsdate"])) : this.parseSelectedDate(value["formatted"]);
+            var cvc = this.visibleMonth.year !== this.selectedDate.year || this.visibleMonth.monthNbr !== this.selectedDate.month;
+            if (cvc) {
+                this.visibleMonth = { monthTxt: this.opts.monthLabels[this.selectedDate.month], monthNbr: this.selectedDate.month, year: this.selectedDate.year };
+                this.generateCalendar(this.selectedDate.month, this.selectedDate.year, cvc);
+            }
+            this.selectionDayTxt = this.utilService.formatDate(this.selectedDate, this.opts.dateFormat, this.opts.monthLabels);
+        }
+        else if (value === null || value === "") {
+            this.selectedDate = { year: 0, month: 0, day: 0 };
+            this.selectionDayTxt = "";
+        }
+        this.inputFieldChanged.emit({ value: this.selectionDayTxt, dateFormat: this.opts.dateFormat, valid: this.selectionDayTxt.length > 0 });
+        this.invalidDate = false;
+    };
+    MyDatePicker.prototype.setDisabledState = function (disabled) {
+        this.opts.componentDisabled = disabled;
+    };
+    MyDatePicker.prototype.registerOnChange = function (fn) {
+        this.onChangeCb = fn;
+    };
+    MyDatePicker.prototype.registerOnTouched = function (fn) {
+        this.onTouchedCb = fn;
+    };
+    MyDatePicker.prototype.ngOnChanges = function (changes) {
+        var _this = this;
+        if (changes.hasOwnProperty("selector")) {
+            var s = changes["selector"].currentValue;
+            if (typeof s === "object") {
+                if (s.open) {
+                    this.showSelector = true;
+                    this.openSelector(CalToggle.Open);
+                }
+                else {
+                    this.showSelector = false;
+                    this.closeSelector(CalToggle.CloseByApi);
+                }
+            }
+            else if (s > 0) {
+                this.openBtnClicked();
+            }
+        }
+        if (changes.hasOwnProperty("placeholder")) {
+            this.placeholder = changes["placeholder"].currentValue;
+        }
+        if (changes.hasOwnProperty("locale")) {
+            this.locale = changes["locale"].currentValue;
+        }
+        if (changes.hasOwnProperty("disabled")) {
+            this.disabled = changes["disabled"].currentValue;
+        }
+        if (changes.hasOwnProperty("options")) {
+            this.options = changes["options"].currentValue;
+        }
+        this.weekDays.length = 0;
+        this.parseOptions();
+        var dmChange = false;
+        if (changes.hasOwnProperty("defaultMonth")) {
+            var dm = changes["defaultMonth"].currentValue;
+            if (typeof dm === "object") {
+                dm = dm.defMonth;
+            }
+            if (dm !== null && dm !== undefined && dm !== "") {
+                this.selectedMonth = this.parseSelectedMonth(dm);
+            }
+            else {
+                this.selectedMonth = { monthTxt: "", monthNbr: 0, year: 0 };
+            }
+            dmChange = true;
+        }
+        if (changes.hasOwnProperty("selDate")) {
+            var sd = changes["selDate"];
+            if (sd.currentValue !== null && sd.currentValue !== undefined && sd.currentValue !== "" && Object.keys(sd.currentValue).length !== 0) {
+                this.selectedDate = this.parseSelectedDate(sd.currentValue);
+                setTimeout(function () {
+                    _this.onChangeCb(_this.getDateModel(_this.selectedDate));
+                });
+            }
+            else {
+                if (!sd.isFirstChange()) {
+                    this.clearDate();
+                }
+            }
+        }
+        if (this.visibleMonth.year === 0 && this.visibleMonth.monthNbr === 0 || dmChange) {
+            this.setVisibleMonth();
+        }
+        else {
+            this.visibleMonth.monthTxt = this.opts.monthLabels[this.visibleMonth.monthNbr];
+            this.generateCalendar(this.visibleMonth.monthNbr, this.visibleMonth.year, false);
+        }
+    };
+    MyDatePicker.prototype.removeBtnClicked = function () {
+        this.clearDate();
+        if (this.showSelector) {
+            this.calendarToggle.emit(CalToggle.CloseByCalBtn);
+        }
+        this.showSelector = false;
+    };
+    MyDatePicker.prototype.onDecreaseBtnClicked = function () {
+        this.decreaseIncreaseDate(true);
+    };
+    MyDatePicker.prototype.onIncreaseBtnClicked = function () {
+        this.decreaseIncreaseDate(false);
+    };
+    MyDatePicker.prototype.openBtnClicked = function () {
+        this.showSelector = !this.showSelector;
+        this.cdr.detectChanges();
+        if (this.showSelector) {
+            this.openSelector(CalToggle.Open);
+        }
+        else {
+            this.closeSelector(CalToggle.CloseByCalBtn);
+        }
+    };
+    MyDatePicker.prototype.openSelector = function (reason) {
+        var _this = this;
+        this.globalListener = this.globalListener || this.renderer.listenGlobal("document", "click", function (event) {
+            if (_this.showSelector && event.target && _this.elem.nativeElement !== event.target && !_this.elem.nativeElement.contains(event.target)) {
+                _this.showSelector = false;
+                _this.calendarToggle.emit(CalToggle.CloseByOutClick);
+            }
+            if (_this.opts.monthSelector || _this.opts.yearSelector) {
+                _this.resetMonthYearSelect();
+            }
+        });
+        this.setVisibleMonth();
+        this.calendarToggle.emit(reason);
+    };
+    MyDatePicker.prototype.closeSelector = function (reason) {
+        if (this.globalListener) {
+            this.globalListener();
+        }
+        this.calendarToggle.emit(reason);
+    };
+    MyDatePicker.prototype.setVisibleMonth = function () {
+        var y = 0, m = 0;
+        if (!this.utilService.isInitializedDate(this.selectedDate)) {
+            if (this.selectedMonth.year === 0 && this.selectedMonth.monthNbr === 0) {
+                var today = this.getToday();
+                y = today.year;
+                m = today.month;
+            }
+            else {
+                y = this.selectedMonth.year;
+                m = this.selectedMonth.monthNbr;
+            }
+        }
+        else {
+            y = this.selectedDate.year;
+            m = this.selectedDate.month;
+        }
+        this.visibleMonth = { monthTxt: this.opts.monthLabels[m], monthNbr: m, year: y };
+        this.generateCalendar(m, y, true);
+    };
+    MyDatePicker.prototype.onPrevMonth = function () {
+        var d = this.getDate(this.visibleMonth.year, this.visibleMonth.monthNbr, 1);
+        d.setMonth(d.getMonth() - 1);
+        var y = d.getFullYear();
+        var m = d.getMonth() + 1;
+        this.visibleMonth = { monthTxt: this.monthText(m), monthNbr: m, year: y };
+        this.generateCalendar(m, y, true);
+    };
+    MyDatePicker.prototype.onNextMonth = function () {
+        var d = this.getDate(this.visibleMonth.year, this.visibleMonth.monthNbr, 1);
+        d.setMonth(d.getMonth() + 1);
+        var y = d.getFullYear();
+        var m = d.getMonth() + 1;
+        this.visibleMonth = { monthTxt: this.monthText(m), monthNbr: m, year: y };
+        this.generateCalendar(m, y, true);
+    };
+    MyDatePicker.prototype.onPrevYear = function () {
+        this.visibleMonth.year--;
+        this.generateCalendar(this.visibleMonth.monthNbr, this.visibleMonth.year, true);
+    };
+    MyDatePicker.prototype.onNextYear = function () {
+        this.visibleMonth.year++;
+        this.generateCalendar(this.visibleMonth.monthNbr, this.visibleMonth.year, true);
+    };
+    MyDatePicker.prototype.onTodayClicked = function () {
+        var today = this.getToday();
+        this.selectDate(today, CalToggle.CloseByDateSel);
+        if (this.opts.inline && today.year !== this.visibleMonth.year || today.month !== this.visibleMonth.monthNbr) {
+            this.visibleMonth = { monthTxt: this.opts.monthLabels[today.month], monthNbr: today.month, year: today.year };
+            this.generateCalendar(today.month, today.year, true);
+        }
+    };
+    MyDatePicker.prototype.onCellClicked = function (cell) {
+        if (cell.cmo === this.prevMonthId) {
+            this.onPrevMonth();
+            if (!this.opts.allowSelectionOnlyInCurrentMonth) {
+                this.selectDate(cell.dateObj, CalToggle.CloseByDateSel);
+            }
+        }
+        else if (cell.cmo === this.currMonthId) {
+            if (this.opts.allowDeselectDate && this.utilService.isSameDate(cell.dateObj, this.selectedDate)) {
+                this.clearDate();
+            }
+            else {
+                this.selectDate(cell.dateObj, CalToggle.CloseByDateSel);
+            }
+        }
+        else if (cell.cmo === this.nextMonthId) {
+            this.onNextMonth();
+            if (!this.opts.allowSelectionOnlyInCurrentMonth) {
+                this.selectDate(cell.dateObj, CalToggle.CloseByDateSel);
+            }
+        }
+        this.resetMonthYearSelect();
+    };
+    MyDatePicker.prototype.onCellKeyDown = function (event, cell) {
+        if ((event.keyCode === KeyCode.enter || event.keyCode === KeyCode.space) && !cell.disabled) {
+            event.preventDefault();
+            this.onCellClicked(cell);
+        }
+    };
+    MyDatePicker.prototype.clearDate = function () {
+        this.updateDateValue({ year: 0, month: 0, day: 0 });
+        this.setFocusToInputBox();
+    };
+    MyDatePicker.prototype.decreaseIncreaseDate = function (decrease) {
+        var date = this.selectedDate;
+        if (this.utilService.isInitializedDate(date)) {
+            var d = this.getDate(date.year, date.month, date.day);
+            d.setDate(decrease ? d.getDate() - 1 : d.getDate() + 1);
+            date = { year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate() };
+        }
+        else {
+            date = this.getToday();
+        }
+        this.selectDate(date, CalToggle.CloseByCalBtn);
+    };
+    MyDatePicker.prototype.selectDate = function (date, closeReason) {
+        this.updateDateValue(date);
+        if (this.showSelector) {
+            this.calendarToggle.emit(closeReason);
+        }
+        this.showSelector = false;
+        this.setFocusToInputBox();
+    };
+    MyDatePicker.prototype.setFocusToInputBox = function () {
+        var _this = this;
+        if (!this.opts.inline && this.opts.showInputField) {
+            setTimeout(function () {
+                _this.inputBoxEl.nativeElement.focus();
+            }, 100);
+        }
+    };
+    MyDatePicker.prototype.updateDateValue = function (date) {
+        var clear = !this.utilService.isInitializedDate(date);
+        this.selectedDate = date;
+        this.emitDateChanged(date);
+        if (!this.opts.inline) {
+            this.selectionDayTxt = clear ? "" : this.utilService.formatDate(date, this.opts.dateFormat, this.opts.monthLabels);
+            this.inputFieldChanged.emit({ value: this.selectionDayTxt, dateFormat: this.opts.dateFormat, valid: !clear });
+            this.invalidDate = false;
+        }
+    };
+    MyDatePicker.prototype.emitDateChanged = function (date) {
+        if (this.utilService.isInitializedDate(date)) {
+            var dateModel = this.getDateModel(date);
+            this.dateChanged.emit(dateModel);
+            this.onChangeCb(dateModel);
+            this.onTouchedCb();
+        }
+        else {
+            this.dateChanged.emit({ date: date, jsdate: null, formatted: "", epoc: 0 });
+            this.onChangeCb(null);
+            this.onTouchedCb();
+        }
+    };
+    MyDatePicker.prototype.getDateModel = function (date) {
+        return { date: date, jsdate: this.getDate(date.year, date.month, date.day), formatted: this.utilService.formatDate(date, this.opts.dateFormat, this.opts.monthLabels), epoc: Math.round(this.getTimeInMilliseconds(date) / 1000.0) };
+    };
+    MyDatePicker.prototype.monthText = function (m) {
+        return this.opts.monthLabels[m];
+    };
+    MyDatePicker.prototype.monthStartIdx = function (y, m) {
+        var d = new Date();
+        d.setDate(1);
+        d.setMonth(m - 1);
+        d.setFullYear(y);
+        var idx = d.getDay() + this.sundayIdx();
+        return idx >= 7 ? idx - 7 : idx;
+    };
+    MyDatePicker.prototype.daysInMonth = function (m, y) {
+        return new Date(y, m, 0).getDate();
+    };
+    MyDatePicker.prototype.daysInPrevMonth = function (m, y) {
+        var d = this.getDate(y, m, 1);
+        d.setMonth(d.getMonth() - 1);
+        return this.daysInMonth(d.getMonth() + 1, d.getFullYear());
+    };
+    MyDatePicker.prototype.isCurrDay = function (d, m, y, cmo, today) {
+        return d === today.day && m === today.month && y === today.year && cmo === this.currMonthId;
+    };
+    MyDatePicker.prototype.getToday = function () {
+        var date = new Date();
+        return { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() };
+    };
+    MyDatePicker.prototype.getTimeInMilliseconds = function (date) {
+        return this.getDate(date.year, date.month, date.day).getTime();
+    };
+    MyDatePicker.prototype.getWeekday = function (date) {
+        var weekDays = this.utilService.getWeekDays();
+        return weekDays[this.utilService.getDayNumber(date)];
+    };
+    MyDatePicker.prototype.getDate = function (year, month, day) {
+        return new Date(year, month - 1, day, 0, 0, 0, 0);
+    };
+    MyDatePicker.prototype.sundayIdx = function () {
+        return this.dayIdx > 0 ? 7 - this.dayIdx : 0;
+    };
+    MyDatePicker.prototype.generateCalendar = function (m, y, notifyChange) {
+        this.dates.length = 0;
+        var today = this.getToday();
+        var monthStart = this.monthStartIdx(y, m);
+        var dInThisM = this.daysInMonth(m, y);
+        var dInPrevM = this.daysInPrevMonth(m, y);
+        var dayNbr = 1;
+        var cmo = this.prevMonthId;
+        for (var i = 1; i < 7; i++) {
+            var week = [];
+            if (i === 1) {
+                var pm = dInPrevM - monthStart + 1;
+                for (var j = pm; j <= dInPrevM; j++) {
+                    var date = { year: m === 1 ? y - 1 : y, month: m === 1 ? 12 : m - 1, day: j };
+                    week.push({ dateObj: date, cmo: cmo, currDay: this.isCurrDay(j, m, y, cmo, today),
+                        disabled: this.utilService.isDisabledDay(date, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableWeekdays, this.opts.disableDays, this.opts.disableDateRanges, this.opts.enableDays),
+                        markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends),
+                        highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates) });
+                }
+                cmo = this.currMonthId;
+                var daysLeft = 7 - week.length;
+                for (var j = 0; j < daysLeft; j++) {
+                    var date = { year: y, month: m, day: dayNbr };
+                    week.push({ dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
+                        disabled: this.utilService.isDisabledDay(date, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableWeekdays, this.opts.disableDays, this.opts.disableDateRanges, this.opts.enableDays),
+                        markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends),
+                        highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates) });
+                    dayNbr++;
+                }
+            }
+            else {
+                for (var j = 1; j < 8; j++) {
+                    if (dayNbr > dInThisM) {
+                        dayNbr = 1;
+                        cmo = this.nextMonthId;
+                    }
+                    var date = { year: cmo === this.nextMonthId && m === 12 ? y + 1 : y, month: cmo === this.currMonthId ? m : cmo === this.nextMonthId && m < 12 ? m + 1 : 1, day: dayNbr };
+                    week.push({ dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
+                        disabled: this.utilService.isDisabledDay(date, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableWeekdays, this.opts.disableDays, this.opts.disableDateRanges, this.opts.enableDays),
+                        markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends),
+                        highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates) });
+                    dayNbr++;
+                }
+            }
+            var weekNbr = this.opts.showWeekNumbers && this.opts.firstDayOfWeek === "mo" ? this.utilService.getWeekNumber(week[0].dateObj) : 0;
+            this.dates.push({ week: week, weekNbr: weekNbr });
+        }
+        this.setHeaderBtnDisabledState(m, y);
+        if (notifyChange) {
+            this.calendarViewChanged.emit({ year: y, month: m, first: { number: 1, weekday: this.getWeekday({ year: y, month: m, day: 1 }) }, last: { number: dInThisM, weekday: this.getWeekday({ year: y, month: m, day: dInThisM }) } });
+        }
+    };
+    MyDatePicker.prototype.parseSelectedDate = function (selDate) {
+        var date = { day: 0, month: 0, year: 0 };
+        if (typeof selDate === "string") {
+            var sd = selDate;
+            var df = this.opts.dateFormat;
+            var delimeters = this.utilService.getDateFormatDelimeters(df);
+            var dateValue = this.utilService.getDateValue(sd, df, delimeters);
+            date.year = this.utilService.getNumberByValue(dateValue[0]);
+            date.month = df.indexOf(MMM) !== -1 ? this.utilService.getMonthNumberByMonthName(dateValue[1], this.opts.monthLabels) : this.utilService.getNumberByValue(dateValue[1]);
+            date.day = this.utilService.getNumberByValue(dateValue[2]);
+        }
+        else if (typeof selDate === "object") {
+            date = selDate;
+        }
+        this.selectionDayTxt = this.utilService.formatDate(date, this.opts.dateFormat, this.opts.monthLabels);
+        return date;
+    };
+    MyDatePicker.prototype.jsDateToMyDate = function (date) {
+        return { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() };
+    };
+    MyDatePicker.prototype.parseSelectedMonth = function (ms) {
+        return this.utilService.parseDefaultMonth(ms);
+    };
+    MyDatePicker.prototype.setHeaderBtnDisabledState = function (m, y) {
+        var dpm = false;
+        var dpy = false;
+        var dnm = false;
+        var dny = false;
+        if (this.opts.disableHeaderButtons) {
+            dpm = this.utilService.isMonthDisabledByDisableUntil({ year: m === 1 ? y - 1 : y, month: m === 1 ? 12 : m - 1, day: this.daysInMonth(m === 1 ? 12 : m - 1, m === 1 ? y - 1 : y) }, this.opts.disableUntil);
+            dpy = this.utilService.isMonthDisabledByDisableUntil({ year: y - 1, month: m, day: this.daysInMonth(m, y - 1) }, this.opts.disableUntil);
+            dnm = this.utilService.isMonthDisabledByDisableSince({ year: m === 12 ? y + 1 : y, month: m === 12 ? 1 : m + 1, day: 1 }, this.opts.disableSince);
+            dny = this.utilService.isMonthDisabledByDisableSince({ year: y + 1, month: m, day: 1 }, this.opts.disableSince);
+        }
+        this.prevMonthDisabled = m === 1 && y === this.opts.minYear || dpm;
+        this.prevYearDisabled = y - 1 < this.opts.minYear || dpy;
+        this.nextMonthDisabled = m === 12 && y === this.opts.maxYear || dnm;
+        this.nextYearDisabled = y + 1 > this.opts.maxYear || dny;
+    };
+    MyDatePicker.prototype.ngOnDestroy = function () {
+        if (this.globalListener) {
+            this.globalListener();
+        }
+    };
+    MyDatePicker.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
+                    selector: "my-date-picker",
+                    exportAs: "mydatepicker",
+                    styles: [".mydp .headertodaybtn,.mydp .monthcell,.mydp .selection,.mydp .weekdaytitle{overflow:hidden;white-space:nowrap}.mydp{line-height:1.1;display:inline-block;position:relative}.mydp *{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;padding:0;margin:0}.mydp,.mydp .headertodaybtn,.mydp .selection,.mydp .selectiongroup,.mydp .selector{border-radius:4px}.mydp .header{border-radius:4px 4px 0 0}.mydp .caltable,.mydp .monthtable,.mydp .yeartable{border-radius:0 0 4px 4px}.mydp .caltable tbody tr:nth-child(6) td:first-child,.mydp .monthtable tbody tr:nth-child(4) td:first-child,.mydp .yeartable tbody tr:nth-child(7) td:first-child{border-bottom-left-radius:4px}.mydp .caltable tbody tr:nth-child(6) td:last-child,.mydp .monthtable tbody tr:nth-child(4) td:last-child,.mydp .yeartable tbody tr:nth-child(7) td:last-child{border-bottom-right-radius:4px}.mydp .btnpicker{border-radius:0 4px 4px 0}.mydp .btnleftborderradius{border-top-left-radius:4px;border-bottom-left-radius:4px}.mydp .selector{margin-top:2px;margin-left:-1px;position:absolute;padding:0;border:1px solid #CCC;z-index:100;animation:selectorfadein .1s}.mydp .selector:focus{border:1px solid #ADD8E6;outline:0}@keyframes selectorfadein{from{opacity:0}to{opacity:1}}.mydp .selectorarrow{background:#FAFAFA;margin-top:12px;padding:0}.mydp .selectorarrow:after,.mydp .selectorarrow:before{bottom:100%;border:solid transparent;content:\" \";height:0;width:0;position:absolute}.mydp .selectorarrow:after{border-color:rgba(250,250,250,0);border-bottom-color:#FAFAFA;border-width:10px;margin-left:-10px}.mydp .selectorarrow:before{border-color:rgba(204,204,204,0);border-bottom-color:#CCC;border-width:11px;margin-left:-11px}.mydp .selectorarrow:focus:before{border-bottom-color:#ADD8E6}.mydp .selectorarrowleft:after,.mydp .selectorarrowleft:before{left:24px}.mydp .selectorarrowright:after,.mydp .selectorarrowright:before{left:86%}.mydp .alignselectorright{right:-1px}.mydp .selectiongroup{position:relative;display:table;border:none;border-spacing:0;background-color:#FFF}.mydp .selection{width:100%;outline:0;background-color:#FFF;display:table-cell;position:absolute;text-overflow:ellipsis;padding-left:6px;border:none;color:#555}.mydp .invaliddate{background-color:#F1DEDE}.mydp ::-ms-clear{display:none}.mydp .headerbtncell,.mydp .selbtngroup{display:table-cell;vertical-align:middle}.mydp .selbtngroup{position:relative;white-space:nowrap;width:1%;font-size:0}.mydp .btnclear,.mydp .btndecrease,.mydp .btnincrease,.mydp .btnpicker{height:100%;width:26px;border:none;padding:0;outline:0;font:inherit;-moz-user-select:none}.mydp .btnleftborder{border-left:1px solid #CCC}.mydp .btnclearenabled,.mydp .btndecreaseenabled,.mydp .btnincreaseenabled,.mydp .btnpickerenabled,.mydp .headerbtnenabled,.mydp .headertodaybtnenabled,.mydp .yearchangebtnenabled{cursor:pointer}.mydp .btncleardisabled,.mydp .btndecreasedisabled,.mydp .btnincreasedisabled,.mydp .btnpickerdisabled,.mydp .headerbtndisabled,.mydp .headertodaybtndisabled,.mydp .selectiondisabled,.mydp .yearchangebtndisabled{cursor:not-allowed;opacity:.65}.mydp .selectiondisabled{background-color:#EEE}.mydp .btnclear,.mydp .btndecrease,.mydp .btnincrease,.mydp .btnpicker,.mydp .headertodaybtn{background:#FFF}.mydp .header{width:100%;height:30px;background-color:#FAFAFA}.mydp .header td{vertical-align:middle;border:none;line-height:0}.mydp .header td:nth-child(1){padding-left:4px}.mydp .header td:nth-child(2){text-align:center}.mydp .header td:nth-child(3){padding-right:4px}.mydp .caltable,.mydp .monthtable,.mydp .yeartable{table-layout:fixed;width:100%;height:calc(100% - 30px);background-color:#FFF;font-size:14px}.mydp .caltable,.mydp .daycell,.mydp .monthcell,.mydp .monthtable,.mydp .weekdaytitle,.mydp .yearcell,.mydp .yeartable{border-collapse:collapse;color:#036;line-height:1.1}.mydp .daycell,.mydp .monthcell,.mydp .weekdaytitle,.mydp .yearcell{padding:4px;text-align:center}.mydp .weekdaytitle{background-color:#DDD;font-size:11px;font-weight:400;vertical-align:middle;max-width:36px}.mydp .weekdaytitleweeknbr{width:20px;border-right:1px solid #BBB}.mydp .monthcell{background-color:#FAFAFA}.mydp .yearcell{background-color:#FAFAFA;width:20%}.mydp .daycell .datevalue{background-color:inherit;vertical-align:middle}.mydp .daycell .datevalue span{vertical-align:middle}.mydp .daycellweeknbr{font-size:10px;border-right:1px solid #CCC;cursor:default;color:#000}.mydp .inlinedp{position:relative;margin-top:-1px}.mydp .nextmonth,.mydp .prevmonth{color:#999}.mydp .disabled{cursor:default!important;color:#CCC;background:#FBEFEF}.mydp .highlight{color:#C30000}.mydp .dimday{opacity:.5}.mydp .currmonth{background-color:#F6F6F6;font-weight:400}.mydp .markdate{position:absolute;width:4px;height:4px;border-radius:4px}.mydp .markcurrday,.mydp .markcurrmonth,.mydp .markcurryear{text-decoration:underline}.mydp .selectedday .datevalue,.mydp .selectedmonth .monthvalue,.mydp .selectedyear .yearvalue{border:none;background-color:#8EBFFF;border-radius:2px}.mydp .headerbtncell{background-color:#FAFAFA}.mydp .yearchangebtncell{text-align:center;background-color:#FAFAFA}.mydp .headerbtn,.mydp .headerlabelbtn,.mydp .yearchangebtn{background:#FAFAFA;border:none;height:22px}.mydp .headerbtn{width:16px}.mydp .headerlabelbtn{font-size:14px;outline:0;cursor:default}.mydp,.mydp .headertodaybtn{border:1px solid #CCC}.mydp .btnclear,.mydp .btndecrease,.mydp .btnincrease,.mydp .btnpicker,.mydp .headerbtn,.mydp .headermonthtxt,.mydp .headertodaybtn,.mydp .headeryeartxt,.mydp .yearchangebtn{color:#000}.mydp .headertodaybtn{padding:0 4px;font-size:11px;height:22px;min-width:60px;max-width:84px}.mydp button::-moz-focus-inner{border:0}.mydp .headermonthtxt,.mydp .headeryeartxt{text-align:center;display:table-cell;vertical-align:middle;font-size:14px;height:26px;width:40px;max-width:40px;overflow:hidden;white-space:nowrap}.mydp .btnclear:focus,.mydp .btndecrease:focus,.mydp .btnincrease:focus,.mydp .btnpicker:focus,.mydp .headertodaybtn:focus{background:#ADD8E6}.mydp .headerbtn:focus,.mydp .monthlabel:focus,.mydp .yearchangebtn:focus,.mydp .yearlabel:focus{color:#ADD8E6;outline:0}.mydp .daycell:focus,.mydp .monthcell:focus,.mydp .yearcell:focus{outline:#CCC solid 1px}.mydp .icon-mydpcalendar,.mydp .icon-mydpremove{font-size:16px}.mydp .icon-mydpdown,.mydp .icon-mydpleft,.mydp .icon-mydpright,.mydp .icon-mydpup{color:#222;font-size:20px}.mydp .btndecrease .icon-mydpleft,.mydp .btnincrease .icon-mydpright{font-size:16px}.mydp .icon-mydptoday{color:#222;font-size:11px}.mydp table{display:table;border-spacing:0}.mydp table td{padding:0}.mydp table,.mydp td,.mydp th{border:none}.mydp .btnclearenabled:hover,.mydp .btndecreaseenabled:hover,.mydp .btnincreaseenabled:hover,.mydp .btnpickerenabled:hover,.mydp .headertodaybtnenabled:hover{background-color:#E6E6E6}.mydp .tablesingleday:hover,.mydp .tablesinglemonth:hover,.mydp .tablesingleyear:hover{background-color:#DDD}.mydp .daycell,.mydp .inputnoteditable,.mydp .monthcell,.mydp .monthlabel,.mydp .yearcell,.mydp .yearlabel{cursor:pointer}.mydp .headerbtnenabled:hover,.mydp .monthlabel:hover,.mydp .yearchangebtnenabled:hover,.mydp .yearlabel:hover{color:#777}@font-face{font-family:mydatepicker;src:url(data:application/octet-stream;base64,AAEAAAAPAIAAAwBwR1NVQiCMJXkAAAD8AAAAVE9TLzI+IEhNAAABUAAAAFZjbWFw6UKcfwAAAagAAAHEY3Z0IAbV/wQAAAz8AAAAIGZwZ22KkZBZAAANHAAAC3BnYXNwAAAAEAAADPQAAAAIZ2x5Zqbn7ycAAANsAAAFXGhlYWQNX0bLAAAIyAAAADZoaGVhBzwDWQAACQAAAAAkaG10eBXB//8AAAkkAAAAIGxvY2EGNATEAAAJRAAAABJtYXhwAXgMOgAACVgAAAAgbmFtZZKUFgMAAAl4AAAC/XBvc3R9NuZlAAAMeAAAAHpwcmVw5UErvAAAGIwAAACGAAEAAAAKADAAPgACbGF0bgAOREZMVAAaAAQAAAAAAAAAAQAAAAQAAAAAAAAAAQAAAAFsaWdhAAgAAAABAAAAAQAEAAQAAAABAAgAAQAGAAAAAQAAAAECuAGQAAUAAAJ6ArwAAACMAnoCvAAAAeAAMQECAAACAAUDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBmRWQAQOgA6AYDUv9qAFoDUgCWAAAAAQAAAAAAAAAAAAUAAAADAAAALAAAAAQAAAFgAAEAAAAAAFoAAwABAAAALAADAAoAAAFgAAQALgAAAAQABAABAADoBv//AADoAP//AAAAAQAEAAAAAQACAAMABAAFAAYABwAAAQYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAZAAAAAAAAAAHAADoAAAA6AAAAAABAADoAQAA6AEAAAACAADoAgAA6AIAAAADAADoAwAA6AMAAAAEAADoBAAA6AQAAAAFAADoBQAA6AUAAAAGAADoBgAA6AYAAAAHAAEAAAAAAUECfQAOAAq3AAAAZhQBBRUrARQPAQYiJjURND4BHwEWAUEK+gscFhYcC/oKAV4OC/oLFg4B9A8UAgz6CgAAAQAAAAABZwJ8AA0AF0AUAAEAAQFHAAEAAW8AAABmFxMCBRYrAREUBiIvASY0PwE2MhYBZRQgCfoKCvoLHBgCWP4MDhYL+gscC/oLFgAAAAAFAAD/agOhA1IAFAAYACgAOABcALdAECoaAgoFMiICBgoNAQABA0dLsApQWEA/DgwCCgUGBgplAAIEAQQCAW0AAQAEAQBrAAADBAADawgBBgAEAgYEXwcBBQULWA0BCwsMSAADAwlYAAkJDQlJG0BADgwCCgUGBQoGbQACBAEEAgFtAAEABAEAawAAAwQAA2sIAQYABAIGBF8HAQUFC1gNAQsLDEgAAwMJWAAJCQ0JSVlAGFtZVlNQT0xJRkQ/PCYmJiQRFRQXEg8FHSsJAQYiLwEmND8BNjIfATc2Mh8BFhQBIREhNzU0JisBIgYdARQWOwEyNiU1NCYrASIGHQEUFjsBMjY3ERQGIyEiJjURNDY7ATU0NjsBMhYdATM1NDY7ATIWBxUzMhYC1/7iBQ4GoQUFGgUOBnv3Bg4GGQX9awMS/O7XCggkCAoKCCQICgGsCggjCAoKCCMICtcsHPzuHSoqHUg0JSQlNNY2JCMlNgFHHSoBOP7iBQWhBg4FGgUFe/gFBRoFDv5zAjxroQgKCgihCAoKCKEICgoIoQgKCiz9NR0qKh0Cyx0qNiU0NCU2NiU0NCU2KgAAAAAPAAD/agOhA1IAAwAHAAsADwATABcAGwAfACMAMwA3ADsAPwBPAHMAmECVQSUCHRJJLSQDEx0CRyEfAh0TCR1UGwETGRcNAwkIEwlfGBYMAwgVEQcDBQQIBV4UEAYDBA8LAwMBAAQBXhoBEhIeWCABHh4MSA4KAgMAABxYABwcDRxJcnBtamdmY2BdW1ZTTUxFRD8+PTw7Ojk4NzY1NDEvKScjIiEgHx4dHBsaGRgXFhUUExIRERERERERERAiBR0rFzM1IxczNSMnMzUjFzM1IyczNSMBMzUjJzM1IwEzNSMnMzUjAzU0JicjIgYHFRQWNzMyNgEzNSMnMzUjFzM1Izc1NCYnIyIGFxUUFjczMjY3ERQGIyEiJjURNDY7ATU0NjsBMhYdATM1NDY7ATIWBxUzMhZHoaHFsrLFoaHFsrLFoaEBm7Oz1rKyAayhodazs8QMBiQHCgEMBiQHCgGboaHWs7PWoaESCggjBwwBCggjCArXLBz87h0qKh1INCUkJTTWNiQjJTYBRx0qT6GhoSSysrIkof3Eofqh/cShJLIBMKEHCgEMBqEHDAEK/iayJKGhoWuhBwoBDAahBwwBCiz9NR0qKh0Cyx0qNiU0NCU2NiU0NCU2KgAAAAH//wAAAjsByQAOABFADgABAAFvAAAAZhUyAgUWKyUUBichIi4BPwE2Mh8BFgI7FA/+DA8UAgz6Ch4K+gqrDhYBFB4L+goK+gsAAAABAAAAAAI8Ae0ADgAXQBQAAQABAUcAAQABbwAAAGY1FAIFFisBFA8BBiIvASY0NjMhMhYCOwr6CxwL+gsWDgH0DhYByQ4L+gsL+gscFhYAAAEAAP/vAtQChgAkAB5AGyIZEAcEAAIBRwMBAgACbwEBAABmFBwUFAQFGCslFA8BBiIvAQcGIi8BJjQ/AScmND8BNjIfATc2Mh8BFhQPARcWAtQPTBAsEKSkECwQTBAQpKQQEEwQLBCkpBAsEEwPD6SkD3AWEEwPD6WlDw9MECwQpKQQLBBMEBCkpBAQTA8uD6SkDwABAAAAAQAAbdyczV8PPPUACwPoAAAAANUsgZUAAAAA1SyBlf///2oD6ANSAAAACAACAAAAAAAAAAEAAANS/2oAAAPo/////gPoAAEAAAAAAAAAAAAAAAAAAAAIA+gAAAFlAAABZQAAA+gAAAOgAAACO///AjsAAAMRAAAAAAAAACIASgEoAhYCPAJkAq4AAAABAAAACAB0AA8AAAAAAAIARABUAHMAAACpC3AAAAAAAAAAEgDeAAEAAAAAAAAANQAAAAEAAAAAAAEADAA1AAEAAAAAAAIABwBBAAEAAAAAAAMADABIAAEAAAAAAAQADABUAAEAAAAAAAUACwBgAAEAAAAAAAYADABrAAEAAAAAAAoAKwB3AAEAAAAAAAsAEwCiAAMAAQQJAAAAagC1AAMAAQQJAAEAGAEfAAMAAQQJAAIADgE3AAMAAQQJAAMAGAFFAAMAAQQJAAQAGAFdAAMAAQQJAAUAFgF1AAMAAQQJAAYAGAGLAAMAAQQJAAoAVgGjAAMAAQQJAAsAJgH5Q29weXJpZ2h0IChDKSAyMDE3IGJ5IG9yaWdpbmFsIGF1dGhvcnMgQCBmb250ZWxsby5jb21teWRhdGVwaWNrZXJSZWd1bGFybXlkYXRlcGlja2VybXlkYXRlcGlja2VyVmVyc2lvbiAxLjBteWRhdGVwaWNrZXJHZW5lcmF0ZWQgYnkgc3ZnMnR0ZiBmcm9tIEZvbnRlbGxvIHByb2plY3QuaHR0cDovL2ZvbnRlbGxvLmNvbQBDAG8AcAB5AHIAaQBnAGgAdAAgACgAQwApACAAMgAwADEANwAgAGIAeQAgAG8AcgBpAGcAaQBuAGEAbAAgAGEAdQB0AGgAbwByAHMAIABAACAAZgBvAG4AdABlAGwAbABvAC4AYwBvAG0AbQB5AGQAYQB0AGUAcABpAGMAawBlAHIAUgBlAGcAdQBsAGEAcgBtAHkAZABhAHQAZQBwAGkAYwBrAGUAcgBtAHkAZABhAHQAZQBwAGkAYwBrAGUAcgBWAGUAcgBzAGkAbwBuACAAMQAuADAAbQB5AGQAYQB0AGUAcABpAGMAawBlAHIARwBlAG4AZQByAGEAdABlAGQAIABiAHkAIABzAHYAZwAyAHQAdABmACAAZgByAG8AbQAgAEYAbwBuAHQAZQBsAGwAbwAgAHAAcgBvAGoAZQBjAHQALgBoAHQAdABwADoALwAvAGYAbwBuAHQAZQBsAGwAbwAuAGMAbwBtAAAAAAIAAAAAAAAACgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAECAQMBBAEFAQYBBwEIAQkACW15ZHByaWdodAhteWRwbGVmdAlteWRwdG9kYXkMbXlkcGNhbGVuZGFyBm15ZHB1cAhteWRwZG93bgpteWRwcmVtb3ZlAAAAAAABAAH//wAPAAAAAAAAAAAAAAAAAAAAAAAYABgAGAAYA1L/agNS/2qwACwgsABVWEVZICBLuAAOUUuwBlNaWLA0G7AoWWBmIIpVWLACJWG5CAAIAGNjI2IbISGwAFmwAEMjRLIAAQBDYEItsAEssCBgZi2wAiwgZCCwwFCwBCZasigBCkNFY0VSW1ghIyEbilggsFBQWCGwQFkbILA4UFghsDhZWSCxAQpDRWNFYWSwKFBYIbEBCkNFY0UgsDBQWCGwMFkbILDAUFggZiCKimEgsApQWGAbILAgUFghsApgGyCwNlBYIbA2YBtgWVlZG7ABK1lZI7AAUFhlWVktsAMsIEUgsAQlYWQgsAVDUFiwBSNCsAYjQhshIVmwAWAtsAQsIyEjISBksQViQiCwBiNCsQEKQ0VjsQEKQ7ABYEVjsAMqISCwBkMgiiCKsAErsTAFJbAEJlFYYFAbYVJZWCNZISCwQFNYsAErGyGwQFkjsABQWGVZLbAFLLAHQyuyAAIAQ2BCLbAGLLAHI0IjILAAI0JhsAJiZrABY7ABYLAFKi2wBywgIEUgsAtDY7gEAGIgsABQWLBAYFlmsAFjYESwAWAtsAgssgcLAENFQiohsgABAENgQi2wCSywAEMjRLIAAQBDYEItsAosICBFILABKyOwAEOwBCVgIEWKI2EgZCCwIFBYIbAAG7AwUFiwIBuwQFlZI7AAUFhlWbADJSNhRESwAWAtsAssICBFILABKyOwAEOwBCVgIEWKI2EgZLAkUFiwABuwQFkjsABQWGVZsAMlI2FERLABYC2wDCwgsAAjQrILCgNFWCEbIyFZKiEtsA0ssQICRbBkYUQtsA4ssAFgICCwDENKsABQWCCwDCNCWbANQ0qwAFJYILANI0JZLbAPLCCwEGJmsAFjILgEAGOKI2GwDkNgIIpgILAOI0IjLbAQLEtUWLEEZERZJLANZSN4LbARLEtRWEtTWLEEZERZGyFZJLATZSN4LbASLLEAD0NVWLEPD0OwAWFCsA8rWbAAQ7ACJUKxDAIlQrENAiVCsAEWIyCwAyVQWLEBAENgsAQlQoqKIIojYbAOKiEjsAFhIIojYbAOKiEbsQEAQ2CwAiVCsAIlYbAOKiFZsAxDR7ANQ0dgsAJiILAAUFiwQGBZZrABYyCwC0NjuAQAYiCwAFBYsEBgWWawAWNgsQAAEyNEsAFDsAA+sgEBAUNgQi2wEywAsQACRVRYsA8jQiBFsAsjQrAKI7ABYEIgYLABYbUQEAEADgBCQopgsRIGK7ByKxsiWS2wFCyxABMrLbAVLLEBEystsBYssQITKy2wFyyxAxMrLbAYLLEEEystsBkssQUTKy2wGiyxBhMrLbAbLLEHEystsBwssQgTKy2wHSyxCRMrLbAeLACwDSuxAAJFVFiwDyNCIEWwCyNCsAojsAFgQiBgsAFhtRAQAQAOAEJCimCxEgYrsHIrGyJZLbAfLLEAHistsCAssQEeKy2wISyxAh4rLbAiLLEDHistsCMssQQeKy2wJCyxBR4rLbAlLLEGHistsCYssQceKy2wJyyxCB4rLbAoLLEJHistsCksIDywAWAtsCosIGCwEGAgQyOwAWBDsAIlYbABYLApKiEtsCsssCorsCoqLbAsLCAgRyAgsAtDY7gEAGIgsABQWLBAYFlmsAFjYCNhOCMgilVYIEcgILALQ2O4BABiILAAUFiwQGBZZrABY2AjYTgbIVktsC0sALEAAkVUWLABFrAsKrABFTAbIlktsC4sALANK7EAAkVUWLABFrAsKrABFTAbIlktsC8sIDWwAWAtsDAsALABRWO4BABiILAAUFiwQGBZZrABY7ABK7ALQ2O4BABiILAAUFiwQGBZZrABY7ABK7AAFrQAAAAAAEQ+IzixLwEVKi2wMSwgPCBHILALQ2O4BABiILAAUFiwQGBZZrABY2CwAENhOC2wMiwuFzwtsDMsIDwgRyCwC0NjuAQAYiCwAFBYsEBgWWawAWNgsABDYbABQ2M4LbA0LLECABYlIC4gR7AAI0KwAiVJiopHI0cjYSBYYhshWbABI0KyMwEBFRQqLbA1LLAAFrAEJbAEJUcjRyNhsAlDK2WKLiMgIDyKOC2wNiywABawBCWwBCUgLkcjRyNhILAEI0KwCUMrILBgUFggsEBRWLMCIAMgG7MCJgMaWUJCIyCwCEMgiiNHI0cjYSNGYLAEQ7ACYiCwAFBYsEBgWWawAWNgILABKyCKimEgsAJDYGQjsANDYWRQWLACQ2EbsANDYFmwAyWwAmIgsABQWLBAYFlmsAFjYSMgILAEJiNGYTgbI7AIQ0awAiWwCENHI0cjYWAgsARDsAJiILAAUFiwQGBZZrABY2AjILABKyOwBENgsAErsAUlYbAFJbACYiCwAFBYsEBgWWawAWOwBCZhILAEJWBkI7ADJWBkUFghGyMhWSMgILAEJiNGYThZLbA3LLAAFiAgILAFJiAuRyNHI2EjPDgtsDgssAAWILAII0IgICBGI0ewASsjYTgtsDkssAAWsAMlsAIlRyNHI2GwAFRYLiA8IyEbsAIlsAIlRyNHI2EgsAUlsAQlRyNHI2GwBiWwBSVJsAIlYbkIAAgAY2MjIFhiGyFZY7gEAGIgsABQWLBAYFlmsAFjYCMuIyAgPIo4IyFZLbA6LLAAFiCwCEMgLkcjRyNhIGCwIGBmsAJiILAAUFiwQGBZZrABYyMgIDyKOC2wOywjIC5GsAIlRlJYIDxZLrErARQrLbA8LCMgLkawAiVGUFggPFkusSsBFCstsD0sIyAuRrACJUZSWCA8WSMgLkawAiVGUFggPFkusSsBFCstsD4ssDUrIyAuRrACJUZSWCA8WS6xKwEUKy2wPyywNiuKICA8sAQjQoo4IyAuRrACJUZSWCA8WS6xKwEUK7AEQy6wKystsEAssAAWsAQlsAQmIC5HI0cjYbAJQysjIDwgLiM4sSsBFCstsEEssQgEJUKwABawBCWwBCUgLkcjRyNhILAEI0KwCUMrILBgUFggsEBRWLMCIAMgG7MCJgMaWUJCIyBHsARDsAJiILAAUFiwQGBZZrABY2AgsAErIIqKYSCwAkNgZCOwA0NhZFBYsAJDYRuwA0NgWbADJbACYiCwAFBYsEBgWWawAWNhsAIlRmE4IyA8IzgbISAgRiNHsAErI2E4IVmxKwEUKy2wQiywNSsusSsBFCstsEMssDYrISMgIDywBCNCIzixKwEUK7AEQy6wKystsEQssAAVIEewACNCsgABARUUEy6wMSotsEUssAAVIEewACNCsgABARUUEy6wMSotsEYssQABFBOwMiotsEcssDQqLbBILLAAFkUjIC4gRoojYTixKwEUKy2wSSywCCNCsEgrLbBKLLIAAEErLbBLLLIAAUErLbBMLLIBAEErLbBNLLIBAUErLbBOLLIAAEIrLbBPLLIAAUIrLbBQLLIBAEIrLbBRLLIBAUIrLbBSLLIAAD4rLbBTLLIAAT4rLbBULLIBAD4rLbBVLLIBAT4rLbBWLLIAAEArLbBXLLIAAUArLbBYLLIBAEArLbBZLLIBAUArLbBaLLIAAEMrLbBbLLIAAUMrLbBcLLIBAEMrLbBdLLIBAUMrLbBeLLIAAD8rLbBfLLIAAT8rLbBgLLIBAD8rLbBhLLIBAT8rLbBiLLA3Ky6xKwEUKy2wYyywNyuwOystsGQssDcrsDwrLbBlLLAAFrA3K7A9Ky2wZiywOCsusSsBFCstsGcssDgrsDsrLbBoLLA4K7A8Ky2waSywOCuwPSstsGossDkrLrErARQrLbBrLLA5K7A7Ky2wbCywOSuwPCstsG0ssDkrsD0rLbBuLLA6Ky6xKwEUKy2wbyywOiuwOystsHAssDorsDwrLbBxLLA6K7A9Ky2wciyzCQQCA0VYIRsjIVlCK7AIZbADJFB4sAEVMC0AS7gAyFJYsQEBjlmwAbkIAAgAY3CxAAVCsgABACqxAAVCswoCAQgqsQAFQrMOAAEIKrEABkK6AsAAAQAJKrEAB0K6AEAAAQAJKrEDAESxJAGIUViwQIhYsQNkRLEmAYhRWLoIgAABBECIY1RYsQMARFlZWVmzDAIBDCq4Af+FsASNsQIARAAA) format('truetype');font-weight:400;font-style:normal}.mydp .mydpicon{font-family:mydatepicker;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.mydp .icon-mydpright:before{content:\"\\e800\"}.mydp .icon-mydpleft:before{content:\"\\e801\"}.mydp .icon-mydptoday:before{content:\"\\e802\"}.mydp .icon-mydpcalendar:before{content:\"\\e803\"}.mydp .icon-mydpup:before{content:\"\\e804\"}.mydp .icon-mydpdown:before{content:\"\\e805\"}.mydp .icon-mydpremove:before{content:\"\\e806\"}"],
+                    template: "<div class=\"mydp\" [ngStyle]=\"{'width': opts.showInputField ? opts.width : null, 'border': opts.inline ? 'none' : null}\"><div class=\"selectiongroup\" *ngIf=\"!opts.inline\"><input *ngIf=\"opts.showInputField\" #inputBoxEl ngtype=\"text\" class=\"selection\" [attr.aria-label]=\"opts.ariaLabelInputField\" (click)=\"opts.openSelectorOnInputClick&&!opts.editableDateField&&openBtnClicked()\" [ngClass]=\"{'invaliddate': invalidDate&&opts.indicateInvalidDate, 'inputnoteditable': opts.openSelectorOnInputClick&&!opts.editableDateField, 'selectiondisabled': opts.componentDisabled}\" placeholder=\"{{placeholder}}\" [ngStyle]=\"{'height': opts.height, 'font-size': opts.selectionTxtFontSize}\" [ngModel]=\"selectionDayTxt\" (ngModelChange)=\"onUserDateInput($event)\" [value]=\"selectionDayTxt\" (keyup)=\"onCloseSelector($event)\" (focus)=\"opts.editableDateField&&onFocusInput($event)\" (blur)=\"opts.editableDateField&&onBlurInput($event)\" [disabled]=\"opts.componentDisabled\" [readonly]=\"!opts.editableDateField\" autocomplete=\"off\" spellcheck=\"false\" autocorrect=\"off\"><div class=\"selbtngroup\" [style.height]=\"opts.height\"><button type=\"button\" [attr.aria-label]=\"opts.ariaLabelDecreaseDate\" class=\"btndecrease\" *ngIf=\"opts.showDecreaseDateBtn\" (click)=\"onDecreaseBtnClicked()\" [ngClass]=\"{'btndecreaseenabled': !opts.componentDisabled, 'btndecreasedisabled': opts.componentDisabled, 'btnleftborderradius': !opts.showInputField}\" [disabled]=\"opts.componentDisabled\"><span class=\"mydpicon icon-mydpleft\"></span></button> <button type=\"button\" [attr.aria-label]=\"opts.ariaLabelIncreaseDate\" class=\"btnincrease\" *ngIf=\"opts.showIncreaseDateBtn\" (click)=\"onIncreaseBtnClicked()\" [ngClass]=\"{'btnincreaseenabled': !opts.componentDisabled, 'btnincreasedisabled': opts.componentDisabled, 'btnleftborderradius': !opts.showDecreaseDateBtn&&!opts.showInputField}\" [disabled]=\"opts.componentDisabled\"><span class=\"mydpicon icon-mydpright\"></span></button> <button type=\"button\" [attr.aria-label]=\"opts.ariaLabelClearDate\" class=\"btnclear\" *ngIf=\"selectionDayTxt.length>0&&opts.showClearDateBtn\" (click)=\"removeBtnClicked()\" [ngClass]=\"{'btnclearenabled': !opts.componentDisabled, 'btncleardisabled': opts.componentDisabled, 'btnleftborderradius': !opts.showIncreaseDateBtn&&!opts.showDecreaseDateBtn&&!opts.showInputField}\" [disabled]=\"opts.componentDisabled\"><span class=\"mydpicon icon-mydpremove\"></span></button> <button type=\"button\" [attr.aria-label]=\"opts.ariaLabelOpenCalendar\" class=\"btnpicker\" (click)=\"openBtnClicked()\" [ngClass]=\"{'btnpickerenabled': !opts.componentDisabled, 'btnpickerdisabled': opts.componentDisabled, 'btnleftborderradius': !opts.showClearDateBtn&&!opts.showIncreaseDateBtn&&!opts.showDecreaseDateBtn&&!opts.showInputField||selectionDayTxt.length===0&&!opts.showInputField}\" [disabled]=\"opts.componentDisabled\"><span class=\"mydpicon icon-mydpcalendar\"></span></button></div></div><div class=\"selector\" #selectorEl [ngStyle]=\"{'width': opts.selectorWidth, 'height' : opts.selectorHeight, 'bottom': getSelectorTopPosition()}\" *ngIf=\"showSelector||opts.inline\" [mydpfocus]=\"opts.inline?'0':'1'\" [ngClass]=\"{'inlinedp': opts.inline, 'alignselectorright': opts.alignSelectorRight, 'selectorarrow': opts.showSelectorArrow&&!opts.inline, 'selectorarrowleft': opts.showSelectorArrow&&!opts.alignSelectorRight&&!opts.inline, 'selectorarrowright': opts.showSelectorArrow&&opts.alignSelectorRight&&!opts.inline}\" (keyup)=\"onCloseSelector($event)\" tabindex=\"0\"><table class=\"header\"><tr><td><div style=\"float:left\"><div class=\"headerbtncell\"><button type=\"button\" [attr.aria-label]=\"opts.ariaLabelPrevMonth\" class=\"headerbtn mydpicon icon-mydpleft\" (click)=\"onPrevMonth()\" [disabled]=\"prevMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !prevMonthDisabled, 'headerbtndisabled': prevMonthDisabled}\"></button></div><div class=\"headermonthtxt\"><button class=\"headerlabelbtn\" type=\"button\" [ngClass]=\"{'monthlabel': opts.monthSelector}\" (click)=\"opts.monthSelector&&onSelectMonthClicked($event)\" tabindex=\"{{opts.monthSelector?'0':'-1'}}\">{{visibleMonth.monthTxt}}</button></div><div class=\"headerbtncell\"><button type=\"button\" [attr.aria-label]=\"opts.ariaLabelNextMonth\" class=\"headerbtn mydpicon icon-mydpright\" (click)=\"onNextMonth()\" [disabled]=\"nextMonthDisabled\" [ngClass]=\"{'headerbtnenabled': !nextMonthDisabled, 'headerbtndisabled': nextMonthDisabled}\"></button></div></div></td><td><button *ngIf=\"opts.showTodayBtn\" type=\"button\" class=\"headertodaybtn\" (click)=\"onTodayClicked()\" [disabled]=\"disableTodayBtn\" [ngClass]=\"{'headertodaybtnenabled': !disableTodayBtn, 'headertodaybtndisabled': disableTodayBtn}\"><span class=\"mydpicon icon-mydptoday\"></span> <span>{{opts.todayBtnTxt}}</span></button></td><td><div style=\"float:right\"><div class=\"headerbtncell\"><button type=\"button\" [attr.aria-label]=\"opts.ariaLabelPrevYear\" class=\"headerbtn mydpicon icon-mydpleft\" (click)=\"onPrevYear()\" [disabled]=\"prevYearDisabled\" [ngClass]=\"{'headerbtnenabled': !prevYearDisabled, 'headerbtndisabled': prevYearDisabled}\"></button></div><div class=\"headeryeartxt\"><button class=\"headerlabelbtn\" type=\"button\" [ngClass]=\"{'yearlabel': opts.yearSelector}\" (click)=\"opts.yearSelector&&onSelectYearClicked($event)\" tabindex=\"{{opts.yearSelector?'0':'-1'}}\">{{visibleMonth.year}}</button></div><div class=\"headerbtncell\"><button type=\"button\" [attr.aria-label]=\"opts.ariaLabelNextYear\" class=\"headerbtn mydpicon icon-mydpright\" (click)=\"onNextYear()\" [disabled]=\"nextYearDisabled\" [ngClass]=\"{'headerbtnenabled': !nextYearDisabled, 'headerbtndisabled': nextYearDisabled}\"></button></div></div></td></tr></table><table class=\"caltable\" *ngIf=\"!selectMonth&&!selectYear\"><thead><tr><th class=\"weekdaytitle weekdaytitleweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">#</th><th class=\"weekdaytitle\" scope=\"col\" *ngFor=\"let d of weekDays\">{{d}}</th></tr></thead><tbody><tr *ngFor=\"let w of dates\"><td class=\"daycell daycellweeknbr\" *ngIf=\"opts.showWeekNumbers&&opts.firstDayOfWeek==='mo'\">{{w.weekNbr}}</td><td class=\"daycell\" *ngFor=\"let d of w.week\" [ngClass]=\"{'currmonth':d.cmo===currMonthId&&!d.disabled, 'selectedday':selectedDate.day===d.dateObj.day && selectedDate.month===d.dateObj.month && selectedDate.year===d.dateObj.year && d.cmo===currMonthId, 'disabled': d.disabled, 'tablesingleday':(!opts.allowSelectionOnlyInCurrentMonth||d.cmo===currMonthId&&opts.allowSelectionOnlyInCurrentMonth)&&!d.disabled}\" (click)=\"!d.disabled&&onCellClicked(d);$event.stopPropagation()\" (keydown)=\"onCellKeyDown($event, d)\" tabindex=\"0\"><div *ngIf=\"d.markedDate.marked\" class=\"markdate\" [ngStyle]=\"{'background-color': d.markedDate.color}\"></div><div class=\"datevalue\" [ngClass]=\"{'prevmonth':d.cmo===prevMonthId,'currmonth':d.cmo===currMonthId,'nextmonth':d.cmo===nextMonthId,'highlight':d.highlight}\"><span [ngClass]=\"{'markcurrday':d.currDay&&opts.markCurrentDay, 'dimday': d.highlight && (d.cmo===prevMonthId || d.cmo===nextMonthId || d.disabled)}\">{{d.dateObj.day}}</span></div></td></tr></tbody></table><table class=\"monthtable\" *ngIf=\"selectMonth\"><tbody><tr *ngFor=\"let mr of months\"><td class=\"monthcell tablesinglemonth\" [ngClass]=\"{'selectedmonth': m.selected, 'disabled': m.disabled}\" *ngFor=\"let m of mr\" (click)=\"!m.disabled&&onMonthCellClicked(m);$event.stopPropagation()\" (keydown)=\"onMonthCellKeyDown($event, m)\" tabindex=\"0\"><div class=\"monthvalue\" [ngClass]=\"{'markcurrmonth':m.currMonth&&opts.markCurrentMonth}\">{{m.name}}</div></td></tr></tbody></table><table class=\"yeartable\" *ngIf=\"selectYear\"><tbody><tr><td colspan=\"5\" class=\"yearchangebtncell\" (click)=\"$event.stopPropagation()\"><button type=\"button\" class=\"yearchangebtn mydpicon icon-mydpup\" (click)=\"onPrevYears($event, years[0][0].year)\" [disabled]=\"prevYearsDisabled\" [ngClass]=\"{'yearchangebtnenabled': !prevYearsDisabled, 'yearchangebtndisabled': prevYearsDisabled}\"></button></td></tr><tr *ngFor=\"let yr of years\"><td class=\"yearcell tablesingleyear\" [ngClass]=\"{'selectedyear': y.selected, 'disabled': y.disabled}\" *ngFor=\"let y of yr\" (click)=\"!y.disabled&&onYearCellClicked(y);$event.stopPropagation()\" (keydown)=\"onYearCellKeyDown($event, y)\" tabindex=\"0\"><div class=\"yearvalue\" [ngClass]=\"{'markcurryear':y.currYear&&opts.markCurrentYear}\">{{y.year}}</div></td></tr><tr><td colspan=\"5\" class=\"yearchangebtncell\" (click)=\"$event.stopPropagation()\"><button type=\"button\" class=\"yearchangebtn mydpicon icon-mydpdown\" (click)=\"onNextYears($event, years[0][0].year)\" [disabled]=\"nextYearsDisabled\" [ngClass]=\"{'yearchangebtnenabled': !nextYearsDisabled, 'yearchangebtndisabled': nextYearsDisabled}\"></button></td></tr></tbody></table></div></div>",
+                    providers: [__WEBPACK_IMPORTED_MODULE_2__services_my_date_picker_locale_service__["a" /* LocaleService */], __WEBPACK_IMPORTED_MODULE_3__services_my_date_picker_util_service__["a" /* UtilService */], MYDP_VALUE_ACCESSOR],
+                    encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* ViewEncapsulation */].None
+                },] },
+    ];
+    MyDatePicker.ctorParameters = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["V" /* Renderer */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* ChangeDetectorRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_2__services_my_date_picker_locale_service__["a" /* LocaleService */], },
+        { type: __WEBPACK_IMPORTED_MODULE_3__services_my_date_picker_util_service__["a" /* UtilService */], },
+    ];
+    MyDatePicker.propDecorators = {
+        'options': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
+        'locale': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
+        'defaultMonth': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
+        'selDate': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
+        'placeholder': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
+        'selector': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
+        'disabled': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
+        'dateChanged': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Output */] },],
+        'inputFieldChanged': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Output */] },],
+        'calendarViewChanged': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Output */] },],
+        'calendarToggle': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Output */] },],
+        'inputFocusBlur': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Output */] },],
+        'selectorEl': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* ViewChild */], args: ["selectorEl",] },],
+        'inputBoxEl': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* ViewChild */], args: ["inputBoxEl",] },],
+    };
+    return MyDatePicker;
+}());
+//# sourceMappingURL=my-date-picker.component.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/my-date-picker.module.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyDatePickerModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common__ = __webpack_require__("../../../common/esm5/common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__my_date_picker_component__ = __webpack_require__("../../../../mydatepicker/dist/my-date-picker.component.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__directives_my_date_picker_focus_directive__ = __webpack_require__("../../../../mydatepicker/dist/directives/my-date-picker.focus.directive.js");
+
+
+
+
+
+var MyDatePickerModule = (function () {
+    function MyDatePickerModule() {
+    }
+    MyDatePickerModule.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_2__angular_core__["I" /* NgModule */], args: [{
+                    imports: [__WEBPACK_IMPORTED_MODULE_0__angular_common__["b" /* CommonModule */], __WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormsModule */]],
+                    declarations: [__WEBPACK_IMPORTED_MODULE_3__my_date_picker_component__["a" /* MyDatePicker */], __WEBPACK_IMPORTED_MODULE_4__directives_my_date_picker_focus_directive__["a" /* FocusDirective */]],
+                    exports: [__WEBPACK_IMPORTED_MODULE_3__my_date_picker_component__["a" /* MyDatePicker */], __WEBPACK_IMPORTED_MODULE_4__directives_my_date_picker_focus_directive__["a" /* FocusDirective */]]
+                },] },
+    ];
+    MyDatePickerModule.ctorParameters = [];
+    return MyDatePickerModule;
+}());
+//# sourceMappingURL=my-date-picker.module.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/services/my-date-picker.locale.service.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocaleService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+
+var LocaleService = (function () {
+    function LocaleService() {
+        this.locales = {
+            "en": {
+                dayLabels: { su: "Sun", mo: "Mon", tu: "Tue", we: "Wed", th: "Thu", fr: "Fri", sa: "Sat" },
+                monthLabels: { 1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun", 7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec" },
+                dateFormat: "mm/dd/yyyy",
+                todayBtnTxt: "Today",
+                firstDayOfWeek: "mo",
+                sunHighlight: true,
+            },
+            "he": {
+                dayLabels: { su: "רא", mo: "שנ", tu: "של", we: "רב", th: "חמ", fr: "שי", sa: "שב" },
+                monthLabels: { 1: "ינו", 2: "פבר", 3: "מרץ", 4: "אפר", 5: "מאי", 6: "יונ", 7: "יול", 8: "אוג", 9: "ספט", 10: "אוק", 11: "נוב", 12: "דצמ" },
+                dateFormat: "dd/mm/yyyy",
+                todayBtnTxt: "היום",
+                firstDayOfWeek: "su",
+                sunHighlight: false
+            },
+            "ja": {
+                dayLabels: { su: "日", mo: "月", tu: "火", we: "水", th: "木", fr: "金", sa: "土" },
+                monthLabels: { 1: "１月", 2: "２月", 3: "３月", 4: "４月", 5: "５月", 6: "６月", 7: "７月", 8: "８月", 9: "９月", 10: "１０月", 11: "１１月", 12: "１２月" },
+                dateFormat: "yyyy.mm.dd",
+                todayBtnTxt: "今日",
+                sunHighlight: false
+            },
+            "fr": {
+                dayLabels: { su: "Dim", mo: "Lun", tu: "Mar", we: "Mer", th: "Jeu", fr: "Ven", sa: "Sam" },
+                monthLabels: { 1: "Jan", 2: "Fév", 3: "Mar", 4: "Avr", 5: "Mai", 6: "Juin", 7: "Juil", 8: "Aoû", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Déc" },
+                dateFormat: "dd/mm/yyyy",
+                todayBtnTxt: "Aujourd'hui",
+                firstDayOfWeek: "mo",
+                sunHighlight: true,
+            },
+            "fr-ch": {
+                dayLabels: { su: "Dim", mo: "Lun", tu: "Mar", we: "Mer", th: "Jeu", fr: "Ven", sa: "Sam" },
+                monthLabels: { 1: "Jan", 2: "Fév", 3: "Mar", 4: "Avr", 5: "Mai", 6: "Juin", 7: "Juil", 8: "Aoû", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Déc" },
+                dateFormat: "dd.mm.yyyy",
+                todayBtnTxt: "Aujourd'hui",
+                firstDayOfWeek: "mo",
+                sunHighlight: true,
+            },
+            "fi": {
+                dayLabels: { su: "Su", mo: "Ma", tu: "Ti", we: "Ke", th: "To", fr: "Pe", sa: "La" },
+                monthLabels: { 1: "Tam", 2: "Hel", 3: "Maa", 4: "Huh", 5: "Tou", 6: "Kes", 7: "Hei", 8: "Elo", 9: "Syy", 10: "Lok", 11: "Mar", 12: "Jou" },
+                dateFormat: "dd.mm.yyyy",
+                todayBtnTxt: "Tänään",
+                firstDayOfWeek: "mo",
+                sunHighlight: true,
+            },
+            "es": {
+                dayLabels: { su: "Do", mo: "Lu", tu: "Ma", we: "Mi", th: "Ju", fr: "Vi", sa: "Sa" },
+                monthLabels: { 1: "Ene", 2: "Feb", 3: "Mar", 4: "Abr", 5: "May", 6: "Jun", 7: "Jul", 8: "Ago", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dic" },
+                dateFormat: "dd.mm.yyyy",
+                todayBtnTxt: "Hoy",
+                firstDayOfWeek: "mo",
+                sunHighlight: true,
+            },
+            "hu": {
+                dayLabels: { su: "Vas", mo: "Hét", tu: "Kedd", we: "Sze", th: "Csü", fr: "Pén", sa: "Szo" },
+                monthLabels: { 1: "Jan", 2: "Feb", 3: "Már", 4: "Ápr", 5: "Máj", 6: "Jún", 7: "Júl", 8: "Aug", 9: "Szep", 10: "Okt", 11: "Nov", 12: "Dec" },
+                dateFormat: "yyyy-mm-dd",
+                todayBtnTxt: "Ma",
+                firstDayOfWeek: "mo",
+                sunHighlight: true
+            },
+            "sv": {
+                dayLabels: { su: "Sön", mo: "Mån", tu: "Tis", we: "Ons", th: "Tor", fr: "Fre", sa: "Lör" },
+                monthLabels: { 1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "Maj", 6: "Jun", 7: "Jul", 8: "Aug", 9: "Sep", 10: "Okt", 11: "Nov", 12: "Dec" },
+                dateFormat: "yyyy-mm-dd",
+                todayBtnTxt: "Idag",
+                firstDayOfWeek: "mo",
+                sunHighlight: false
+            },
+            "nl": {
+                dayLabels: { su: "Zon", mo: "Maa", tu: "Din", we: "Woe", th: "Don", fr: "Vri", sa: "Zat" },
+                monthLabels: { 1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "Mei", 6: "Jun", 7: "Jul", 8: "Aug", 9: "Sep", 10: "Okt", 11: "Nov", 12: "Dec" },
+                dateFormat: "dd-mm-yyyy",
+                todayBtnTxt: "Vandaag",
+                firstDayOfWeek: "mo",
+                sunHighlight: false
+            },
+            "ru": {
+                dayLabels: { su: "Вс", mo: "Пн", tu: "Вт", we: "Ср", th: "Чт", fr: "Пт", sa: "Сб" },
+                monthLabels: { 1: "Янв", 2: "Фев", 3: "Март", 4: "Апр", 5: "Май", 6: "Июнь", 7: "Июль", 8: "Авг", 9: "Сент", 10: "Окт", 11: "Ноя", 12: "Дек" },
+                dateFormat: "dd.mm.yyyy",
+                todayBtnTxt: "Сегодня",
+                firstDayOfWeek: "mo",
+                sunHighlight: true
+            },
+            "uk": {
+                dayLabels: { su: "Нд", mo: "Пн", tu: "Вт", we: "Ср", th: "Чт", fr: "Пт", sa: "Сб" },
+                monthLabels: { 1: "Січ", 2: "Лют", 3: "Бер", 4: "Кві", 5: "Тра", 6: "Чер", 7: "Лип", 8: "Сер", 9: "Вер", 10: "Жов", 11: "Лис", 12: "Гру" },
+                dateFormat: "dd.mm.yyyy",
+                todayBtnTxt: "Сьогодні",
+                firstDayOfWeek: "mo",
+                sunHighlight: true
+            },
+            "no": {
+                dayLabels: { su: "Søn", mo: "Man", tu: "Tir", we: "Ons", th: "Tor", fr: "Fre", sa: "Lør" },
+                monthLabels: { 1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "Mai", 6: "Jun", 7: "Jul", 8: "Aug", 9: "Sep", 10: "Okt", 11: "Nov", 12: "Des" },
+                dateFormat: "dd.mm.yyyy",
+                todayBtnTxt: "I dag",
+                firstDayOfWeek: "mo",
+                sunHighlight: false
+            },
+            "tr": {
+                dayLabels: { su: "Paz", mo: "Pzt", tu: "Sal", we: "Çar", th: "Per", fr: "Cum", sa: "Cmt" },
+                monthLabels: { 1: "Oca", 2: "Şub", 3: "Mar", 4: "Nis", 5: "May", 6: "Haz", 7: "Tem", 8: "Ağu", 9: "Eyl", 10: "Eki", 11: "Kas", 12: "Ara" },
+                dateFormat: "dd.mm.yyyy",
+                todayBtnTxt: "Bugün",
+                firstDayOfWeek: "mo",
+                sunHighlight: false
+            },
+            "pt-br": {
+                dayLabels: { su: "Dom", mo: "Seg", tu: "Ter", we: "Qua", th: "Qui", fr: "Sex", sa: "Sab" },
+                monthLabels: { 1: "Jan", 2: "Fev", 3: "Mar", 4: "Abr", 5: "Mai", 6: "Jun", 7: "Jul", 8: "Ago", 9: "Set", 10: "Out", 11: "Nov", 12: "Dez" },
+                dateFormat: "dd/mm/yyyy",
+                todayBtnTxt: "Hoje",
+                firstDayOfWeek: "su",
+                sunHighlight: true
+            },
+            "de": {
+                dayLabels: { su: "So", mo: "Mo", tu: "Di", we: "Mi", th: "Do", fr: "Fr", sa: "Sa" },
+                monthLabels: { 1: "Jan", 2: "Feb", 3: "Mär", 4: "Apr", 5: "Mai", 6: "Jun", 7: "Jul", 8: "Aug", 9: "Sep", 10: "Okt", 11: "Nov", 12: "Dez" },
+                dateFormat: "dd.mm.yyyy",
+                todayBtnTxt: "Heute",
+                firstDayOfWeek: "mo",
+                sunHighlight: true
+            },
+            "de-ch": {
+                dayLabels: { su: "So", mo: "Mo", tu: "Di", we: "Mi", th: "Do", fr: "Fr", sa: "Sa" },
+                monthLabels: { 1: "Jan", 2: "Feb", 3: "Mär", 4: "Apr", 5: "Mai", 6: "Jun", 7: "Jul", 8: "Aug", 9: "Sep", 10: "Okt", 11: "Nov", 12: "Dez" },
+                dateFormat: "dd.mm.yyyy",
+                todayBtnTxt: "Heute",
+                firstDayOfWeek: "mo",
+                sunHighlight: true
+            },
+            "it": {
+                dayLabels: { su: "Dom", mo: "Lun", tu: "Mar", we: "Mer", th: "Gio", fr: "Ven", sa: "Sab" },
+                monthLabels: { 1: "Gen", 2: "Feb", 3: "Mar", 4: "Apr", 5: "Mag", 6: "Giu", 7: "Lug", 8: "Ago", 9: "Set", 10: "Ott", 11: "Nov", 12: "Dic" },
+                dateFormat: "dd/mm/yyyy",
+                todayBtnTxt: "Oggi",
+                firstDayOfWeek: "mo",
+                sunHighlight: true
+            },
+            "it-ch": {
+                dayLabels: { su: "Dom", mo: "Lun", tu: "Mar", we: "Mer", th: "Gio", fr: "Ven", sa: "Sab" },
+                monthLabels: { 1: "Gen", 2: "Feb", 3: "Mar", 4: "Apr", 5: "Mag", 6: "Giu", 7: "Lug", 8: "Ago", 9: "Set", 10: "Ott", 11: "Nov", 12: "Dic" },
+                dateFormat: "dd.mm.yyyy",
+                todayBtnTxt: "Oggi",
+                firstDayOfWeek: "mo",
+                sunHighlight: true
+            },
+            "pl": {
+                dayLabels: { su: "Nie", mo: "Pon", tu: "Wto", we: "Śro", th: "Czw", fr: "Pią", sa: "Sob" },
+                monthLabels: { 1: "Sty", 2: "Lut", 3: "Mar", 4: "Kwi", 5: "Maj", 6: "Cze", 7: "Lip", 8: "Sie", 9: "Wrz", 10: "Paź", 11: "Lis", 12: "Gru" },
+                dateFormat: "yyyy-mm-dd",
+                todayBtnTxt: "Dzisiaj",
+                firstDayOfWeek: "mo",
+                sunHighlight: true,
+            },
+            "my": {
+                dayLabels: { su: "တနင်္ဂနွေ", mo: "တနင်္လာ", tu: "အင်္ဂါ", we: "ဗုဒ္ဓဟူး", th: "ကြသပတေး", fr: "သောကြာ", sa: "စနေ" },
+                monthLabels: { 1: "ဇန်နဝါရီ", 2: "ဖေဖော်ဝါရီ", 3: "မတ်", 4: "ဧပြီ", 5: "မေ", 6: "ဇွန်", 7: "ဇူလိုင်", 8: "ဩဂုတ်", 9: "စက်တင်ဘာ", 10: "အောက်တိုဘာ", 11: "နိုဝင်ဘာ", 12: "ဒီဇင်ဘာ" },
+                dateFormat: "yyyy-mm-dd",
+                todayBtnTxt: "ယနေ့",
+                firstDayOfWeek: "mo",
+                sunHighlight: true,
+            },
+            "sk": {
+                dayLabels: { su: "Ne", mo: "Po", tu: "Ut", we: "St", th: "Št", fr: "Pi", sa: "So" },
+                monthLabels: { 1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "Máj", 6: "Jún", 7: "Júl", 8: "Aug", 9: "Sep", 10: "Okt", 11: "Nov", 12: "Dec" },
+                dateFormat: "dd.mm.yyyy",
+                todayBtnTxt: "Dnes",
+                firstDayOfWeek: "mo",
+                sunHighlight: true,
+            },
+            "sl": {
+                dayLabels: { su: "Ned", mo: "Pon", tu: "Tor", we: "Sre", th: "Čet", fr: "Pet", sa: "Sob" },
+                monthLabels: { 1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "Maj", 6: "Jun", 7: "Jul", 8: "Avg", 9: "Sep", 10: "Okt", 11: "Nov", 12: "Dec" },
+                dateFormat: "dd. mm. yyyy",
+                todayBtnTxt: "Danes",
+                firstDayOfWeek: "mo",
+                sunHighlight: true,
+            },
+            "zh-cn": {
+                dayLabels: { su: "日", mo: "一", tu: "二", we: "三", th: "四", fr: "五", sa: "六" },
+                monthLabels: { 1: "1月", 2: "2月", 3: "3月", 4: "4月", 5: "5月", 6: "6月", 7: "7月", 8: "8月", 9: "9月", 10: "10月", 11: "11月", 12: "12月" },
+                dateFormat: "yyyy-mm-dd",
+                todayBtnTxt: "今天",
+                firstDayOfWeek: "mo",
+                sunHighlight: true,
+            },
+            "ro": {
+                dayLabels: { su: "du", mo: "lu", tu: "ma", we: "mi", th: "jo", fr: "vi", sa: "sa" },
+                monthLabels: { 1: "ian", 2: "feb", 3: "mart", 4: "apr", 5: "mai", 6: "iun", 7: "iul", 8: "aug", 9: "sept", 10: "oct", 11: "nov", 12: "dec" },
+                dateFormat: "dd.mm.yyyy",
+                todayBtnTxt: "Astăzi",
+                firstDayOfWeek: "mo",
+                sunHighlight: true,
+            },
+            "ca": {
+                dayLabels: { su: "dg", mo: "dl", tu: "dt", we: "dc", th: "dj", fr: "dv", sa: "ds" },
+                monthLabels: { 1: "Gen", 2: "Febr", 3: "Març", 4: "Abr", 5: "Maig", 6: "Juny", 7: "Jul", 8: "Ag", 9: "Set", 10: "Oct", 11: "Nov", 12: "Des" },
+                dateFormat: "dd.mm.yyyy",
+                todayBtnTxt: "Avui",
+                firstDayOfWeek: "mo",
+                sunHighlight: true,
+            },
+            "id": {
+                dayLabels: { su: "Min", mo: "Sen", tu: "Sel", we: "Rab", th: "Kam", fr: "Jum", sa: "Sab" },
+                monthLabels: { 1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "Mei", 6: "Jun", 7: "Jul", 8: "Ags", 9: "Sep", 10: "Okt", 11: "Nov", 12: "Des" },
+                dateFormat: "dd-mm-yyyy",
+                todayBtnTxt: "Hari ini",
+                firstDayOfWeek: "su",
+                sunHighlight: true
+            },
+            "en-au": {
+                dayLabels: { su: "Sun", mo: "Mon", tu: "Tue", we: "Wed", th: "Thu", fr: "Fri", sa: "Sat" },
+                monthLabels: { 1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun", 7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec" },
+                dateFormat: "dd/mm/yyyy",
+                todayBtnTxt: "Today",
+                firstDayOfWeek: "mo",
+                sunHighlight: true
+            },
+            "am-et": {
+                dayLabels: { su: "እሑድ", mo: "ሰኞ", tu: "ማክሰኞ", we: "ረቡዕ", th: "ሐሙስ", fr: "ዓርብ", sa: "ቅዳሜ" },
+                monthLabels: { 1: "ጃንዩ", 2: "ፌብሩ", 3: "ማርች", 4: "ኤፕረ", 5: "ሜይ", 6: "ጁን", 7: "ጁላይ", 8: "ኦገስ", 9: "ሴፕቴ", 10: "ኦክተ", 11: "ኖቬም", 12: "ዲሴም" },
+                dateFormat: "yyyy-mm-dd",
+                todayBtnTxt: "ዛሬ",
+                firstDayOfWeek: "mo",
+                sunHighlight: true
+            },
+            "cs": {
+                dayLabels: { su: "Ne", mo: "Po", tu: "Út", we: "St", th: "Čt", fr: "Pá", sa: "So" },
+                monthLabels: { 1: "Led", 2: "Úno", 3: "Bře", 4: "Dub", 5: "Kvě", 6: "Čvn", 7: "Čvc", 8: "Srp", 9: "Zář", 10: "Říj", 11: "Lis", 12: "Pro" },
+                dateFormat: "dd.mm.yyyy",
+                todayBtnTxt: "Dnes",
+                firstDayOfWeek: "mo",
+                sunHighlight: true
+            },
+            "el": {
+                dayLabels: { su: "Κυρ", mo: "Δευ", tu: "Τρι", we: "Τετ", th: "Πεμ", fr: "Παρ", sa: "Σαβ" },
+                monthLabels: { 1: "Ιαν", 2: "Φεβ", 3: "Μαρ", 4: "Απρ", 5: "Μαι", 6: "Ιουν", 7: "Ιουλ", 8: "Αυγ", 9: "Σεπ", 10: "Οκτ", 11: "Νοε", 12: "Δεκ" },
+                dateFormat: "dd/mm/yyyy",
+                todayBtnTxt: "Σήμερα",
+                firstDayOfWeek: "mo",
+                sunHighlight: true
+            },
+            "kk": {
+                dayLabels: { su: "Жк", mo: "Дс", tu: "Сс", we: "Ср", th: "Бс", fr: "Жм", sa: "Сб" },
+                monthLabels: { 1: "Қаң", 2: "Ақп", 3: "Нау", 4: "Сәу", 5: "Мам", 6: "Мау", 7: "Шіл", 8: "Там", 9: "Қырк", 10: "Қаз", 11: "Қар", 12: "Желт" },
+                dateFormat: "dd-mmm-yyyy",
+                todayBtnTxt: "Бүгін",
+                firstDayOfWeek: "mo",
+                sunHighlight: true
+            },
+            "th": {
+                dayLabels: { su: "อา", mo: "จ", tu: "อ", we: "พ", th: "พฤ", fr: "ศ", sa: "ส" },
+                monthLabels: { 1: "ม.ค", 2: "ก.พ.", 3: "มี.ค.", 4: "เม.ย.", 5: "พ.ค.", 6: "มิ.ย.", 7: "ก.ค.", 8: "ส.ค.", 9: "ก.ย.", 10: "ต.ค.", 11: "พ.ย.", 12: "ธ.ค." },
+                dateFormat: "dd-mm-yyyy",
+                todayBtnTxt: "วันนี้",
+                firstDayOfWeek: "su",
+                sunHighlight: true
+            },
+            "ko-kr": {
+                dayLabels: { su: "일", mo: "월", tu: "화", we: "수", th: "목", fr: "금", sa: "토" },
+                monthLabels: { 1: "1월", 2: "2월", 3: "3월", 4: "4월", 5: "5월", 6: "6월", 7: "7월", 8: "8월", 9: "9월", 10: "10월", 11: "11월", 12: "12월" },
+                dateFormat: "yyyy mm dd",
+                todayBtnTxt: "오늘",
+                firstDayOfWeek: "su",
+                sunHighlight: true
+            },
+            "da": {
+                dayLabels: { su: "Søn", mo: "Man", tu: "Tir", we: "Ons", th: "Tor", fr: "Fre", sa: "Lør" },
+                monthLabels: { 1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "Maj", 6: "Jun", 7: "Jul", 8: "Aug", 9: "Sep", 10: "Okt", 11: "Nov", 12: "Dec" },
+                dateFormat: "dd-mm-yyyy",
+                todayBtnTxt: "I dag",
+                firstDayOfWeek: "mo",
+                sunHighlight: true
+            },
+            "lt": {
+                dayLabels: { su: "Sk", mo: "Pr", tu: "An", we: "Tr", th: "Kt", fr: "Pn", sa: "Št" },
+                monthLabels: { 1: "Saus.", 2: "Vas.", 3: "Kov.", 4: "Bal.", 5: "Geg.", 6: "Birž.", 7: "Liep.", 8: "Rugp.", 9: "Rugs.", 10: "Sapl.", 11: "Lapkr.", 12: "Gruod." },
+                dateFormat: "yyyy-mm-dd",
+                todayBtnTxt: "Šianien",
+                firstDayOfWeek: "mo",
+                sunHighlight: true
+            },
+            "vi": {
+                dayLabels: { su: "CN", mo: "T2", tu: "T3", we: "T4", th: "T5", fr: "T6", sa: "T7" },
+                monthLabels: { 1: "THG 1", 2: "THG 2", 3: "THG 3", 4: "THG 4", 5: "THG 5", 6: "THG 6", 7: "THG 7", 8: "THG 8", 9: "THG 9", 10: "THG 10", 11: "THG 11", 12: "THG 12" },
+                dateFormat: "dd/mm/yyyy",
+                todayBtnTxt: "Hôm nay",
+                firstDayOfWeek: "mo",
+                sunHighlight: true,
+            },
+            "bn": {
+                dayLabels: { su: "রবি", mo: "সোম", tu: "মঙ্গল", we: "বুধ", th: "বৃহঃ", fr: "শুক্র", sa: "শনি" },
+                monthLabels: { 1: "জানু", 2: "ফেব্রু", 3: "মার্চ", 4: "এপ্রিল", 5: "মে", 6: "জুন", 7: "জুলাই", 8: "আগস্ট", 9: "সেপ্টে", 10: "অক্টো", 11: "নভে", 12: "ডিসে" },
+                dateFormat: "dd-mm-yyyy",
+                todayBtnTxt: "আজ",
+                firstDayOfWeek: "su",
+                sunHighlight: true
+            },
+            "bg": {
+                dayLabels: { su: "нд", mo: "пн", tu: "вт", we: "ср", th: "чт", fr: "пт", sa: "сб" },
+                monthLabels: { 1: "яну.", 2: "фев.", 3: "март", 4: "апр.", 5: "май", 6: "юни", 7: "юли", 8: "авг.", 9: "сеп.", 10: "окт.", 11: "ное.", 12: "дек." },
+                dateFormat: "dd.mm.yyyy",
+                todayBtnTxt: "днес",
+                firstDayOfWeek: "mo",
+                sunHighlight: true
+            },
+            "hr": {
+                dayLabels: { su: "Ne", mo: "Po", tu: "Ul", we: "Sr", th: "Če", fr: "Pe", sa: "Su" },
+                monthLabels: { 1: "Sij", 2: "Vel", 3: "Ožu", 4: "Tra", 5: "Svi", 6: "Lip", 7: "Srp", 8: "Kol", 9: "Ruj", 10: "Lis", 11: "Stu", 12: "Pro" },
+                dateFormat: "dd.mm.yyyy.",
+                todayBtnTxt: "danas",
+                firstDayOfWeek: "su",
+                sunHighlight: true
+            },
+            "ar": {
+                dayLabels: { su: "الأحد", mo: "الاثنين", tu: "الثلاثاء", we: "الاربعاء", th: "الخميس", fr: "الجمعة", sa: "السبت" },
+                monthLabels: { 1: "يناير", 2: "فبراير", 3: "مارس", 4: "ابريل", 5: "مايو", 6: "يونيو", 7: "يوليو", 8: "أغسطس", 9: "سبتمبر", 10: "أكتوبر", 11: "نوفمبر", 12: "ديسمبر" },
+                dateFormat: "yyyy-mm-dd",
+                todayBtnTxt: "اليوم",
+                firstDayOfWeek: "sa",
+                sunHighlight: true
+            },
+            "is": {
+                dayLabels: { su: "sun", mo: "mán", tu: "þri", we: "mið", th: "fim", fr: "fös", sa: "lau" },
+                monthLabels: { 1: "jan", 2: "feb", 3: "mar", 4: "apr", 5: "maí", 6: "jún", 7: "júl", 8: "ágú", 9: "sep", 10: "okt", 11: "nóv", 12: "des" },
+                dateFormat: "dd.mm.yyyy",
+                todayBtnTxt: "Í dag",
+                firstDayOfWeek: "su",
+                sunHighlight: true
+            }
+        };
+    }
+    LocaleService.prototype.getLocaleOptions = function (locale) {
+        if (locale && this.locales.hasOwnProperty(locale)) {
+            return this.locales[locale];
+        }
+        return this.locales["en"];
+    };
+    LocaleService.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
+    ];
+    LocaleService.ctorParameters = [];
+    return LocaleService;
+}());
+//# sourceMappingURL=my-date-picker.locale.service.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/dist/services/my-date-picker.util.service.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UtilService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+
+var M = "m";
+var MM = "mm";
+var MMM = "mmm";
+var D = "d";
+var DD = "dd";
+var YYYY = "yyyy";
+var UtilService = (function () {
+    function UtilService() {
+        this.weekDays = ["su", "mo", "tu", "we", "th", "fr", "sa"];
+    }
+    UtilService.prototype.isDateValid = function (dateStr, dateFormat, minYear, maxYear, disableUntil, disableSince, disableWeekends, disableWeekDays, disableDays, disableDateRanges, monthLabels, enableDays) {
+        var returnDate = { day: 0, month: 0, year: 0 };
+        var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        var isMonthStr = dateFormat.indexOf(MMM) !== -1;
+        var delimeters = this.getDateFormatDelimeters(dateFormat);
+        var dateValue = this.getDateValue(dateStr, dateFormat, delimeters);
+        var year = this.getNumberByValue(dateValue[0]);
+        var month = isMonthStr ? this.getMonthNumberByMonthName(dateValue[1], monthLabels) : this.getNumberByValue(dateValue[1]);
+        var day = this.getNumberByValue(dateValue[2]);
+        if (month !== -1 && day !== -1 && year !== -1) {
+            if (year < minYear || year > maxYear || month < 1 || month > 12) {
+                return returnDate;
+            }
+            var date = { year: year, month: month, day: day };
+            if (this.isDisabledDay(date, minYear, maxYear, disableUntil, disableSince, disableWeekends, disableWeekDays, disableDays, disableDateRanges, enableDays)) {
+                return returnDate;
+            }
+            if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)) {
+                daysInMonth[1] = 29;
+            }
+            if (day < 1 || day > daysInMonth[month - 1]) {
+                return returnDate;
+            }
+            return date;
+        }
+        return returnDate;
+    };
+    UtilService.prototype.getDateValue = function (dateStr, dateFormat, delimeters) {
+        var del = delimeters[0];
+        if (delimeters[0] !== delimeters[1]) {
+            del = delimeters[0] + delimeters[1];
+        }
+        var re = new RegExp("[" + del + "]");
+        var ds = dateStr.split(re);
+        var df = dateFormat.split(re);
+        var da = [];
+        for (var i = 0; i < df.length; i++) {
+            if (df[i].indexOf(YYYY) !== -1) {
+                da[0] = { value: ds[i], format: df[i] };
+            }
+            if (df[i].indexOf(M) !== -1) {
+                da[1] = { value: ds[i], format: df[i] };
+            }
+            if (df[i].indexOf(D) !== -1) {
+                da[2] = { value: ds[i], format: df[i] };
+            }
+        }
+        return da;
+    };
+    UtilService.prototype.getMonthNumberByMonthName = function (df, monthLabels) {
+        if (df.value) {
+            for (var key = 1; key <= 12; key++) {
+                if (df.value.toLowerCase() === monthLabels[key].toLowerCase()) {
+                    return key;
+                }
+            }
+        }
+        return -1;
+    };
+    UtilService.prototype.getNumberByValue = function (df) {
+        if (!/^\d+$/.test(df.value)) {
+            return -1;
+        }
+        var nbr = Number(df.value);
+        if (df.format.length === 1 && df.value.length !== 1 && nbr < 10 || df.format.length === 1 && df.value.length !== 2 && nbr >= 10) {
+            nbr = -1;
+        }
+        else if (df.format.length === 2 && df.value.length > 2) {
+            nbr = -1;
+        }
+        return nbr;
+    };
+    UtilService.prototype.getDateFormatDelimeters = function (dateFormat) {
+        return dateFormat.match(/[^(dmy)]{1,}/g);
+    };
+    UtilService.prototype.parseDefaultMonth = function (monthString) {
+        var month = { monthTxt: "", monthNbr: 0, year: 0 };
+        if (monthString !== "") {
+            var split = monthString.split(monthString.match(/[^0-9]/)[0]);
+            month.monthNbr = split[0].length === 2 ? parseInt(split[0]) : parseInt(split[1]);
+            month.year = split[0].length === 2 ? parseInt(split[1]) : parseInt(split[0]);
+        }
+        return month;
+    };
+    UtilService.prototype.formatDate = function (date, dateFormat, monthLabels) {
+        var formatted = dateFormat.replace(YYYY, String(date.year));
+        if (dateFormat.indexOf(MMM) !== -1) {
+            formatted = formatted.replace(MMM, monthLabels[date.month]);
+        }
+        else if (dateFormat.indexOf(MM) !== -1) {
+            formatted = formatted.replace(MM, this.preZero(date.month));
+        }
+        else {
+            formatted = formatted.replace(M, String(date.month));
+        }
+        if (dateFormat.indexOf(DD) !== -1) {
+            formatted = formatted.replace(DD, this.preZero(date.day));
+        }
+        else {
+            formatted = formatted.replace(D, String(date.day));
+        }
+        return formatted;
+    };
+    UtilService.prototype.preZero = function (val) {
+        return val < 10 ? "0" + val : String(val);
+    };
+    UtilService.prototype.isDisabledDay = function (date, minYear, maxYear, disableUntil, disableSince, disableWeekends, disableWeekDays, disableDays, disableDateRanges, enableDays) {
+        for (var _i = 0, enableDays_1 = enableDays; _i < enableDays_1.length; _i++) {
+            var e = enableDays_1[_i];
+            if (e.year === date.year && e.month === date.month && e.day === date.day) {
+                return false;
+            }
+        }
+        var dn = this.getDayNumber(date);
+        if (date.year < minYear && date.month === 12 || date.year > maxYear && date.month === 1) {
+            return true;
+        }
+        var dateMs = this.getTimeInMilliseconds(date);
+        if (this.isInitializedDate(disableUntil) && dateMs <= this.getTimeInMilliseconds(disableUntil)) {
+            return true;
+        }
+        if (this.isInitializedDate(disableSince) && dateMs >= this.getTimeInMilliseconds(disableSince)) {
+            return true;
+        }
+        if (disableWeekends) {
+            if (dn === 0 || dn === 6) {
+                return true;
+            }
+        }
+        if (disableWeekDays.length > 0) {
+            for (var _a = 0, disableWeekDays_1 = disableWeekDays; _a < disableWeekDays_1.length; _a++) {
+                var wd = disableWeekDays_1[_a];
+                if (dn === this.getWeekdayIndex(wd)) {
+                    return true;
+                }
+            }
+        }
+        for (var _b = 0, disableDays_1 = disableDays; _b < disableDays_1.length; _b++) {
+            var d = disableDays_1[_b];
+            if (d.year === date.year && d.month === date.month && d.day === date.day) {
+                return true;
+            }
+        }
+        for (var _c = 0, disableDateRanges_1 = disableDateRanges; _c < disableDateRanges_1.length; _c++) {
+            var d = disableDateRanges_1[_c];
+            if (this.isInitializedDate(d.begin) && this.isInitializedDate(d.end) && dateMs >= this.getTimeInMilliseconds(d.begin) && dateMs <= this.getTimeInMilliseconds(d.end)) {
+                return true;
+            }
+        }
+        return false;
+    };
+    UtilService.prototype.isMarkedDate = function (date, markedDates, markWeekends) {
+        for (var _i = 0, markedDates_1 = markedDates; _i < markedDates_1.length; _i++) {
+            var md = markedDates_1[_i];
+            for (var _a = 0, _b = md.dates; _a < _b.length; _a++) {
+                var d = _b[_a];
+                if (d.year === date.year && d.month === date.month && d.day === date.day) {
+                    return { marked: true, color: md.color };
+                }
+            }
+        }
+        if (markWeekends && markWeekends.marked) {
+            var dayNbr = this.getDayNumber(date);
+            if (dayNbr === 0 || dayNbr === 6) {
+                return { marked: true, color: markWeekends.color };
+            }
+        }
+        return { marked: false, color: "" };
+    };
+    UtilService.prototype.isHighlightedDate = function (date, sunHighlight, satHighlight, highlightDates) {
+        var dayNbr = this.getDayNumber(date);
+        if (sunHighlight && dayNbr === 0 || satHighlight && dayNbr === 6) {
+            return true;
+        }
+        for (var _i = 0, highlightDates_1 = highlightDates; _i < highlightDates_1.length; _i++) {
+            var d = highlightDates_1[_i];
+            if (d.year === date.year && d.month === date.month && d.day === date.day) {
+                return true;
+            }
+        }
+        return false;
+    };
+    UtilService.prototype.getWeekNumber = function (date) {
+        var d = new Date(date.year, date.month - 1, date.day, 0, 0, 0, 0);
+        d.setDate(d.getDate() + (d.getDay() === 0 ? -3 : 4 - d.getDay()));
+        return Math.round(((d.getTime() - new Date(d.getFullYear(), 0, 4).getTime()) / 86400000) / 7) + 1;
+    };
+    UtilService.prototype.isMonthDisabledByDisableUntil = function (date, disableUntil) {
+        return this.isInitializedDate(disableUntil) && this.getTimeInMilliseconds(date) <= this.getTimeInMilliseconds(disableUntil);
+    };
+    UtilService.prototype.isMonthDisabledByDisableSince = function (date, disableSince) {
+        return this.isInitializedDate(disableSince) && this.getTimeInMilliseconds(date) >= this.getTimeInMilliseconds(disableSince);
+    };
+    UtilService.prototype.isInitializedDate = function (date) {
+        return date.year !== 0 && date.month !== 0 && date.day !== 0;
+    };
+    UtilService.prototype.isSameDate = function (d1, d2) {
+        return d1.year === d2.year && d1.month === d2.month && d1.day === d2.day;
+    };
+    UtilService.prototype.getTimeInMilliseconds = function (date) {
+        return new Date(date.year, date.month - 1, date.day, 0, 0, 0, 0).getTime();
+    };
+    UtilService.prototype.getDayNumber = function (date) {
+        return new Date(date.year, date.month - 1, date.day, 0, 0, 0, 0).getDay();
+    };
+    UtilService.prototype.getWeekDays = function () {
+        return this.weekDays;
+    };
+    UtilService.prototype.getWeekdayIndex = function (wd) {
+        return this.weekDays.indexOf(wd);
+    };
+    UtilService.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
+    ];
+    UtilService.ctorParameters = [];
+    return UtilService;
+}());
+//# sourceMappingURL=my-date-picker.util.service.js.map
+
+/***/ }),
+
+/***/ "../../../../mydatepicker/index.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dist_my_date_picker_module__ = __webpack_require__("../../../../mydatepicker/dist/my-date-picker.module.js");
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "MyDatePickerModule", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_my_date_picker_module__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dist_my_date_picker_component__ = __webpack_require__("../../../../mydatepicker/dist/my-date-picker.component.js");
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dist_interfaces_my_date_interface__ = __webpack_require__("../../../../mydatepicker/dist/interfaces/my-date.interface.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dist_interfaces_my_date_interface___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__dist_interfaces_my_date_interface__);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dist_interfaces_my_date_model_interface__ = __webpack_require__("../../../../mydatepicker/dist/interfaces/my-date-model.interface.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dist_interfaces_my_date_model_interface___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__dist_interfaces_my_date_model_interface__);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dist_interfaces_my_input_field_changed_interface__ = __webpack_require__("../../../../mydatepicker/dist/interfaces/my-input-field-changed.interface.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dist_interfaces_my_input_field_changed_interface___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__dist_interfaces_my_input_field_changed_interface__);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dist_interfaces_my_calendar_view_changed_interface__ = __webpack_require__("../../../../mydatepicker/dist/interfaces/my-calendar-view-changed.interface.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dist_interfaces_my_calendar_view_changed_interface___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__dist_interfaces_my_calendar_view_changed_interface__);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__dist_interfaces_my_input_focus_blur_interface__ = __webpack_require__("../../../../mydatepicker/dist/interfaces/my-input-focus-blur.interface.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__dist_interfaces_my_input_focus_blur_interface___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__dist_interfaces_my_input_focus_blur_interface__);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__dist_interfaces_my_date_range_interface__ = __webpack_require__("../../../../mydatepicker/dist/interfaces/my-date-range.interface.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__dist_interfaces_my_date_range_interface___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__dist_interfaces_my_date_range_interface__);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__dist_interfaces_my_day_labels_interface__ = __webpack_require__("../../../../mydatepicker/dist/interfaces/my-day-labels.interface.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__dist_interfaces_my_day_labels_interface___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__dist_interfaces_my_day_labels_interface__);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__dist_interfaces_my_month_labels_interface__ = __webpack_require__("../../../../mydatepicker/dist/interfaces/my-month-labels.interface.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__dist_interfaces_my_month_labels_interface___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__dist_interfaces_my_month_labels_interface__);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__dist_interfaces_my_options_interface__ = __webpack_require__("../../../../mydatepicker/dist/interfaces/my-options.interface.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__dist_interfaces_my_options_interface___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__dist_interfaces_my_options_interface__);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__dist_interfaces_my_weekday_interface__ = __webpack_require__("../../../../mydatepicker/dist/interfaces/my-weekday.interface.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__dist_interfaces_my_weekday_interface___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__dist_interfaces_my_weekday_interface__);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__dist_interfaces_my_marked_date_interface__ = __webpack_require__("../../../../mydatepicker/dist/interfaces/my-marked-date.interface.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__dist_interfaces_my_marked_date_interface___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__dist_interfaces_my_marked_date_interface__);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__dist_interfaces_my_marked_dates_interface__ = __webpack_require__("../../../../mydatepicker/dist/interfaces/my-marked-dates.interface.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__dist_interfaces_my_marked_dates_interface___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__dist_interfaces_my_marked_dates_interface__);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__dist_interfaces_my_default_month_interface__ = __webpack_require__("../../../../mydatepicker/dist/interfaces/my-default-month.interface.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__dist_interfaces_my_default_month_interface___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__dist_interfaces_my_default_month_interface__);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__dist_interfaces_my_selector_interface__ = __webpack_require__("../../../../mydatepicker/dist/interfaces/my-selector.interface.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__dist_interfaces_my_selector_interface___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__dist_interfaces_my_selector_interface__);
+/* unused harmony namespace reexport */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /***/ }),
@@ -936,6 +2305,66 @@ var OuterSubscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     return OuterSubscriber;
 }(__WEBPACK_IMPORTED_MODULE_0__Subscriber__["a" /* Subscriber */]));
 //# sourceMappingURL=OuterSubscriber.js.map 
+
+
+/***/ }),
+
+/***/ "../../../../rxjs/_esm5/Scheduler.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Scheduler; });
+/**
+ * An execution context and a data structure to order tasks and schedule their
+ * execution. Provides a notion of (potentially virtual) time, through the
+ * `now()` getter method.
+ *
+ * Each unit of work in a Scheduler is called an {@link Action}.
+ *
+ * ```ts
+ * class Scheduler {
+ *   now(): number;
+ *   schedule(work, delay?, state?): Subscription;
+ * }
+ * ```
+ *
+ * @class Scheduler
+ */
+var Scheduler = /*@__PURE__*/ (/*@__PURE__*/ function () {
+    function Scheduler(SchedulerAction, now) {
+        if (now === void 0) {
+            now = Scheduler.now;
+        }
+        this.SchedulerAction = SchedulerAction;
+        this.now = now;
+    }
+    /**
+     * Schedules a function, `work`, for execution. May happen at some point in
+     * the future, according to the `delay` parameter, if specified. May be passed
+     * some context object, `state`, which will be passed to the `work` function.
+     *
+     * The given arguments will be processed an stored as an Action object in a
+     * queue of actions.
+     *
+     * @param {function(state: ?T): ?Subscription} work A function representing a
+     * task, or some unit of work to be executed by the Scheduler.
+     * @param {number} [delay] Time to wait before executing the work, where the
+     * time unit is implicit and defined by the Scheduler itself.
+     * @param {T} [state] Some contextual data that the `work` function uses when
+     * called by the Scheduler.
+     * @return {Subscription} A subscription in order to be able to unsubscribe
+     * the scheduled work.
+     */
+    Scheduler.prototype.schedule = function (work, delay, state) {
+        if (delay === void 0) {
+            delay = 0;
+        }
+        return new this.SchedulerAction(this, work).schedule(state, delay);
+    };
+    Scheduler.now = Date.now ? Date.now : function () { return +new Date(); };
+    return Scheduler;
+}());
+//# sourceMappingURL=Scheduler.js.map 
 
 
 /***/ }),
@@ -1661,6 +3090,36 @@ function flattenUnsubscriptionErrors(errors) {
 
 /***/ }),
 
+/***/ "../../../../rxjs/_esm5/add/operator/debounceTime.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Observable__ = __webpack_require__("../../../../rxjs/_esm5/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__operator_debounceTime__ = __webpack_require__("../../../../rxjs/_esm5/operator/debounceTime.js");
+/** PURE_IMPORTS_START .._.._Observable,.._.._operator_debounceTime PURE_IMPORTS_END */
+
+
+__WEBPACK_IMPORTED_MODULE_0__Observable__["a" /* Observable */].prototype.debounceTime = __WEBPACK_IMPORTED_MODULE_1__operator_debounceTime__["a" /* debounceTime */];
+//# sourceMappingURL=debounceTime.js.map 
+
+
+/***/ }),
+
+/***/ "../../../../rxjs/_esm5/add/operator/distinctUntilChanged.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Observable__ = __webpack_require__("../../../../rxjs/_esm5/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__operator_distinctUntilChanged__ = __webpack_require__("../../../../rxjs/_esm5/operator/distinctUntilChanged.js");
+/** PURE_IMPORTS_START .._.._Observable,.._.._operator_distinctUntilChanged PURE_IMPORTS_END */
+
+
+__WEBPACK_IMPORTED_MODULE_0__Observable__["a" /* Observable */].prototype.distinctUntilChanged = __WEBPACK_IMPORTED_MODULE_1__operator_distinctUntilChanged__["a" /* distinctUntilChanged */];
+//# sourceMappingURL=distinctUntilChanged.js.map 
+
+
+/***/ }),
+
 /***/ "../../../../rxjs/_esm5/add/operator/map.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1672,6 +3131,21 @@ function flattenUnsubscriptionErrors(errors) {
 
 __WEBPACK_IMPORTED_MODULE_0__Observable__["a" /* Observable */].prototype.map = __WEBPACK_IMPORTED_MODULE_1__operator_map__["a" /* map */];
 //# sourceMappingURL=map.js.map 
+
+
+/***/ }),
+
+/***/ "../../../../rxjs/_esm5/add/operator/switchMap.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Observable__ = __webpack_require__("../../../../rxjs/_esm5/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__operator_switchMap__ = __webpack_require__("../../../../rxjs/_esm5/operator/switchMap.js");
+/** PURE_IMPORTS_START .._.._Observable,.._.._operator_switchMap PURE_IMPORTS_END */
+
+
+__WEBPACK_IMPORTED_MODULE_0__Observable__["a" /* Observable */].prototype.switchMap = __WEBPACK_IMPORTED_MODULE_1__operator_switchMap__["a" /* switchMap */];
+//# sourceMappingURL=switchMap.js.map 
 
 
 /***/ }),
@@ -3303,6 +4777,129 @@ function concatMap(project, resultSelector) {
 
 /***/ }),
 
+/***/ "../../../../rxjs/_esm5/operator/debounceTime.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = debounceTime;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__scheduler_async__ = __webpack_require__("../../../../rxjs/_esm5/scheduler/async.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__operators_debounceTime__ = __webpack_require__("../../../../rxjs/_esm5/operators/debounceTime.js");
+/** PURE_IMPORTS_START .._scheduler_async,.._operators_debounceTime PURE_IMPORTS_END */
+
+
+/**
+ * Emits a value from the source Observable only after a particular time span
+ * has passed without another source emission.
+ *
+ * <span class="informal">It's like {@link delay}, but passes only the most
+ * recent value from each burst of emissions.</span>
+ *
+ * <img src="./img/debounceTime.png" width="100%">
+ *
+ * `debounceTime` delays values emitted by the source Observable, but drops
+ * previous pending delayed emissions if a new value arrives on the source
+ * Observable. This operator keeps track of the most recent value from the
+ * source Observable, and emits that only when `dueTime` enough time has passed
+ * without any other value appearing on the source Observable. If a new value
+ * appears before `dueTime` silence occurs, the previous value will be dropped
+ * and will not be emitted on the output Observable.
+ *
+ * This is a rate-limiting operator, because it is impossible for more than one
+ * value to be emitted in any time window of duration `dueTime`, but it is also
+ * a delay-like operator since output emissions do not occur at the same time as
+ * they did on the source Observable. Optionally takes a {@link IScheduler} for
+ * managing timers.
+ *
+ * @example <caption>Emit the most recent click after a burst of clicks</caption>
+ * var clicks = Rx.Observable.fromEvent(document, 'click');
+ * var result = clicks.debounceTime(1000);
+ * result.subscribe(x => console.log(x));
+ *
+ * @see {@link auditTime}
+ * @see {@link debounce}
+ * @see {@link delay}
+ * @see {@link sampleTime}
+ * @see {@link throttleTime}
+ *
+ * @param {number} dueTime The timeout duration in milliseconds (or the time
+ * unit determined internally by the optional `scheduler`) for the window of
+ * time required to wait for emission silence before emitting the most recent
+ * source value.
+ * @param {Scheduler} [scheduler=async] The {@link IScheduler} to use for
+ * managing the timers that handle the timeout for each value.
+ * @return {Observable} An Observable that delays the emissions of the source
+ * Observable by the specified `dueTime`, and may drop some values if they occur
+ * too frequently.
+ * @method debounceTime
+ * @owner Observable
+ */
+function debounceTime(dueTime, scheduler) {
+    if (scheduler === void 0) {
+        scheduler = __WEBPACK_IMPORTED_MODULE_0__scheduler_async__["a" /* async */];
+    }
+    return Object(__WEBPACK_IMPORTED_MODULE_1__operators_debounceTime__["a" /* debounceTime */])(dueTime, scheduler)(this);
+}
+//# sourceMappingURL=debounceTime.js.map 
+
+
+/***/ }),
+
+/***/ "../../../../rxjs/_esm5/operator/distinctUntilChanged.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = distinctUntilChanged;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__operators_distinctUntilChanged__ = __webpack_require__("../../../../rxjs/_esm5/operators/distinctUntilChanged.js");
+/** PURE_IMPORTS_START .._operators_distinctUntilChanged PURE_IMPORTS_END */
+
+/* tslint:enable:max-line-length */
+/**
+ * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from the previous item.
+ *
+ * If a comparator function is provided, then it will be called for each item to test for whether or not that value should be emitted.
+ *
+ * If a comparator function is not provided, an equality check is used by default.
+ *
+ * @example <caption>A simple example with numbers</caption>
+ * Observable.of(1, 1, 2, 2, 2, 1, 1, 2, 3, 3, 4)
+ *   .distinctUntilChanged()
+ *   .subscribe(x => console.log(x)); // 1, 2, 1, 2, 3, 4
+ *
+ * @example <caption>An example using a compare function</caption>
+ * interface Person {
+ *    age: number,
+ *    name: string
+ * }
+ *
+ * Observable.of<Person>(
+ *     { age: 4, name: 'Foo'},
+ *     { age: 7, name: 'Bar'},
+ *     { age: 5, name: 'Foo'})
+ *     { age: 6, name: 'Foo'})
+ *     .distinctUntilChanged((p: Person, q: Person) => p.name === q.name)
+ *     .subscribe(x => console.log(x));
+ *
+ * // displays:
+ * // { age: 4, name: 'Foo' }
+ * // { age: 7, name: 'Bar' }
+ * // { age: 5, name: 'Foo' }
+ *
+ * @see {@link distinct}
+ * @see {@link distinctUntilKeyChanged}
+ *
+ * @param {function} [compare] Optional comparison function called to test if an item is distinct from the previous item in the source.
+ * @return {Observable} An Observable that emits items from the source Observable with distinct values.
+ * @method distinctUntilChanged
+ * @owner Observable
+ */
+function distinctUntilChanged(compare, keySelector) {
+    return Object(__WEBPACK_IMPORTED_MODULE_0__operators_distinctUntilChanged__["a" /* distinctUntilChanged */])(compare, keySelector)(this);
+}
+//# sourceMappingURL=distinctUntilChanged.js.map 
+
+
+/***/ }),
+
 /***/ "../../../../rxjs/_esm5/operator/every.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3780,6 +5377,70 @@ function share() {
 
 /***/ }),
 
+/***/ "../../../../rxjs/_esm5/operator/switchMap.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = switchMap;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__operators_switchMap__ = __webpack_require__("../../../../rxjs/_esm5/operators/switchMap.js");
+/** PURE_IMPORTS_START .._operators_switchMap PURE_IMPORTS_END */
+
+/* tslint:enable:max-line-length */
+/**
+ * Projects each source value to an Observable which is merged in the output
+ * Observable, emitting values only from the most recently projected Observable.
+ *
+ * <span class="informal">Maps each value to an Observable, then flattens all of
+ * these inner Observables using {@link switch}.</span>
+ *
+ * <img src="./img/switchMap.png" width="100%">
+ *
+ * Returns an Observable that emits items based on applying a function that you
+ * supply to each item emitted by the source Observable, where that function
+ * returns an (so-called "inner") Observable. Each time it observes one of these
+ * inner Observables, the output Observable begins emitting the items emitted by
+ * that inner Observable. When a new inner Observable is emitted, `switchMap`
+ * stops emitting items from the earlier-emitted inner Observable and begins
+ * emitting items from the new one. It continues to behave like this for
+ * subsequent inner Observables.
+ *
+ * @example <caption>Rerun an interval Observable on every click event</caption>
+ * var clicks = Rx.Observable.fromEvent(document, 'click');
+ * var result = clicks.switchMap((ev) => Rx.Observable.interval(1000));
+ * result.subscribe(x => console.log(x));
+ *
+ * @see {@link concatMap}
+ * @see {@link exhaustMap}
+ * @see {@link mergeMap}
+ * @see {@link switch}
+ * @see {@link switchMapTo}
+ *
+ * @param {function(value: T, ?index: number): ObservableInput} project A function
+ * that, when applied to an item emitted by the source Observable, returns an
+ * Observable.
+ * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
+ * A function to produce the value on the output Observable based on the values
+ * and the indices of the source (outer) emission and the inner Observable
+ * emission. The arguments passed to this function are:
+ * - `outerValue`: the value that came from the source
+ * - `innerValue`: the value that came from the projected Observable
+ * - `outerIndex`: the "index" of the value that came from the source
+ * - `innerIndex`: the "index" of the value from the projected Observable
+ * @return {Observable} An Observable that emits the result of applying the
+ * projection function (and the optional `resultSelector`) to each item emitted
+ * by the source Observable and taking only the values from the most recently
+ * projected inner Observable.
+ * @method switchMap
+ * @owner Observable
+ */
+function switchMap(project, resultSelector) {
+    return Object(__WEBPACK_IMPORTED_MODULE_0__operators_switchMap__["a" /* switchMap */])(project, resultSelector)(this);
+}
+//# sourceMappingURL=switchMap.js.map 
+
+
+/***/ }),
+
 /***/ "../../../../rxjs/_esm5/operators/catchError.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4048,6 +5709,136 @@ function concatMap(project, resultSelector) {
 
 /***/ }),
 
+/***/ "../../../../rxjs/_esm5/operators/debounceTime.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = debounceTime;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Subscriber__ = __webpack_require__("../../../../rxjs/_esm5/Subscriber.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__scheduler_async__ = __webpack_require__("../../../../rxjs/_esm5/scheduler/async.js");
+/** PURE_IMPORTS_START .._Subscriber,.._scheduler_async PURE_IMPORTS_END */
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b)
+        if (b.hasOwnProperty(p))
+            d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+
+
+/**
+ * Emits a value from the source Observable only after a particular time span
+ * has passed without another source emission.
+ *
+ * <span class="informal">It's like {@link delay}, but passes only the most
+ * recent value from each burst of emissions.</span>
+ *
+ * <img src="./img/debounceTime.png" width="100%">
+ *
+ * `debounceTime` delays values emitted by the source Observable, but drops
+ * previous pending delayed emissions if a new value arrives on the source
+ * Observable. This operator keeps track of the most recent value from the
+ * source Observable, and emits that only when `dueTime` enough time has passed
+ * without any other value appearing on the source Observable. If a new value
+ * appears before `dueTime` silence occurs, the previous value will be dropped
+ * and will not be emitted on the output Observable.
+ *
+ * This is a rate-limiting operator, because it is impossible for more than one
+ * value to be emitted in any time window of duration `dueTime`, but it is also
+ * a delay-like operator since output emissions do not occur at the same time as
+ * they did on the source Observable. Optionally takes a {@link IScheduler} for
+ * managing timers.
+ *
+ * @example <caption>Emit the most recent click after a burst of clicks</caption>
+ * var clicks = Rx.Observable.fromEvent(document, 'click');
+ * var result = clicks.debounceTime(1000);
+ * result.subscribe(x => console.log(x));
+ *
+ * @see {@link auditTime}
+ * @see {@link debounce}
+ * @see {@link delay}
+ * @see {@link sampleTime}
+ * @see {@link throttleTime}
+ *
+ * @param {number} dueTime The timeout duration in milliseconds (or the time
+ * unit determined internally by the optional `scheduler`) for the window of
+ * time required to wait for emission silence before emitting the most recent
+ * source value.
+ * @param {Scheduler} [scheduler=async] The {@link IScheduler} to use for
+ * managing the timers that handle the timeout for each value.
+ * @return {Observable} An Observable that delays the emissions of the source
+ * Observable by the specified `dueTime`, and may drop some values if they occur
+ * too frequently.
+ * @method debounceTime
+ * @owner Observable
+ */
+function debounceTime(dueTime, scheduler) {
+    if (scheduler === void 0) {
+        scheduler = __WEBPACK_IMPORTED_MODULE_1__scheduler_async__["a" /* async */];
+    }
+    return function (source) { return source.lift(new DebounceTimeOperator(dueTime, scheduler)); };
+}
+var DebounceTimeOperator = /*@__PURE__*/ (/*@__PURE__*/ function () {
+    function DebounceTimeOperator(dueTime, scheduler) {
+        this.dueTime = dueTime;
+        this.scheduler = scheduler;
+    }
+    DebounceTimeOperator.prototype.call = function (subscriber, source) {
+        return source.subscribe(new DebounceTimeSubscriber(subscriber, this.dueTime, this.scheduler));
+    };
+    return DebounceTimeOperator;
+}());
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var DebounceTimeSubscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
+    __extends(DebounceTimeSubscriber, _super);
+    function DebounceTimeSubscriber(destination, dueTime, scheduler) {
+        _super.call(this, destination);
+        this.dueTime = dueTime;
+        this.scheduler = scheduler;
+        this.debouncedSubscription = null;
+        this.lastValue = null;
+        this.hasValue = false;
+    }
+    DebounceTimeSubscriber.prototype._next = function (value) {
+        this.clearDebounce();
+        this.lastValue = value;
+        this.hasValue = true;
+        this.add(this.debouncedSubscription = this.scheduler.schedule(dispatchNext, this.dueTime, this));
+    };
+    DebounceTimeSubscriber.prototype._complete = function () {
+        this.debouncedNext();
+        this.destination.complete();
+    };
+    DebounceTimeSubscriber.prototype.debouncedNext = function () {
+        this.clearDebounce();
+        if (this.hasValue) {
+            this.destination.next(this.lastValue);
+            this.lastValue = null;
+            this.hasValue = false;
+        }
+    };
+    DebounceTimeSubscriber.prototype.clearDebounce = function () {
+        var debouncedSubscription = this.debouncedSubscription;
+        if (debouncedSubscription !== null) {
+            this.remove(debouncedSubscription);
+            debouncedSubscription.unsubscribe();
+            this.debouncedSubscription = null;
+        }
+    };
+    return DebounceTimeSubscriber;
+}(__WEBPACK_IMPORTED_MODULE_0__Subscriber__["a" /* Subscriber */]));
+function dispatchNext(subscriber) {
+    subscriber.debouncedNext();
+}
+//# sourceMappingURL=debounceTime.js.map 
+
+
+/***/ }),
+
 /***/ "../../../../rxjs/_esm5/operators/defaultIfEmpty.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4134,6 +5925,127 @@ var DefaultIfEmptySubscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     return DefaultIfEmptySubscriber;
 }(__WEBPACK_IMPORTED_MODULE_0__Subscriber__["a" /* Subscriber */]));
 //# sourceMappingURL=defaultIfEmpty.js.map 
+
+
+/***/ }),
+
+/***/ "../../../../rxjs/_esm5/operators/distinctUntilChanged.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = distinctUntilChanged;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Subscriber__ = __webpack_require__("../../../../rxjs/_esm5/Subscriber.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_tryCatch__ = __webpack_require__("../../../../rxjs/_esm5/util/tryCatch.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_errorObject__ = __webpack_require__("../../../../rxjs/_esm5/util/errorObject.js");
+/** PURE_IMPORTS_START .._Subscriber,.._util_tryCatch,.._util_errorObject PURE_IMPORTS_END */
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b)
+        if (b.hasOwnProperty(p))
+            d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+
+
+
+/* tslint:enable:max-line-length */
+/**
+ * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from the previous item.
+ *
+ * If a comparator function is provided, then it will be called for each item to test for whether or not that value should be emitted.
+ *
+ * If a comparator function is not provided, an equality check is used by default.
+ *
+ * @example <caption>A simple example with numbers</caption>
+ * Observable.of(1, 1, 2, 2, 2, 1, 1, 2, 3, 3, 4)
+ *   .distinctUntilChanged()
+ *   .subscribe(x => console.log(x)); // 1, 2, 1, 2, 3, 4
+ *
+ * @example <caption>An example using a compare function</caption>
+ * interface Person {
+ *    age: number,
+ *    name: string
+ * }
+ *
+ * Observable.of<Person>(
+ *     { age: 4, name: 'Foo'},
+ *     { age: 7, name: 'Bar'},
+ *     { age: 5, name: 'Foo'})
+ *     { age: 6, name: 'Foo'})
+ *     .distinctUntilChanged((p: Person, q: Person) => p.name === q.name)
+ *     .subscribe(x => console.log(x));
+ *
+ * // displays:
+ * // { age: 4, name: 'Foo' }
+ * // { age: 7, name: 'Bar' }
+ * // { age: 5, name: 'Foo' }
+ *
+ * @see {@link distinct}
+ * @see {@link distinctUntilKeyChanged}
+ *
+ * @param {function} [compare] Optional comparison function called to test if an item is distinct from the previous item in the source.
+ * @return {Observable} An Observable that emits items from the source Observable with distinct values.
+ * @method distinctUntilChanged
+ * @owner Observable
+ */
+function distinctUntilChanged(compare, keySelector) {
+    return function (source) { return source.lift(new DistinctUntilChangedOperator(compare, keySelector)); };
+}
+var DistinctUntilChangedOperator = /*@__PURE__*/ (/*@__PURE__*/ function () {
+    function DistinctUntilChangedOperator(compare, keySelector) {
+        this.compare = compare;
+        this.keySelector = keySelector;
+    }
+    DistinctUntilChangedOperator.prototype.call = function (subscriber, source) {
+        return source.subscribe(new DistinctUntilChangedSubscriber(subscriber, this.compare, this.keySelector));
+    };
+    return DistinctUntilChangedOperator;
+}());
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var DistinctUntilChangedSubscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
+    __extends(DistinctUntilChangedSubscriber, _super);
+    function DistinctUntilChangedSubscriber(destination, compare, keySelector) {
+        _super.call(this, destination);
+        this.keySelector = keySelector;
+        this.hasKey = false;
+        if (typeof compare === 'function') {
+            this.compare = compare;
+        }
+    }
+    DistinctUntilChangedSubscriber.prototype.compare = function (x, y) {
+        return x === y;
+    };
+    DistinctUntilChangedSubscriber.prototype._next = function (value) {
+        var keySelector = this.keySelector;
+        var key = value;
+        if (keySelector) {
+            key = Object(__WEBPACK_IMPORTED_MODULE_1__util_tryCatch__["a" /* tryCatch */])(this.keySelector)(value);
+            if (key === __WEBPACK_IMPORTED_MODULE_2__util_errorObject__["a" /* errorObject */]) {
+                return this.destination.error(__WEBPACK_IMPORTED_MODULE_2__util_errorObject__["a" /* errorObject */].e);
+            }
+        }
+        var result = false;
+        if (this.hasKey) {
+            result = Object(__WEBPACK_IMPORTED_MODULE_1__util_tryCatch__["a" /* tryCatch */])(this.compare)(this.key, key);
+            if (result === __WEBPACK_IMPORTED_MODULE_2__util_errorObject__["a" /* errorObject */]) {
+                return this.destination.error(__WEBPACK_IMPORTED_MODULE_2__util_errorObject__["a" /* errorObject */].e);
+            }
+        }
+        else {
+            this.hasKey = true;
+        }
+        if (Boolean(result) === false) {
+            this.key = key;
+            this.destination.next(value);
+        }
+    };
+    return DistinctUntilChangedSubscriber;
+}(__WEBPACK_IMPORTED_MODULE_0__Subscriber__["a" /* Subscriber */]));
+//# sourceMappingURL=distinctUntilChanged.js.map 
 
 
 /***/ }),
@@ -5527,6 +7439,160 @@ function share() {
 
 /***/ }),
 
+/***/ "../../../../rxjs/_esm5/operators/switchMap.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = switchMap;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__OuterSubscriber__ = __webpack_require__("../../../../rxjs/_esm5/OuterSubscriber.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_subscribeToResult__ = __webpack_require__("../../../../rxjs/_esm5/util/subscribeToResult.js");
+/** PURE_IMPORTS_START .._OuterSubscriber,.._util_subscribeToResult PURE_IMPORTS_END */
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b)
+        if (b.hasOwnProperty(p))
+            d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+
+
+/* tslint:enable:max-line-length */
+/**
+ * Projects each source value to an Observable which is merged in the output
+ * Observable, emitting values only from the most recently projected Observable.
+ *
+ * <span class="informal">Maps each value to an Observable, then flattens all of
+ * these inner Observables using {@link switch}.</span>
+ *
+ * <img src="./img/switchMap.png" width="100%">
+ *
+ * Returns an Observable that emits items based on applying a function that you
+ * supply to each item emitted by the source Observable, where that function
+ * returns an (so-called "inner") Observable. Each time it observes one of these
+ * inner Observables, the output Observable begins emitting the items emitted by
+ * that inner Observable. When a new inner Observable is emitted, `switchMap`
+ * stops emitting items from the earlier-emitted inner Observable and begins
+ * emitting items from the new one. It continues to behave like this for
+ * subsequent inner Observables.
+ *
+ * @example <caption>Rerun an interval Observable on every click event</caption>
+ * var clicks = Rx.Observable.fromEvent(document, 'click');
+ * var result = clicks.switchMap((ev) => Rx.Observable.interval(1000));
+ * result.subscribe(x => console.log(x));
+ *
+ * @see {@link concatMap}
+ * @see {@link exhaustMap}
+ * @see {@link mergeMap}
+ * @see {@link switch}
+ * @see {@link switchMapTo}
+ *
+ * @param {function(value: T, ?index: number): ObservableInput} project A function
+ * that, when applied to an item emitted by the source Observable, returns an
+ * Observable.
+ * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
+ * A function to produce the value on the output Observable based on the values
+ * and the indices of the source (outer) emission and the inner Observable
+ * emission. The arguments passed to this function are:
+ * - `outerValue`: the value that came from the source
+ * - `innerValue`: the value that came from the projected Observable
+ * - `outerIndex`: the "index" of the value that came from the source
+ * - `innerIndex`: the "index" of the value from the projected Observable
+ * @return {Observable} An Observable that emits the result of applying the
+ * projection function (and the optional `resultSelector`) to each item emitted
+ * by the source Observable and taking only the values from the most recently
+ * projected inner Observable.
+ * @method switchMap
+ * @owner Observable
+ */
+function switchMap(project, resultSelector) {
+    return function switchMapOperatorFunction(source) {
+        return source.lift(new SwitchMapOperator(project, resultSelector));
+    };
+}
+var SwitchMapOperator = /*@__PURE__*/ (/*@__PURE__*/ function () {
+    function SwitchMapOperator(project, resultSelector) {
+        this.project = project;
+        this.resultSelector = resultSelector;
+    }
+    SwitchMapOperator.prototype.call = function (subscriber, source) {
+        return source.subscribe(new SwitchMapSubscriber(subscriber, this.project, this.resultSelector));
+    };
+    return SwitchMapOperator;
+}());
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var SwitchMapSubscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
+    __extends(SwitchMapSubscriber, _super);
+    function SwitchMapSubscriber(destination, project, resultSelector) {
+        _super.call(this, destination);
+        this.project = project;
+        this.resultSelector = resultSelector;
+        this.index = 0;
+    }
+    SwitchMapSubscriber.prototype._next = function (value) {
+        var result;
+        var index = this.index++;
+        try {
+            result = this.project(value, index);
+        }
+        catch (error) {
+            this.destination.error(error);
+            return;
+        }
+        this._innerSub(result, value, index);
+    };
+    SwitchMapSubscriber.prototype._innerSub = function (result, value, index) {
+        var innerSubscription = this.innerSubscription;
+        if (innerSubscription) {
+            innerSubscription.unsubscribe();
+        }
+        this.add(this.innerSubscription = Object(__WEBPACK_IMPORTED_MODULE_1__util_subscribeToResult__["a" /* subscribeToResult */])(this, result, value, index));
+    };
+    SwitchMapSubscriber.prototype._complete = function () {
+        var innerSubscription = this.innerSubscription;
+        if (!innerSubscription || innerSubscription.closed) {
+            _super.prototype._complete.call(this);
+        }
+    };
+    SwitchMapSubscriber.prototype._unsubscribe = function () {
+        this.innerSubscription = null;
+    };
+    SwitchMapSubscriber.prototype.notifyComplete = function (innerSub) {
+        this.remove(innerSub);
+        this.innerSubscription = null;
+        if (this.isStopped) {
+            _super.prototype._complete.call(this);
+        }
+    };
+    SwitchMapSubscriber.prototype.notifyNext = function (outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+        if (this.resultSelector) {
+            this._tryNotifyNext(outerValue, innerValue, outerIndex, innerIndex);
+        }
+        else {
+            this.destination.next(innerValue);
+        }
+    };
+    SwitchMapSubscriber.prototype._tryNotifyNext = function (outerValue, innerValue, outerIndex, innerIndex) {
+        var result;
+        try {
+            result = this.resultSelector(outerValue, innerValue, outerIndex, innerIndex);
+        }
+        catch (err) {
+            this.destination.error(err);
+            return;
+        }
+        this.destination.next(result);
+    };
+    return SwitchMapSubscriber;
+}(__WEBPACK_IMPORTED_MODULE_0__OuterSubscriber__["a" /* OuterSubscriber */]));
+//# sourceMappingURL=switchMap.js.map 
+
+
+/***/ }),
+
 /***/ "../../../../rxjs/_esm5/operators/takeLast.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5645,6 +7711,343 @@ var TakeLastSubscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     return TakeLastSubscriber;
 }(__WEBPACK_IMPORTED_MODULE_0__Subscriber__["a" /* Subscriber */]));
 //# sourceMappingURL=takeLast.js.map 
+
+
+/***/ }),
+
+/***/ "../../../../rxjs/_esm5/scheduler/Action.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Action; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Subscription__ = __webpack_require__("../../../../rxjs/_esm5/Subscription.js");
+/** PURE_IMPORTS_START .._Subscription PURE_IMPORTS_END */
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b)
+        if (b.hasOwnProperty(p))
+            d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+
+/**
+ * A unit of work to be executed in a {@link Scheduler}. An action is typically
+ * created from within a Scheduler and an RxJS user does not need to concern
+ * themselves about creating and manipulating an Action.
+ *
+ * ```ts
+ * class Action<T> extends Subscription {
+ *   new (scheduler: Scheduler, work: (state?: T) => void);
+ *   schedule(state?: T, delay: number = 0): Subscription;
+ * }
+ * ```
+ *
+ * @class Action<T>
+ */
+var Action = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
+    __extends(Action, _super);
+    function Action(scheduler, work) {
+        _super.call(this);
+    }
+    /**
+     * Schedules this action on its parent Scheduler for execution. May be passed
+     * some context object, `state`. May happen at some point in the future,
+     * according to the `delay` parameter, if specified.
+     * @param {T} [state] Some contextual data that the `work` function uses when
+     * called by the Scheduler.
+     * @param {number} [delay] Time to wait before executing the work, where the
+     * time unit is implicit and defined by the Scheduler.
+     * @return {void}
+     */
+    Action.prototype.schedule = function (state, delay) {
+        if (delay === void 0) {
+            delay = 0;
+        }
+        return this;
+    };
+    return Action;
+}(__WEBPACK_IMPORTED_MODULE_0__Subscription__["a" /* Subscription */]));
+//# sourceMappingURL=Action.js.map 
+
+
+/***/ }),
+
+/***/ "../../../../rxjs/_esm5/scheduler/AsyncAction.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AsyncAction; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_root__ = __webpack_require__("../../../../rxjs/_esm5/util/root.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Action__ = __webpack_require__("../../../../rxjs/_esm5/scheduler/Action.js");
+/** PURE_IMPORTS_START .._util_root,._Action PURE_IMPORTS_END */
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b)
+        if (b.hasOwnProperty(p))
+            d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+
+
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var AsyncAction = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
+    __extends(AsyncAction, _super);
+    function AsyncAction(scheduler, work) {
+        _super.call(this, scheduler, work);
+        this.scheduler = scheduler;
+        this.work = work;
+        this.pending = false;
+    }
+    AsyncAction.prototype.schedule = function (state, delay) {
+        if (delay === void 0) {
+            delay = 0;
+        }
+        if (this.closed) {
+            return this;
+        }
+        // Always replace the current state with the new state.
+        this.state = state;
+        // Set the pending flag indicating that this action has been scheduled, or
+        // has recursively rescheduled itself.
+        this.pending = true;
+        var id = this.id;
+        var scheduler = this.scheduler;
+        //
+        // Important implementation note:
+        //
+        // Actions only execute once by default, unless rescheduled from within the
+        // scheduled callback. This allows us to implement single and repeat
+        // actions via the same code path, without adding API surface area, as well
+        // as mimic traditional recursion but across asynchronous boundaries.
+        //
+        // However, JS runtimes and timers distinguish between intervals achieved by
+        // serial `setTimeout` calls vs. a single `setInterval` call. An interval of
+        // serial `setTimeout` calls can be individually delayed, which delays
+        // scheduling the next `setTimeout`, and so on. `setInterval` attempts to
+        // guarantee the interval callback will be invoked more precisely to the
+        // interval period, regardless of load.
+        //
+        // Therefore, we use `setInterval` to schedule single and repeat actions.
+        // If the action reschedules itself with the same delay, the interval is not
+        // canceled. If the action doesn't reschedule, or reschedules with a
+        // different delay, the interval will be canceled after scheduled callback
+        // execution.
+        //
+        if (id != null) {
+            this.id = this.recycleAsyncId(scheduler, id, delay);
+        }
+        this.delay = delay;
+        // If this action has already an async Id, don't request a new one.
+        this.id = this.id || this.requestAsyncId(scheduler, this.id, delay);
+        return this;
+    };
+    AsyncAction.prototype.requestAsyncId = function (scheduler, id, delay) {
+        if (delay === void 0) {
+            delay = 0;
+        }
+        return __WEBPACK_IMPORTED_MODULE_0__util_root__["a" /* root */].setInterval(scheduler.flush.bind(scheduler, this), delay);
+    };
+    AsyncAction.prototype.recycleAsyncId = function (scheduler, id, delay) {
+        if (delay === void 0) {
+            delay = 0;
+        }
+        // If this action is rescheduled with the same delay time, don't clear the interval id.
+        if (delay !== null && this.delay === delay && this.pending === false) {
+            return id;
+        }
+        // Otherwise, if the action's delay time is different from the current delay,
+        // or the action has been rescheduled before it's executed, clear the interval id
+        return __WEBPACK_IMPORTED_MODULE_0__util_root__["a" /* root */].clearInterval(id) && undefined || undefined;
+    };
+    /**
+     * Immediately executes this action and the `work` it contains.
+     * @return {any}
+     */
+    AsyncAction.prototype.execute = function (state, delay) {
+        if (this.closed) {
+            return new Error('executing a cancelled action');
+        }
+        this.pending = false;
+        var error = this._execute(state, delay);
+        if (error) {
+            return error;
+        }
+        else if (this.pending === false && this.id != null) {
+            // Dequeue if the action didn't reschedule itself. Don't call
+            // unsubscribe(), because the action could reschedule later.
+            // For example:
+            // ```
+            // scheduler.schedule(function doWork(counter) {
+            //   /* ... I'm a busy worker bee ... */
+            //   var originalAction = this;
+            //   /* wait 100ms before rescheduling the action */
+            //   setTimeout(function () {
+            //     originalAction.schedule(counter + 1);
+            //   }, 100);
+            // }, 1000);
+            // ```
+            this.id = this.recycleAsyncId(this.scheduler, this.id, null);
+        }
+    };
+    AsyncAction.prototype._execute = function (state, delay) {
+        var errored = false;
+        var errorValue = undefined;
+        try {
+            this.work(state);
+        }
+        catch (e) {
+            errored = true;
+            errorValue = !!e && e || new Error(e);
+        }
+        if (errored) {
+            this.unsubscribe();
+            return errorValue;
+        }
+    };
+    AsyncAction.prototype._unsubscribe = function () {
+        var id = this.id;
+        var scheduler = this.scheduler;
+        var actions = scheduler.actions;
+        var index = actions.indexOf(this);
+        this.work = null;
+        this.state = null;
+        this.pending = false;
+        this.scheduler = null;
+        if (index !== -1) {
+            actions.splice(index, 1);
+        }
+        if (id != null) {
+            this.id = this.recycleAsyncId(scheduler, id, null);
+        }
+        this.delay = null;
+    };
+    return AsyncAction;
+}(__WEBPACK_IMPORTED_MODULE_1__Action__["a" /* Action */]));
+//# sourceMappingURL=AsyncAction.js.map 
+
+
+/***/ }),
+
+/***/ "../../../../rxjs/_esm5/scheduler/AsyncScheduler.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AsyncScheduler; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Scheduler__ = __webpack_require__("../../../../rxjs/_esm5/Scheduler.js");
+/** PURE_IMPORTS_START .._Scheduler PURE_IMPORTS_END */
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b)
+        if (b.hasOwnProperty(p))
+            d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+
+var AsyncScheduler = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
+    __extends(AsyncScheduler, _super);
+    function AsyncScheduler() {
+        _super.apply(this, arguments);
+        this.actions = [];
+        /**
+         * A flag to indicate whether the Scheduler is currently executing a batch of
+         * queued actions.
+         * @type {boolean}
+         */
+        this.active = false;
+        /**
+         * An internal ID used to track the latest asynchronous task such as those
+         * coming from `setTimeout`, `setInterval`, `requestAnimationFrame`, and
+         * others.
+         * @type {any}
+         */
+        this.scheduled = undefined;
+    }
+    AsyncScheduler.prototype.flush = function (action) {
+        var actions = this.actions;
+        if (this.active) {
+            actions.push(action);
+            return;
+        }
+        var error;
+        this.active = true;
+        do {
+            if (error = action.execute(action.state, action.delay)) {
+                break;
+            }
+        } while (action = actions.shift()); // exhaust the scheduler queue
+        this.active = false;
+        if (error) {
+            while (action = actions.shift()) {
+                action.unsubscribe();
+            }
+            throw error;
+        }
+    };
+    return AsyncScheduler;
+}(__WEBPACK_IMPORTED_MODULE_0__Scheduler__["a" /* Scheduler */]));
+//# sourceMappingURL=AsyncScheduler.js.map 
+
+
+/***/ }),
+
+/***/ "../../../../rxjs/_esm5/scheduler/async.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return async; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AsyncAction__ = __webpack_require__("../../../../rxjs/_esm5/scheduler/AsyncAction.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AsyncScheduler__ = __webpack_require__("../../../../rxjs/_esm5/scheduler/AsyncScheduler.js");
+/** PURE_IMPORTS_START ._AsyncAction,._AsyncScheduler PURE_IMPORTS_END */
+
+
+/**
+ *
+ * Async Scheduler
+ *
+ * <span class="informal">Schedule task as if you used setTimeout(task, duration)</span>
+ *
+ * `async` scheduler schedules tasks asynchronously, by putting them on the JavaScript
+ * event loop queue. It is best used to delay tasks in time or to schedule tasks repeating
+ * in intervals.
+ *
+ * If you just want to "defer" task, that is to perform it right after currently
+ * executing synchronous code ends (commonly achieved by `setTimeout(deferredTask, 0)`),
+ * better choice will be the {@link asap} scheduler.
+ *
+ * @example <caption>Use async scheduler to delay task</caption>
+ * const task = () => console.log('it works!');
+ *
+ * Rx.Scheduler.async.schedule(task, 2000);
+ *
+ * // After 2 seconds logs:
+ * // "it works!"
+ *
+ *
+ * @example <caption>Use async scheduler to repeat task in intervals</caption>
+ * function task(state) {
+ *   console.log(state);
+ *   this.schedule(state + 1, 1000); // `this` references currently executing Action,
+ *                                   // which we reschedule with new state and delay
+ * }
+ *
+ * Rx.Scheduler.async.schedule(task, 3000, 0);
+ *
+ * // Logs:
+ * // 0 after 3s
+ * // 1 after 4s
+ * // 2 after 5s
+ * // 3 after 6s
+ *
+ * @static true
+ * @name async
+ * @owner Scheduler
+ */
+var async = /*@__PURE__*/ new __WEBPACK_IMPORTED_MODULE_1__AsyncScheduler__["a" /* AsyncScheduler */](__WEBPACK_IMPORTED_MODULE_0__AsyncAction__["a" /* AsyncAction */]);
+//# sourceMappingURL=async.js.map 
 
 
 /***/ }),
@@ -6601,7 +9004,7 @@ var PlatformLocation = /** @class */ (function () {
  * \@whatItDoes indicates when a location is initialized
  * \@experimental
  */
-var LOCATION_INITIALIZED = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* InjectionToken */]('Location Initialized');
+var LOCATION_INITIALIZED = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* InjectionToken */]('Location Initialized');
 /**
  * A serializable version of the event from onPopState or onHashChange
  *
@@ -6671,7 +9074,7 @@ var LocationStrategy = /** @class */ (function () {
  *
  * \@stable
  */
-var APP_BASE_HREF = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* InjectionToken */]('appBaseHref');
+var APP_BASE_HREF = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* InjectionToken */]('appBaseHref');
 
 /**
  * @fileoverview added by tsickle
@@ -6716,7 +9119,7 @@ var Location = /** @class */ (function () {
         /**
          * \@internal
          */
-        this._subject = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
+        this._subject = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */]();
         this._platformStrategy = platformStrategy;
         var /** @type {?} */ browserBaseHref = this._platformStrategy.getBaseHref();
         this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
@@ -6972,7 +9375,7 @@ var Location = /** @class */ (function () {
         return url.slice(0, droppedSlashIdx) + url.slice(pathEndIdx);
     };
     Location.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     Location.ctorParameters = function () { return [
@@ -7140,12 +9543,12 @@ var HashLocationStrategy = /** @class */ (function (_super) {
      */
     function () { this._platformLocation.back(); };
     HashLocationStrategy.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     HashLocationStrategy.ctorParameters = function () { return [
         { type: PlatformLocation, },
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */], args: [APP_BASE_HREF,] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */], args: [APP_BASE_HREF,] },] },
     ]; };
     return HashLocationStrategy;
 }(LocationStrategy));
@@ -7297,12 +9700,12 @@ var PathLocationStrategy = /** @class */ (function (_super) {
      */
     function () { this._platformLocation.back(); };
     PathLocationStrategy.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     PathLocationStrategy.ctorParameters = function () { return [
         { type: PlatformLocation, },
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */], args: [APP_BASE_HREF,] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */], args: [APP_BASE_HREF,] },] },
     ]; };
     return PathLocationStrategy;
 }(LocationStrategy));
@@ -8083,7 +10486,7 @@ function getCurrencySymbol(code, format) {
 /**
  * @deprecated from v5
  */
-var DEPRECATED_PLURAL_FN = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* InjectionToken */]('UseV4Plurals');
+var DEPRECATED_PLURAL_FN = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* InjectionToken */]('UseV4Plurals');
 /**
  * \@experimental
  * @abstract
@@ -8160,12 +10563,12 @@ var NgLocaleLocalization = /** @class */ (function (_super) {
         }
     };
     NgLocaleLocalization.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     NgLocaleLocalization.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["H" /* LOCALE_ID */],] },] },
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */], args: [DEPRECATED_PLURAL_FN,] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* LOCALE_ID */],] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */], args: [DEPRECATED_PLURAL_FN,] },] },
     ]; };
     return NgLocaleLocalization;
 }(NgLocalization));
@@ -8789,18 +11192,18 @@ var NgClass = /** @class */ (function () {
         }
     };
     NgClass.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* Directive */], args: [{ selector: '[ngClass]' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* Directive */], args: [{ selector: '[ngClass]' },] },
     ];
     /** @nocollapse */
     NgClass.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* IterableDiffers */], },
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* KeyValueDiffers */], },
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */], },
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["X" /* Renderer2 */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* IterableDiffers */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* KeyValueDiffers */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["W" /* Renderer2 */], },
     ]; };
     NgClass.propDecorators = {
-        "klass": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */], args: ['class',] },],
-        "ngClass": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
+        "klass": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */], args: ['class',] },],
+        "ngClass": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
     };
     return NgClass;
 }());
@@ -8893,7 +11296,7 @@ var NgComponentOutlet = /** @class */ (function () {
                 if (this._moduleRef)
                     this._moduleRef.destroy();
                 if (this.ngComponentOutletNgModuleFactory) {
-                    var /** @type {?} */ parentModule = elInjector.get(__WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgModuleRef */]);
+                    var /** @type {?} */ parentModule = elInjector.get(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModuleRef */]);
                     this._moduleRef = this.ngComponentOutletNgModuleFactory.create(parentModule.injector);
                 }
                 else {
@@ -8901,7 +11304,7 @@ var NgComponentOutlet = /** @class */ (function () {
                 }
             }
             var /** @type {?} */ componentFactoryResolver = this._moduleRef ? this._moduleRef.componentFactoryResolver :
-                elInjector.get(__WEBPACK_IMPORTED_MODULE_0__angular_core__["q" /* ComponentFactoryResolver */]);
+                elInjector.get(__WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /* ComponentFactoryResolver */]);
             var /** @type {?} */ componentFactory = componentFactoryResolver.resolveComponentFactory(this.ngComponentOutlet);
             this._componentRef = this._viewContainerRef.createComponent(componentFactory, this._viewContainerRef.length, elInjector, this.ngComponentOutletContent);
         }
@@ -8917,17 +11320,17 @@ var NgComponentOutlet = /** @class */ (function () {
             this._moduleRef.destroy();
     };
     NgComponentOutlet.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* Directive */], args: [{ selector: '[ngComponentOutlet]' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* Directive */], args: [{ selector: '[ngComponentOutlet]' },] },
     ];
     /** @nocollapse */
     NgComponentOutlet.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_10" /* ViewContainerRef */], },
     ]; };
     NgComponentOutlet.propDecorators = {
-        "ngComponentOutlet": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
-        "ngComponentOutletInjector": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
-        "ngComponentOutletContent": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
-        "ngComponentOutletNgModuleFactory": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
+        "ngComponentOutlet": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
+        "ngComponentOutletInjector": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
+        "ngComponentOutletContent": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
+        "ngComponentOutletNgModuleFactory": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
     };
     return NgComponentOutlet;
 }());
@@ -9191,18 +11594,18 @@ var NgForOf = /** @class */ (function () {
         view.context.$implicit = record.item;
     };
     NgForOf.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* Directive */], args: [{ selector: '[ngFor][ngForOf]' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* Directive */], args: [{ selector: '[ngFor][ngForOf]' },] },
     ];
     /** @nocollapse */
     NgForOf.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_10" /* ViewContainerRef */], },
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_7" /* TemplateRef */], },
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* IterableDiffers */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* TemplateRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* IterableDiffers */], },
     ]; };
     NgForOf.propDecorators = {
-        "ngForOf": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
-        "ngForTrackBy": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
-        "ngForTemplate": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
+        "ngForOf": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
+        "ngForTrackBy": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
+        "ngForTemplate": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
     };
     return NgForOf;
 }());
@@ -9398,17 +11801,17 @@ var NgIf = /** @class */ (function () {
         }
     };
     NgIf.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* Directive */], args: [{ selector: '[ngIf]' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* Directive */], args: [{ selector: '[ngIf]' },] },
     ];
     /** @nocollapse */
     NgIf.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_10" /* ViewContainerRef */], },
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_7" /* TemplateRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* TemplateRef */], },
     ]; };
     NgIf.propDecorators = {
-        "ngIf": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
-        "ngIfThen": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
-        "ngIfElse": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
+        "ngIf": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
+        "ngIfThen": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
+        "ngIfElse": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
     };
     return NgIf;
 }());
@@ -9607,12 +12010,12 @@ var NgSwitch = /** @class */ (function () {
         }
     };
     NgSwitch.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* Directive */], args: [{ selector: '[ngSwitch]' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* Directive */], args: [{ selector: '[ngSwitch]' },] },
     ];
     /** @nocollapse */
     NgSwitch.ctorParameters = function () { return []; };
     NgSwitch.propDecorators = {
-        "ngSwitch": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
+        "ngSwitch": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
     };
     return NgSwitch;
 }());
@@ -9654,16 +12057,16 @@ var NgSwitchCase = /** @class */ (function () {
      */
     function () { this._view.enforceState(this.ngSwitch._matchCase(this.ngSwitchCase)); };
     NgSwitchCase.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* Directive */], args: [{ selector: '[ngSwitchCase]' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* Directive */], args: [{ selector: '[ngSwitchCase]' },] },
     ];
     /** @nocollapse */
     NgSwitchCase.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_10" /* ViewContainerRef */], },
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_7" /* TemplateRef */], },
-        { type: NgSwitch, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* Host */] },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* TemplateRef */], },
+        { type: NgSwitch, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Host */] },] },
     ]; };
     NgSwitchCase.propDecorators = {
-        "ngSwitchCase": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
+        "ngSwitchCase": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
     };
     return NgSwitchCase;
 }());
@@ -9695,13 +12098,13 @@ var NgSwitchDefault = /** @class */ (function () {
         ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
     }
     NgSwitchDefault.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* Directive */], args: [{ selector: '[ngSwitchDefault]' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* Directive */], args: [{ selector: '[ngSwitchDefault]' },] },
     ];
     /** @nocollapse */
     NgSwitchDefault.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_10" /* ViewContainerRef */], },
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_7" /* TemplateRef */], },
-        { type: NgSwitch, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* Host */] },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* TemplateRef */], },
+        { type: NgSwitch, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Host */] },] },
     ]; };
     return NgSwitchDefault;
 }());
@@ -9813,14 +12216,14 @@ var NgPlural = /** @class */ (function () {
         }
     };
     NgPlural.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* Directive */], args: [{ selector: '[ngPlural]' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* Directive */], args: [{ selector: '[ngPlural]' },] },
     ];
     /** @nocollapse */
     NgPlural.ctorParameters = function () { return [
         { type: NgLocalization, },
     ]; };
     NgPlural.propDecorators = {
-        "ngPlural": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
+        "ngPlural": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
     };
     return NgPlural;
 }());
@@ -9849,14 +12252,14 @@ var NgPluralCase = /** @class */ (function () {
         ngPlural.addCase(isANumber ? "=" + value : value, new SwitchView(viewContainer, template));
     }
     NgPluralCase.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* Directive */], args: [{ selector: '[ngPluralCase]' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* Directive */], args: [{ selector: '[ngPluralCase]' },] },
     ];
     /** @nocollapse */
     NgPluralCase.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["h" /* Attribute */], args: ['ngPluralCase',] },] },
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_7" /* TemplateRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* TemplateRef */], },
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_10" /* ViewContainerRef */], },
-        { type: NgPlural, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* Host */] },] },
+        { type: NgPlural, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Host */] },] },
     ]; };
     return NgPluralCase;
 }());
@@ -9958,16 +12361,16 @@ var NgStyle = /** @class */ (function () {
         this._renderer.setStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
     };
     NgStyle.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* Directive */], args: [{ selector: '[ngStyle]' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* Directive */], args: [{ selector: '[ngStyle]' },] },
     ];
     /** @nocollapse */
     NgStyle.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* KeyValueDiffers */], },
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */], },
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["X" /* Renderer2 */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* KeyValueDiffers */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["W" /* Renderer2 */], },
     ]; };
     NgStyle.propDecorators = {
-        "ngStyle": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
+        "ngStyle": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
     };
     return NgStyle;
 }());
@@ -10102,15 +12505,15 @@ var NgTemplateOutlet = /** @class */ (function () {
         }
     };
     NgTemplateOutlet.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* Directive */], args: [{ selector: '[ngTemplateOutlet]' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* Directive */], args: [{ selector: '[ngTemplateOutlet]' },] },
     ];
     /** @nocollapse */
     NgTemplateOutlet.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_10" /* ViewContainerRef */], },
     ]; };
     NgTemplateOutlet.propDecorators = {
-        "ngTemplateOutletContext": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
-        "ngTemplateOutlet": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
+        "ngTemplateOutletContext": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
+        "ngTemplateOutlet": [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */] },],
     };
     return NgTemplateOutlet;
 }());
@@ -11004,11 +13407,11 @@ var DatePipe = /** @class */ (function () {
         return formatDate(date, format, locale || this.locale, timezone);
     };
     DatePipe.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Pipe */], args: [{ name: 'date', pure: true },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */], args: [{ name: 'date', pure: true },] },
     ];
     /** @nocollapse */
     DatePipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["H" /* LOCALE_ID */],] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* LOCALE_ID */],] },] },
     ]; };
     return DatePipe;
 }());
@@ -11452,11 +13855,11 @@ var DeprecatedDatePipe = /** @class */ (function () {
         'shortTime': 'jm'
     };
     DeprecatedDatePipe.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Pipe */], args: [{ name: 'date', pure: true },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */], args: [{ name: 'date', pure: true },] },
     ];
     /** @nocollapse */
     DeprecatedDatePipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["H" /* LOCALE_ID */],] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* LOCALE_ID */],] },] },
     ]; };
     return DeprecatedDatePipe;
 }());
@@ -11950,11 +14353,11 @@ var DeprecatedDecimalPipe = /** @class */ (function () {
         return formatNumber(DeprecatedDecimalPipe, this._locale, value, NumberFormatStyle.Decimal, digits);
     };
     DeprecatedDecimalPipe.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Pipe */], args: [{ name: 'number' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */], args: [{ name: 'number' },] },
     ];
     /** @nocollapse */
     DeprecatedDecimalPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["H" /* LOCALE_ID */],] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* LOCALE_ID */],] },] },
     ]; };
     return DeprecatedDecimalPipe;
 }());
@@ -11996,11 +14399,11 @@ var DeprecatedPercentPipe = /** @class */ (function () {
         return formatNumber(DeprecatedPercentPipe, this._locale, value, NumberFormatStyle.Percent, digits);
     };
     DeprecatedPercentPipe.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Pipe */], args: [{ name: 'percent' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */], args: [{ name: 'percent' },] },
     ];
     /** @nocollapse */
     DeprecatedPercentPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["H" /* LOCALE_ID */],] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* LOCALE_ID */],] },] },
     ]; };
     return DeprecatedPercentPipe;
 }());
@@ -12052,11 +14455,11 @@ var DeprecatedCurrencyPipe = /** @class */ (function () {
         return formatNumber(DeprecatedCurrencyPipe, this._locale, value, NumberFormatStyle.Currency, digits, currencyCode, symbolDisplay);
     };
     DeprecatedCurrencyPipe.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Pipe */], args: [{ name: 'currency' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */], args: [{ name: 'currency' },] },
     ];
     /** @nocollapse */
     DeprecatedCurrencyPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["H" /* LOCALE_ID */],] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* LOCALE_ID */],] },] },
     ]; };
     return DeprecatedCurrencyPipe;
 }());
@@ -12296,11 +14699,11 @@ var AsyncPipe = /** @class */ (function () {
         }
     };
     AsyncPipe.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Pipe */], args: [{ name: 'async', pure: false },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */], args: [{ name: 'async', pure: false },] },
     ];
     /** @nocollapse */
     AsyncPipe.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["l" /* ChangeDetectorRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* ChangeDetectorRef */], },
     ]; };
     return AsyncPipe;
 }());
@@ -12343,7 +14746,7 @@ var LowerCasePipe = /** @class */ (function () {
         return value.toLowerCase();
     };
     LowerCasePipe.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Pipe */], args: [{ name: 'lowercase' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */], args: [{ name: 'lowercase' },] },
     ];
     /** @nocollapse */
     LowerCasePipe.ctorParameters = function () { return []; };
@@ -12386,7 +14789,7 @@ var TitleCasePipe = /** @class */ (function () {
         return value.split(/\b/g).map(function (word) { return titleCaseWord(word); }).join('');
     };
     TitleCasePipe.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Pipe */], args: [{ name: 'titlecase' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */], args: [{ name: 'titlecase' },] },
     ];
     /** @nocollapse */
     TitleCasePipe.ctorParameters = function () { return []; };
@@ -12417,7 +14820,7 @@ var UpperCasePipe = /** @class */ (function () {
         return value.toUpperCase();
     };
     UpperCasePipe.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Pipe */], args: [{ name: 'uppercase' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */], args: [{ name: 'uppercase' },] },
     ];
     /** @nocollapse */
     UpperCasePipe.ctorParameters = function () { return []; };
@@ -12481,7 +14884,7 @@ var I18nPluralPipe = /** @class */ (function () {
         return pluralMap[key].replace(_INTERPOLATION_REGEXP, value.toString());
     };
     I18nPluralPipe.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Pipe */], args: [{ name: 'i18nPlural', pure: true },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */], args: [{ name: 'i18nPlural', pure: true },] },
     ];
     /** @nocollapse */
     I18nPluralPipe.ctorParameters = function () { return [
@@ -12546,7 +14949,7 @@ var I18nSelectPipe = /** @class */ (function () {
         return '';
     };
     I18nSelectPipe.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Pipe */], args: [{ name: 'i18nSelect', pure: true },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */], args: [{ name: 'i18nSelect', pure: true },] },
     ];
     /** @nocollapse */
     I18nSelectPipe.ctorParameters = function () { return []; };
@@ -12590,7 +14993,7 @@ var JsonPipe = /** @class */ (function () {
      */
     function (value) { return JSON.stringify(value, null, 2); };
     JsonPipe.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Pipe */], args: [{ name: 'json', pure: false },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */], args: [{ name: 'json', pure: false },] },
     ];
     /** @nocollapse */
     JsonPipe.ctorParameters = function () { return []; };
@@ -12661,11 +15064,11 @@ var DecimalPipe = /** @class */ (function () {
         return str;
     };
     DecimalPipe.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Pipe */], args: [{ name: 'number' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */], args: [{ name: 'number' },] },
     ];
     /** @nocollapse */
     DecimalPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["H" /* LOCALE_ID */],] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* LOCALE_ID */],] },] },
     ]; };
     return DecimalPipe;
 }());
@@ -12715,11 +15118,11 @@ var PercentPipe = /** @class */ (function () {
         return str;
     };
     PercentPipe.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Pipe */], args: [{ name: 'percent' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */], args: [{ name: 'percent' },] },
     ];
     /** @nocollapse */
     PercentPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["H" /* LOCALE_ID */],] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* LOCALE_ID */],] },] },
     ]; };
     return PercentPipe;
 }());
@@ -12792,11 +15195,11 @@ var CurrencyPipe = /** @class */ (function () {
         return str;
     };
     CurrencyPipe.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Pipe */], args: [{ name: 'currency' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */], args: [{ name: 'currency' },] },
     ];
     /** @nocollapse */
     CurrencyPipe.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["H" /* LOCALE_ID */],] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* LOCALE_ID */],] },] },
     ]; };
     return CurrencyPipe;
 }());
@@ -12896,7 +15299,7 @@ var SlicePipe = /** @class */ (function () {
      */
     function (obj) { return typeof obj === 'string' || Array.isArray(obj); };
     SlicePipe.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Pipe */], args: [{ name: 'slice', pure: false },] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */], args: [{ name: 'slice', pure: false },] },
     ];
     /** @nocollapse */
     SlicePipe.ctorParameters = function () { return []; };
@@ -12952,7 +15355,7 @@ var CommonModule = /** @class */ (function () {
     function CommonModule() {
     }
     CommonModule.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */], args: [{
                     declarations: [COMMON_DIRECTIVES, COMMON_PIPES],
                     exports: [COMMON_DIRECTIVES, COMMON_PIPES],
                     providers: [
@@ -12974,7 +15377,7 @@ var DeprecatedI18NPipesModule = /** @class */ (function () {
     function DeprecatedI18NPipesModule() {
     }
     DeprecatedI18NPipesModule.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */], args: [{
                     declarations: [COMMON_DEPRECATED_I18N_PIPES],
                     exports: [COMMON_DEPRECATED_I18N_PIPES],
                     providers: [{ provide: DEPRECATED_PLURAL_FN, useValue: ɵ0 }],
@@ -13004,7 +15407,7 @@ var DeprecatedI18NPipesModule = /** @class */ (function () {
  *
  * \@stable
  */
-var DOCUMENT = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* InjectionToken */]('DocumentToken');
+var DOCUMENT = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* InjectionToken */]('DocumentToken');
 
 /**
  * @fileoverview added by tsickle
@@ -13072,7 +15475,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* Version */]('5.2.0');
+var VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* Version */]('5.2.0');
 
 /**
  * @fileoverview added by tsickle
@@ -14909,7 +17312,7 @@ var HttpClient = /** @class */ (function () {
         return this.request('PUT', url, addBody(options, body));
     };
     HttpClient.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     HttpClient.ctorParameters = function () { return [
@@ -14971,7 +17374,7 @@ var HttpInterceptorHandler = /** @class */ (function () {
  *
  * \@stable
  */
-var HTTP_INTERCEPTORS = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* InjectionToken */]('HTTP_INTERCEPTORS');
+var HTTP_INTERCEPTORS = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* InjectionToken */]('HTTP_INTERCEPTORS');
 var NoopInterceptor = /** @class */ (function () {
     function NoopInterceptor() {
     }
@@ -14989,7 +17392,7 @@ var NoopInterceptor = /** @class */ (function () {
         return next.handle(req);
     };
     NoopInterceptor.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     NoopInterceptor.ctorParameters = function () { return []; };
@@ -15192,12 +17595,12 @@ var JsonpClientBackend = /** @class */ (function () {
         });
     };
     JsonpClientBackend.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     JsonpClientBackend.ctorParameters = function () { return [
         { type: JsonpCallbackContext, },
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_6__angular_common__["c" /* DOCUMENT */],] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_6__angular_common__["c" /* DOCUMENT */],] },] },
     ]; };
     return JsonpClientBackend;
 }());
@@ -15229,7 +17632,7 @@ var JsonpInterceptor = /** @class */ (function () {
         return next.handle(req);
     };
     JsonpInterceptor.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     JsonpInterceptor.ctorParameters = function () { return [
@@ -15292,7 +17695,7 @@ var BrowserXhr = /** @class */ (function () {
      */
     function () { return /** @type {?} */ ((new XMLHttpRequest())); };
     BrowserXhr.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     BrowserXhr.ctorParameters = function () { return []; };
@@ -15551,7 +17954,7 @@ var HttpXhrBackend = /** @class */ (function () {
         });
     };
     HttpXhrBackend.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     HttpXhrBackend.ctorParameters = function () { return [
@@ -15571,8 +17974,8 @@ var HttpXhrBackend = /** @class */ (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var XSRF_COOKIE_NAME = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* InjectionToken */]('XSRF_COOKIE_NAME');
-var XSRF_HEADER_NAME = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* InjectionToken */]('XSRF_HEADER_NAME');
+var XSRF_COOKIE_NAME = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* InjectionToken */]('XSRF_COOKIE_NAME');
+var XSRF_HEADER_NAME = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* InjectionToken */]('XSRF_HEADER_NAME');
 /**
  * Retrieves the current XSRF token to use with the next outgoing request.
  *
@@ -15618,13 +18021,13 @@ var HttpXsrfCookieExtractor = /** @class */ (function () {
         return this.lastToken;
     };
     HttpXsrfCookieExtractor.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     HttpXsrfCookieExtractor.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_6__angular_common__["c" /* DOCUMENT */],] },] },
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* PLATFORM_ID */],] },] },
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */], args: [XSRF_COOKIE_NAME,] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_6__angular_common__["c" /* DOCUMENT */],] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */], args: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* PLATFORM_ID */],] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */], args: [XSRF_COOKIE_NAME,] },] },
     ]; };
     return HttpXsrfCookieExtractor;
 }());
@@ -15664,12 +18067,12 @@ var HttpXsrfInterceptor = /** @class */ (function () {
         return next.handle(req);
     };
     HttpXsrfInterceptor.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     HttpXsrfInterceptor.ctorParameters = function () { return [
         { type: HttpXsrfTokenExtractor, },
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */], args: [XSRF_HEADER_NAME,] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */], args: [XSRF_HEADER_NAME,] },] },
     ]; };
     return HttpXsrfInterceptor;
 }());
@@ -15779,7 +18182,7 @@ var HttpClientXsrfModule = /** @class */ (function () {
         };
     };
     HttpClientXsrfModule.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */], args: [{
                     providers: [
                         HttpXsrfInterceptor,
                         { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
@@ -15805,7 +18208,7 @@ var HttpClientModule = /** @class */ (function () {
     function HttpClientModule() {
     }
     HttpClientModule.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */], args: [{
                     imports: [
                         HttpClientXsrfModule.withOptions({
                             cookieName: 'XSRF-TOKEN',
@@ -15819,7 +18222,7 @@ var HttpClientModule = /** @class */ (function () {
                         {
                             provide: HttpHandler,
                             useFactory: interceptingHandler,
-                            deps: [HttpBackend, [new __WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Optional */](), new __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */](HTTP_INTERCEPTORS)]],
+                            deps: [HttpBackend, [new __WEBPACK_IMPORTED_MODULE_0__angular_core__["O" /* Optional */](), new __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */](HTTP_INTERCEPTORS)]],
                         },
                         HttpXhrBackend,
                         { provide: HttpBackend, useExisting: HttpXhrBackend },
@@ -15844,7 +18247,7 @@ var HttpClientJsonpModule = /** @class */ (function () {
     function HttpClientJsonpModule() {
     }
     HttpClientJsonpModule.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */], args: [{
                     providers: [
                         JsonpClientBackend,
                         { provide: JsonpCallbackContext, useFactory: jsonpCallbackContext },
@@ -51360,11 +53763,11 @@ var Extractor = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_14", function() { return enableProdMode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_17", function() { return isDevMode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_13", function() { return createPlatformFactory; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "N", function() { return NgProbeToken; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "M", function() { return NgProbeToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return APP_ID; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "R", function() { return PACKAGE_ROOT_URL; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "T", function() { return PLATFORM_INITIALIZER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "S", function() { return PLATFORM_ID; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Q", function() { return PACKAGE_ROOT_URL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "S", function() { return PLATFORM_INITIALIZER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "R", function() { return PLATFORM_ID; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return APP_BOOTSTRAP_LISTENER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return APP_INITIALIZER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return ApplicationInitStatus; });
@@ -51372,87 +53775,87 @@ var Extractor = /** @class */ (function () {
 /* unused harmony export DebugNode */
 /* unused harmony export asNativeElements */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_16", function() { return getDebugNode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_8", function() { return Testability; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_7", function() { return Testability; });
 /* unused harmony export TestabilityRegistry */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_19", function() { return setTestabilityGetter; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_5", function() { return TRANSLATIONS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_6", function() { return TRANSLATIONS_FORMAT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "H", function() { return LOCALE_ID; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I", function() { return MissingTranslationStrategy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_4", function() { return TRANSLATIONS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_5", function() { return TRANSLATIONS_FORMAT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G", function() { return LOCALE_ID; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "H", function() { return MissingTranslationStrategy; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return ApplicationModule; });
 /* unused harmony export wtfCreateScope */
 /* unused harmony export wtfLeave */
 /* unused harmony export wtfStartTimeRange */
 /* unused harmony export wtfEndTimeRange */
 /* unused harmony export Type */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return EventEmitter; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return ErrorHandler; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_0", function() { return Sanitizer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_1", function() { return SecurityContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return EventEmitter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return ErrorHandler; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Z", function() { return Sanitizer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_0", function() { return SecurityContext; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ANALYZE_FOR_ENTRY_COMPONENTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return Attribute; });
 /* unused harmony export ContentChild */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return ContentChildren; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return ContentChildren; });
 /* unused harmony export Query */
-/* unused harmony export ViewChild */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_9", function() { return ViewChild; });
 /* unused harmony export ViewChildren */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return Component; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return Directive; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return HostBinding; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return HostListener; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return Input; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Q", function() { return Output; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "U", function() { return Pipe; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return CUSTOM_ELEMENTS_SCHEMA; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return Component; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return Directive; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return HostBinding; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return HostListener; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return Input; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "P", function() { return Output; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "T", function() { return Pipe; });
+/* unused harmony export CUSTOM_ELEMENTS_SCHEMA */
 /* unused harmony export NO_ERRORS_SCHEMA */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "J", function() { return NgModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I", function() { return NgModule; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_11", function() { return ViewEncapsulation; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_9", function() { return Version; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_8", function() { return Version; });
 /* unused harmony export VERSION */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_15", function() { return forwardRef; });
 /* unused harmony export resolveForwardRef */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return Injector; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return Injector; });
 /* unused harmony export ReflectiveInjector */
 /* unused harmony export ResolvedReflectiveFactory */
 /* unused harmony export ReflectiveKey */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return InjectionToken; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return Inject; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "P", function() { return Optional; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return Injectable; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_2", function() { return Self; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_3", function() { return SkipSelf; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return Host; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "O", function() { return NgZone; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return InjectionToken; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return Inject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "O", function() { return Optional; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return Injectable; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_1", function() { return Self; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_2", function() { return SkipSelf; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return Host; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "N", function() { return NgZone; });
 /* unused harmony export RenderComponentType */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "W", function() { return Renderer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "X", function() { return Renderer2; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Y", function() { return RendererFactory2; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Z", function() { return RendererStyleFlags2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "V", function() { return Renderer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "W", function() { return Renderer2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "X", function() { return RendererFactory2; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Y", function() { return RendererStyleFlags2; });
 /* unused harmony export RootRenderer */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return COMPILER_OPTIONS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return Compiler; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return CompilerFactory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return Compiler; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return CompilerFactory; });
 /* unused harmony export ModuleWithComponentFactories */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return ComponentFactory; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return ComponentRef; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return ComponentFactoryResolver; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return ElementRef; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "K", function() { return NgModuleFactory; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "M", function() { return NgModuleRef; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "L", function() { return NgModuleFactoryLoader; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return ComponentFactory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return ComponentRef; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return ComponentFactoryResolver; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return ElementRef; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "J", function() { return NgModuleFactory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "L", function() { return NgModuleRef; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "K", function() { return NgModuleFactoryLoader; });
 /* unused harmony export getModuleFactory */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "V", function() { return QueryList; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_4", function() { return SystemJsNgModuleLoader; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "U", function() { return QueryList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_3", function() { return SystemJsNgModuleLoader; });
 /* unused harmony export SystemJsNgModuleLoaderConfig */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_7", function() { return TemplateRef; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_6", function() { return TemplateRef; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_10", function() { return ViewContainerRef; });
 /* unused harmony export EmbeddedViewRef */
 /* unused harmony export ViewRef */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return ChangeDetectionStrategy; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return ChangeDetectorRef; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return ChangeDetectionStrategy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return ChangeDetectorRef; });
 /* unused harmony export DefaultIterableDiffer */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return IterableDiffers; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G", function() { return KeyValueDiffers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return IterableDiffers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return KeyValueDiffers; });
 /* unused harmony export SimpleChange */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_12", function() { return WrappedValue; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_18", function() { return platformCore; });
@@ -71385,7 +73788,7 @@ function isEmptyInputValue(value) {
  *
  * \@stable
  */
-var NG_VALIDATORS = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* InjectionToken */]('NgValidators');
+var NG_VALIDATORS = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* InjectionToken */]('NgValidators');
 /**
  * Providers for asynchronous validators to be used for {\@link FormControl}s
  * in a form.
@@ -71396,7 +73799,7 @@ var NG_VALIDATORS = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* Injec
  *
  * \@stable
  */
-var NG_ASYNC_VALIDATORS = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* InjectionToken */]('NgAsyncValidators');
+var NG_ASYNC_VALIDATORS = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* InjectionToken */]('NgAsyncValidators');
 var EMAIL_REGEXP = /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/;
 /**
  * Provides a set of validators used by form controls.
@@ -71729,7 +74132,7 @@ function _mergeErrors(arrayOfErrors) {
  * See {\@link DefaultValueAccessor} for how to implement one.
  * \@stable
  */
-var NG_VALUE_ACCESSOR = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* InjectionToken */]('NgValueAccessor');
+var NG_VALUE_ACCESSOR = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* InjectionToken */]('NgValueAccessor');
 
 /**
  * @fileoverview added by tsickle
@@ -71805,7 +74208,7 @@ var CheckboxControlValueAccessor = /** @class */ (function () {
         this._renderer.setProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     };
     CheckboxControlValueAccessor.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: 'input[type=checkbox][formControlName],input[type=checkbox][formControl],input[type=checkbox][ngModel]',
                     host: { '(change)': 'onChange($event.target.checked)', '(blur)': 'onTouched()' },
                     providers: [CHECKBOX_VALUE_ACCESSOR]
@@ -71813,8 +74216,8 @@ var CheckboxControlValueAccessor = /** @class */ (function () {
     ];
     /** @nocollapse */
     CheckboxControlValueAccessor.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["X" /* Renderer2 */], },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ElementRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["W" /* Renderer2 */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* ElementRef */], },
     ]; };
     return CheckboxControlValueAccessor;
 }());
@@ -71848,7 +74251,7 @@ function _isAndroid() {
  * Turn this mode on if you want form directives to buffer IME input until compositionend
  * \@experimental
  */
-var COMPOSITION_BUFFER_MODE = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* InjectionToken */]('CompositionEventMode');
+var COMPOSITION_BUFFER_MODE = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* InjectionToken */]('CompositionEventMode');
 /**
  * The default accessor for writing a value and listening to changes that is used by the
  * {\@link NgModel}, {\@link FormControlDirective}, and {\@link FormControlName} directives.
@@ -71958,7 +74361,7 @@ var DefaultValueAccessor = /** @class */ (function () {
         this._compositionMode && this.onChange(value);
     };
     DefaultValueAccessor.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: 'input:not([type=checkbox])[formControlName],textarea[formControlName],input:not([type=checkbox])[formControl],textarea[formControl],input:not([type=checkbox])[ngModel],textarea[ngModel],[ngDefaultControl]',
                     // TODO: vsavkin replace the above selector with the one below it once
                     // https://github.com/angular/angular/issues/3011 is implemented
@@ -71974,9 +74377,9 @@ var DefaultValueAccessor = /** @class */ (function () {
     ];
     /** @nocollapse */
     DefaultValueAccessor.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["X" /* Renderer2 */], },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ElementRef */], },
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [COMPOSITION_BUFFER_MODE,] },] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["W" /* Renderer2 */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* ElementRef */], },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [COMPOSITION_BUFFER_MODE,] },] },
     ]; };
     return DefaultValueAccessor;
 }());
@@ -72094,7 +74497,7 @@ var NumberValueAccessor = /** @class */ (function () {
         this._renderer.setProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     };
     NumberValueAccessor.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: 'input[type=number][formControlName],input[type=number][formControl],input[type=number][ngModel]',
                     host: {
                         '(change)': 'onChange($event.target.value)',
@@ -72106,8 +74509,8 @@ var NumberValueAccessor = /** @class */ (function () {
     ];
     /** @nocollapse */
     NumberValueAccessor.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["X" /* Renderer2 */], },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ElementRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["W" /* Renderer2 */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* ElementRef */], },
     ]; };
     return NumberValueAccessor;
 }());
@@ -72262,7 +74665,7 @@ var RadioControlRegistry = /** @class */ (function () {
             controlPair[1].name === accessor.name;
     };
     RadioControlRegistry.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     RadioControlRegistry.ctorParameters = function () { return []; };
@@ -72404,7 +74807,7 @@ var RadioControlValueAccessor = /** @class */ (function () {
         throw new Error("\n      If you define both a name and a formControlName attribute on your radio button, their values\n      must match. Ex: <input type=\"radio\" formControlName=\"food\" name=\"food\">\n    ");
     };
     RadioControlValueAccessor.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: 'input[type=radio][formControlName],input[type=radio][formControl],input[type=radio][ngModel]',
                     host: { '(change)': 'onChange()', '(blur)': 'onTouched()' },
                     providers: [RADIO_VALUE_ACCESSOR]
@@ -72412,15 +74815,15 @@ var RadioControlValueAccessor = /** @class */ (function () {
     ];
     /** @nocollapse */
     RadioControlValueAccessor.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["X" /* Renderer2 */], },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ElementRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["W" /* Renderer2 */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* ElementRef */], },
         { type: RadioControlRegistry, },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Injector */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* Injector */], },
     ]; };
     RadioControlValueAccessor.propDecorators = {
-        "name": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "formControlName": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "value": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
+        "name": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "formControlName": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "value": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
     };
     return RadioControlValueAccessor;
 }());
@@ -72500,7 +74903,7 @@ var RangeValueAccessor = /** @class */ (function () {
         this._renderer.setProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     };
     RangeValueAccessor.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: 'input[type=range][formControlName],input[type=range][formControl],input[type=range][ngModel]',
                     host: {
                         '(change)': 'onChange($event.target.value)',
@@ -72512,8 +74915,8 @@ var RangeValueAccessor = /** @class */ (function () {
     ];
     /** @nocollapse */
     RangeValueAccessor.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["X" /* Renderer2 */], },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ElementRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["W" /* Renderer2 */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* ElementRef */], },
     ]; };
     return RangeValueAccessor;
 }());
@@ -72743,7 +75146,7 @@ var SelectControlValueAccessor = /** @class */ (function () {
         return this._optionMap.has(id) ? this._optionMap.get(id) : valueString;
     };
     SelectControlValueAccessor.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: 'select:not([multiple])[formControlName],select:not([multiple])[formControl],select:not([multiple])[ngModel]',
                     host: { '(change)': 'onChange($event.target.value)', '(blur)': 'onTouched()' },
                     providers: [SELECT_VALUE_ACCESSOR]
@@ -72751,11 +75154,11 @@ var SelectControlValueAccessor = /** @class */ (function () {
     ];
     /** @nocollapse */
     SelectControlValueAccessor.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["X" /* Renderer2 */], },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ElementRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["W" /* Renderer2 */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* ElementRef */], },
     ]; };
     SelectControlValueAccessor.propDecorators = {
-        "compareWith": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
+        "compareWith": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
     };
     return SelectControlValueAccessor;
 }());
@@ -72831,17 +75234,17 @@ var NgSelectOption = /** @class */ (function () {
         }
     };
     NgSelectOption.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{ selector: 'option' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{ selector: 'option' },] },
     ];
     /** @nocollapse */
     NgSelectOption.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ElementRef */], },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["X" /* Renderer2 */], },
-        { type: SelectControlValueAccessor, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* Host */] },] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* ElementRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["W" /* Renderer2 */], },
+        { type: SelectControlValueAccessor, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["w" /* Host */] },] },
     ]; };
     NgSelectOption.propDecorators = {
-        "ngValue": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['ngValue',] },],
-        "value": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['value',] },],
+        "ngValue": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['ngValue',] },],
+        "value": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['value',] },],
     };
     return NgSelectOption;
 }());
@@ -73070,7 +75473,7 @@ var SelectMultipleControlValueAccessor = /** @class */ (function () {
         return this._optionMap.has(id) ? /** @type {?} */ ((this._optionMap.get(id)))._value : valueString;
     };
     SelectMultipleControlValueAccessor.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: 'select[multiple][formControlName],select[multiple][formControl],select[multiple][ngModel]',
                     host: { '(change)': 'onChange($event.target)', '(blur)': 'onTouched()' },
                     providers: [SELECT_MULTIPLE_VALUE_ACCESSOR]
@@ -73078,11 +75481,11 @@ var SelectMultipleControlValueAccessor = /** @class */ (function () {
     ];
     /** @nocollapse */
     SelectMultipleControlValueAccessor.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["X" /* Renderer2 */], },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ElementRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["W" /* Renderer2 */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* ElementRef */], },
     ]; };
     SelectMultipleControlValueAccessor.propDecorators = {
-        "compareWith": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
+        "compareWith": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
     };
     return SelectMultipleControlValueAccessor;
 }());
@@ -73180,17 +75583,17 @@ var NgSelectMultipleOption = /** @class */ (function () {
         }
     };
     NgSelectMultipleOption.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{ selector: 'option' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{ selector: 'option' },] },
     ];
     /** @nocollapse */
     NgSelectMultipleOption.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ElementRef */], },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["X" /* Renderer2 */], },
-        { type: SelectMultipleControlValueAccessor, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* Host */] },] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* ElementRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["W" /* Renderer2 */], },
+        { type: SelectMultipleControlValueAccessor, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["w" /* Host */] },] },
     ]; };
     NgSelectMultipleOption.propDecorators = {
-        "ngValue": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['ngValue',] },],
-        "value": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['value',] },],
+        "ngValue": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['ngValue',] },],
+        "value": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['value',] },],
     };
     return NgSelectMultipleOption;
 }());
@@ -73672,11 +76075,11 @@ var NgControlStatus = /** @class */ (function (_super) {
         return _super.call(this, cd) || this;
     }
     NgControlStatus.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{ selector: '[formControlName],[ngModel],[formControl]', host: ngControlStatusHost },] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{ selector: '[formControlName],[ngModel],[formControl]', host: ngControlStatusHost },] },
     ];
     /** @nocollapse */
     NgControlStatus.ctorParameters = function () { return [
-        { type: NgControl, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] },] },
+        { type: NgControl, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] },] },
     ]; };
     return NgControlStatus;
 }(AbstractControlStatus));
@@ -73692,14 +76095,14 @@ var NgControlStatusGroup = /** @class */ (function (_super) {
         return _super.call(this, cd) || this;
     }
     NgControlStatusGroup.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: '[formGroupName],[formArrayName],[ngModelGroup],[formGroup],form:not([ngNoForm]),[ngForm]',
                     host: ngControlStatusHost
                 },] },
     ];
     /** @nocollapse */
     NgControlStatusGroup.ctorParameters = function () { return [
-        { type: ControlContainer, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] },] },
+        { type: ControlContainer, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] },] },
     ]; };
     return NgControlStatusGroup;
 }(AbstractControlStatus));
@@ -74609,8 +77012,8 @@ var AbstractControl = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        (/** @type {?} */ (this)).valueChanges = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["w" /* EventEmitter */]();
-        (/** @type {?} */ (this)).statusChanges = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["w" /* EventEmitter */]();
+        (/** @type {?} */ (this)).valueChanges = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* EventEmitter */]();
+        (/** @type {?} */ (this)).statusChanges = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* EventEmitter */]();
     };
     /**
      * @return {?}
@@ -76519,7 +78922,7 @@ var NgForm = /** @class */ (function (_super) {
         var _this = _super.call(this) || this;
         _this.submitted = false;
         _this._directives = [];
-        _this.ngSubmit = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["w" /* EventEmitter */]();
+        _this.ngSubmit = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* EventEmitter */]();
         _this.form =
             new FormGroup({}, composeValidators(validators), composeAsyncValidators(asyncValidators));
         return _this;
@@ -76739,7 +79142,7 @@ var NgForm = /** @class */ (function (_super) {
         return path.length ? /** @type {?} */ (this.form.get(path)) : this.form;
     };
     NgForm.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: 'form:not([ngNoForm]):not([formGroup]),ngForm,[ngForm]',
                     providers: [formDirectiveProvider],
                     host: { '(submit)': 'onSubmit($event)', '(reset)': 'onReset()' },
@@ -76749,11 +79152,11 @@ var NgForm = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     NgForm.ctorParameters = function () { return [
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_VALIDATORS,] },] },
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_ASYNC_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_ASYNC_VALIDATORS,] },] },
     ]; };
     NgForm.propDecorators = {
-        "options": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['ngFormOptions',] },],
+        "options": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['ngFormOptions',] },],
     };
     return NgForm;
 }(ControlContainer));
@@ -76894,16 +79297,16 @@ var NgModelGroup = /** @class */ (function (_super) {
         }
     };
     NgModelGroup.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{ selector: '[ngModelGroup]', providers: [modelGroupProvider], exportAs: 'ngModelGroup' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{ selector: '[ngModelGroup]', providers: [modelGroupProvider], exportAs: 'ngModelGroup' },] },
     ];
     /** @nocollapse */
     NgModelGroup.ctorParameters = function () { return [
-        { type: ControlContainer, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* Host */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_3" /* SkipSelf */] },] },
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_VALIDATORS,] },] },
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_ASYNC_VALIDATORS,] },] },
+        { type: ControlContainer, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["w" /* Host */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* SkipSelf */] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_ASYNC_VALIDATORS,] },] },
     ]; };
     NgModelGroup.propDecorators = {
-        "name": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['ngModelGroup',] },],
+        "name": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['ngModelGroup',] },],
     };
     return NgModelGroup;
 }(AbstractFormGroupDirective));
@@ -77008,7 +79411,7 @@ var NgModel = /** @class */ (function (_super) {
          * \@internal
          */
         _this._registered = false;
-        _this.update = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["w" /* EventEmitter */]();
+        _this.update = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* EventEmitter */]();
         _this._parent = parent;
         _this._rawValidators = validators || [];
         _this._rawAsyncValidators = asyncValidators || [];
@@ -77206,7 +79609,7 @@ var NgModel = /** @class */ (function (_super) {
         });
     };
     NgModel.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: '[ngModel]:not([formControlName]):not([formControl])',
                     providers: [formControlBinding],
                     exportAs: 'ngModel'
@@ -77214,17 +79617,17 @@ var NgModel = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     NgModel.ctorParameters = function () { return [
-        { type: ControlContainer, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* Host */] },] },
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_VALIDATORS,] },] },
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_ASYNC_VALIDATORS,] },] },
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_VALUE_ACCESSOR,] },] },
+        { type: ControlContainer, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["w" /* Host */] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_ASYNC_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_VALUE_ACCESSOR,] },] },
     ]; };
     NgModel.propDecorators = {
-        "name": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "isDisabled": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['disabled',] },],
-        "model": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['ngModel',] },],
-        "options": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['ngModelOptions',] },],
-        "update": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["Q" /* Output */], args: ['ngModelChange',] },],
+        "name": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "isDisabled": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['disabled',] },],
+        "model": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['ngModel',] },],
+        "options": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['ngModelOptions',] },],
+        "update": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Output */], args: ['ngModelChange',] },],
     };
     return NgModel;
 }(NgControl));
@@ -77361,7 +79764,7 @@ var FormControlDirective = /** @class */ (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(FormControlDirective, _super);
     function FormControlDirective(validators, asyncValidators, valueAccessors) {
         var _this = _super.call(this) || this;
-        _this.update = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["w" /* EventEmitter */]();
+        _this.update = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* EventEmitter */]();
         _this._rawValidators = validators || [];
         _this._rawAsyncValidators = asyncValidators || [];
         _this.valueAccessor = selectValueAccessor(_this, valueAccessors);
@@ -77455,19 +79858,19 @@ var FormControlDirective = /** @class */ (function (_super) {
         return changes.hasOwnProperty('form');
     };
     FormControlDirective.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{ selector: '[formControl]', providers: [formControlBinding$1], exportAs: 'ngForm' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{ selector: '[formControl]', providers: [formControlBinding$1], exportAs: 'ngForm' },] },
     ];
     /** @nocollapse */
     FormControlDirective.ctorParameters = function () { return [
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_VALIDATORS,] },] },
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_ASYNC_VALIDATORS,] },] },
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_VALUE_ACCESSOR,] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_ASYNC_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_VALUE_ACCESSOR,] },] },
     ]; };
     FormControlDirective.propDecorators = {
-        "form": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['formControl',] },],
-        "model": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['ngModel',] },],
-        "update": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["Q" /* Output */], args: ['ngModelChange',] },],
-        "isDisabled": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['disabled',] },],
+        "form": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['formControl',] },],
+        "model": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['ngModel',] },],
+        "update": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Output */], args: ['ngModelChange',] },],
+        "isDisabled": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['disabled',] },],
     };
     return FormControlDirective;
 }(NgControl));
@@ -77532,7 +79935,7 @@ var FormGroupDirective = /** @class */ (function (_super) {
         _this.submitted = false;
         _this.directives = [];
         _this.form = /** @type {?} */ ((null));
-        _this.ngSubmit = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["w" /* EventEmitter */]();
+        _this.ngSubmit = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* EventEmitter */]();
         return _this;
     }
     /**
@@ -77777,7 +80180,7 @@ var FormGroupDirective = /** @class */ (function (_super) {
         }
     };
     FormGroupDirective.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: '[formGroup]',
                     providers: [formDirectiveProvider$1],
                     host: { '(submit)': 'onSubmit($event)', '(reset)': 'onReset()' },
@@ -77786,12 +80189,12 @@ var FormGroupDirective = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     FormGroupDirective.ctorParameters = function () { return [
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_VALIDATORS,] },] },
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_ASYNC_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_ASYNC_VALIDATORS,] },] },
     ]; };
     FormGroupDirective.propDecorators = {
-        "form": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['formGroup',] },],
-        "ngSubmit": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["Q" /* Output */] },],
+        "form": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['formGroup',] },],
+        "ngSubmit": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Output */] },],
     };
     return FormGroupDirective;
 }(ControlContainer));
@@ -77879,16 +80282,16 @@ var FormGroupName = /** @class */ (function (_super) {
         }
     };
     FormGroupName.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{ selector: '[formGroupName]', providers: [formGroupNameProvider] },] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{ selector: '[formGroupName]', providers: [formGroupNameProvider] },] },
     ];
     /** @nocollapse */
     FormGroupName.ctorParameters = function () { return [
-        { type: ControlContainer, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* Host */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_3" /* SkipSelf */] },] },
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_VALIDATORS,] },] },
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_ASYNC_VALIDATORS,] },] },
+        { type: ControlContainer, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["w" /* Host */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* SkipSelf */] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_ASYNC_VALIDATORS,] },] },
     ]; };
     FormGroupName.propDecorators = {
-        "name": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['formGroupName',] },],
+        "name": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['formGroupName',] },],
     };
     return FormGroupName;
 }(AbstractFormGroupDirective));
@@ -78029,16 +80432,16 @@ var FormArrayName = /** @class */ (function (_super) {
         }
     };
     FormArrayName.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{ selector: '[formArrayName]', providers: [formArrayNameProvider] },] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{ selector: '[formArrayName]', providers: [formArrayNameProvider] },] },
     ];
     /** @nocollapse */
     FormArrayName.ctorParameters = function () { return [
-        { type: ControlContainer, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* Host */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_3" /* SkipSelf */] },] },
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_VALIDATORS,] },] },
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_ASYNC_VALIDATORS,] },] },
+        { type: ControlContainer, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["w" /* Host */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* SkipSelf */] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_ASYNC_VALIDATORS,] },] },
     ]; };
     FormArrayName.propDecorators = {
-        "name": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['formArrayName',] },],
+        "name": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['formArrayName',] },],
     };
     return FormArrayName;
 }(ControlContainer));
@@ -78122,7 +80525,7 @@ var FormControlName = /** @class */ (function (_super) {
     function FormControlName(parent, validators, asyncValidators, valueAccessors) {
         var _this = _super.call(this) || this;
         _this._added = false;
-        _this.update = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["w" /* EventEmitter */]();
+        _this.update = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* EventEmitter */]();
         _this._parent = parent;
         _this._rawValidators = validators || [];
         _this._rawAsyncValidators = asyncValidators || [];
@@ -78242,20 +80645,20 @@ var FormControlName = /** @class */ (function (_super) {
         this._added = true;
     };
     FormControlName.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{ selector: '[formControlName]', providers: [controlNameBinding] },] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{ selector: '[formControlName]', providers: [controlNameBinding] },] },
     ];
     /** @nocollapse */
     FormControlName.ctorParameters = function () { return [
-        { type: ControlContainer, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* Host */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_3" /* SkipSelf */] },] },
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_VALIDATORS,] },] },
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_ASYNC_VALIDATORS,] },] },
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [NG_VALUE_ACCESSOR,] },] },
+        { type: ControlContainer, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["w" /* Host */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* SkipSelf */] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_ASYNC_VALIDATORS,] },] },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* Self */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [NG_VALUE_ACCESSOR,] },] },
     ]; };
     FormControlName.propDecorators = {
-        "name": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['formControlName',] },],
-        "model": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['ngModel',] },],
-        "update": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["Q" /* Output */], args: ['ngModelChange',] },],
-        "isDisabled": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */], args: ['disabled',] },],
+        "name": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['formControlName',] },],
+        "model": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['ngModel',] },],
+        "update": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Output */], args: ['ngModelChange',] },],
+        "isDisabled": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */], args: ['disabled',] },],
     };
     return FormControlName;
 }(NgControl));
@@ -78360,7 +80763,7 @@ var RequiredValidator = /** @class */ (function () {
      */
     function (fn) { this._onChange = fn; };
     RequiredValidator.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: ':not([type=checkbox])[required][formControlName],:not([type=checkbox])[required][formControl],:not([type=checkbox])[required][ngModel]',
                     providers: [REQUIRED_VALIDATOR],
                     host: { '[attr.required]': 'required ? "" : null' }
@@ -78369,7 +80772,7 @@ var RequiredValidator = /** @class */ (function () {
     /** @nocollapse */
     RequiredValidator.ctorParameters = function () { return []; };
     RequiredValidator.propDecorators = {
-        "required": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
+        "required": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
     };
     return RequiredValidator;
 }());
@@ -78402,7 +80805,7 @@ var CheckboxRequiredValidator = /** @class */ (function (_super) {
         return this.required ? Validators.requiredTrue(c) : null;
     };
     CheckboxRequiredValidator.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: 'input[type=checkbox][required][formControlName],input[type=checkbox][required][formControl],input[type=checkbox][required][ngModel]',
                     providers: [CHECKBOX_REQUIRED_VALIDATOR],
                     host: { '[attr.required]': 'required ? "" : null' }
@@ -78471,7 +80874,7 @@ var EmailValidator = /** @class */ (function () {
      */
     function (fn) { this._onChange = fn; };
     EmailValidator.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: '[email][formControlName],[email][formControl],[email][ngModel]',
                     providers: [EMAIL_VALIDATOR]
                 },] },
@@ -78479,7 +80882,7 @@ var EmailValidator = /** @class */ (function () {
     /** @nocollapse */
     EmailValidator.ctorParameters = function () { return []; };
     EmailValidator.propDecorators = {
-        "email": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
+        "email": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
     };
     return EmailValidator;
 }());
@@ -78559,7 +80962,7 @@ var MinLengthValidator = /** @class */ (function () {
         this._validator = Validators.minLength(parseInt(this.minlength, 10));
     };
     MinLengthValidator.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: '[minlength][formControlName],[minlength][formControl],[minlength][ngModel]',
                     providers: [MIN_LENGTH_VALIDATOR],
                     host: { '[attr.minlength]': 'minlength ? minlength : null' }
@@ -78568,7 +80971,7 @@ var MinLengthValidator = /** @class */ (function () {
     /** @nocollapse */
     MinLengthValidator.ctorParameters = function () { return []; };
     MinLengthValidator.propDecorators = {
-        "minlength": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
+        "minlength": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
     };
     return MinLengthValidator;
 }());
@@ -78639,7 +81042,7 @@ var MaxLengthValidator = /** @class */ (function () {
         this._validator = Validators.maxLength(parseInt(this.maxlength, 10));
     };
     MaxLengthValidator.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: '[maxlength][formControlName],[maxlength][formControl],[maxlength][ngModel]',
                     providers: [MAX_LENGTH_VALIDATOR],
                     host: { '[attr.maxlength]': 'maxlength ? maxlength : null' }
@@ -78648,7 +81051,7 @@ var MaxLengthValidator = /** @class */ (function () {
     /** @nocollapse */
     MaxLengthValidator.ctorParameters = function () { return []; };
     MaxLengthValidator.propDecorators = {
-        "maxlength": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
+        "maxlength": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
     };
     return MaxLengthValidator;
 }());
@@ -78714,7 +81117,7 @@ var PatternValidator = /** @class */ (function () {
      */
     function () { this._validator = Validators.pattern(this.pattern); };
     PatternValidator.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: '[pattern][formControlName],[pattern][formControl],[pattern][ngModel]',
                     providers: [PATTERN_VALIDATOR],
                     host: { '[attr.pattern]': 'pattern ? pattern : null' }
@@ -78723,7 +81126,7 @@ var PatternValidator = /** @class */ (function () {
     /** @nocollapse */
     PatternValidator.ctorParameters = function () { return []; };
     PatternValidator.propDecorators = {
-        "pattern": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
+        "pattern": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
     };
     return PatternValidator;
 }());
@@ -78899,7 +81302,7 @@ var FormBuilder = /** @class */ (function () {
         }
     };
     FormBuilder.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     FormBuilder.ctorParameters = function () { return []; };
@@ -78920,7 +81323,7 @@ var FormBuilder = /** @class */ (function () {
 /**
  * \@stable
  */
-var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_9" /* Version */]('5.2.0');
+var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_8" /* Version */]('5.2.0');
 
 /**
  * @fileoverview added by tsickle
@@ -78950,7 +81353,7 @@ var NgNoValidate = /** @class */ (function () {
     function NgNoValidate() {
     }
     NgNoValidate.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: 'form:not([ngNoForm]):not([ngNativeValidate])',
                     host: { 'novalidate': '' },
                 },] },
@@ -79000,7 +81403,7 @@ var InternalFormsSharedModule = /** @class */ (function () {
     function InternalFormsSharedModule() {
     }
     InternalFormsSharedModule.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["J" /* NgModule */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */], args: [{
                     declarations: SHARED_FORM_DIRECTIVES,
                     exports: SHARED_FORM_DIRECTIVES,
                 },] },
@@ -79029,7 +81432,7 @@ var FormsModule = /** @class */ (function () {
     function FormsModule() {
     }
     FormsModule.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["J" /* NgModule */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */], args: [{
                     declarations: TEMPLATE_DRIVEN_DIRECTIVES,
                     providers: [RadioControlRegistry],
                     exports: [InternalFormsSharedModule, TEMPLATE_DRIVEN_DIRECTIVES]
@@ -79047,7 +81450,7 @@ var ReactiveFormsModule = /** @class */ (function () {
     function ReactiveFormsModule() {
     }
     ReactiveFormsModule.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["J" /* NgModule */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */], args: [{
                     declarations: [REACTIVE_DRIVEN_DIRECTIVES],
                     providers: [FormBuilder, RadioControlRegistry],
                     exports: [InternalFormsSharedModule, REACTIVE_DRIVEN_DIRECTIVES]
@@ -79182,7 +81585,7 @@ var BrowserXhr = /** @class */ (function () {
      */
     function () { return /** @type {?} */ ((new XMLHttpRequest())); };
     BrowserXhr.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     BrowserXhr.ctorParameters = function () { return []; };
@@ -79763,7 +82166,7 @@ var BaseResponseOptions = /** @class */ (function (_super) {
         return _super.call(this, { status: 200, statusText: 'Ok', type: ResponseType.Default, headers: new Headers() }) || this;
     }
     BaseResponseOptions.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     BaseResponseOptions.ctorParameters = function () { return []; };
@@ -80513,7 +82916,7 @@ var BrowserJsonp = /** @class */ (function () {
         }
     };
     BrowserJsonp.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     BrowserJsonp.ctorParameters = function () { return []; };
@@ -80658,7 +83061,7 @@ var JSONPBackend = /** @class */ (function (_super) {
         return new JSONPConnection(request, this._browserJSONP, this._baseResponseOptions);
     };
     JSONPBackend.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     JSONPBackend.ctorParameters = function () { return [
@@ -80907,7 +83310,7 @@ var XHRBackend = /** @class */ (function () {
         return new XHRConnection(request, this._browserXHR, this._baseResponseOptions);
     };
     XHRBackend.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     XHRBackend.ctorParameters = function () { return [
@@ -81180,7 +83583,7 @@ var BaseRequestOptions = /** @class */ (function (_super) {
         return _super.call(this, { method: RequestMethod.Get, headers: new Headers() }) || this;
     }
     BaseRequestOptions.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     BaseRequestOptions.ctorParameters = function () { return []; };
@@ -81672,7 +84075,7 @@ var Http = /** @class */ (function () {
         return this.request(new Request(mergeOptions(this._defaultOptions, options, RequestMethod.Options, url)));
     };
     Http.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     Http.ctorParameters = function () { return [
@@ -81755,7 +84158,7 @@ var Jsonp = /** @class */ (function (_super) {
         return responseObservable;
     };
     Jsonp.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     Jsonp.ctorParameters = function () { return [
@@ -81807,7 +84210,7 @@ var HttpModule = /** @class */ (function () {
     function HttpModule() {
     }
     HttpModule.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */], args: [{
                     providers: [
                         // TODO(pascal): use factory type annotations once supported in DI
                         // issue: https://github.com/angular/angular/issues/3183
@@ -81833,7 +84236,7 @@ var JsonpModule = /** @class */ (function () {
     function JsonpModule() {
     }
     JsonpModule.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */], args: [{
                     providers: [
                         // TODO(pascal): use factory type annotations once supported in DI
                         // issue: https://github.com/angular/angular/issues/3183
@@ -81864,7 +84267,7 @@ var JsonpModule = /** @class */ (function () {
 /**
  * @deprecated use \@angular/common/http instead
  */
-var VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* Version */]('5.2.0');
+var VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* Version */]('5.2.0');
 
 /**
  * @fileoverview added by tsickle
@@ -82054,32 +84457,32 @@ var JitReflector = /** @class */ (function () {
 function createBuiltinExternalReferencesMap() {
     var /** @type {?} */ map = new Map();
     map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].ANALYZE_FOR_ENTRY_COMPONENTS, __WEBPACK_IMPORTED_MODULE_1__angular_core__["a" /* ANALYZE_FOR_ENTRY_COMPONENTS */]);
-    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].ElementRef, __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ElementRef */]);
-    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].NgModuleRef, __WEBPACK_IMPORTED_MODULE_1__angular_core__["M" /* NgModuleRef */]);
+    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].ElementRef, __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* ElementRef */]);
+    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].NgModuleRef, __WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModuleRef */]);
     map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].ViewContainerRef, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_10" /* ViewContainerRef */]);
-    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].ChangeDetectorRef, __WEBPACK_IMPORTED_MODULE_1__angular_core__["l" /* ChangeDetectorRef */]);
-    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].QueryList, __WEBPACK_IMPORTED_MODULE_1__angular_core__["V" /* QueryList */]);
-    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].TemplateRef, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_7" /* TemplateRef */]);
+    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].ChangeDetectorRef, __WEBPACK_IMPORTED_MODULE_1__angular_core__["k" /* ChangeDetectorRef */]);
+    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].QueryList, __WEBPACK_IMPORTED_MODULE_1__angular_core__["U" /* QueryList */]);
+    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].TemplateRef, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_6" /* TemplateRef */]);
     map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].CodegenComponentFactoryResolver, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_20" /* ɵCodegenComponentFactoryResolver */]);
-    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].ComponentFactoryResolver, __WEBPACK_IMPORTED_MODULE_1__angular_core__["q" /* ComponentFactoryResolver */]);
-    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].ComponentFactory, __WEBPACK_IMPORTED_MODULE_1__angular_core__["p" /* ComponentFactory */]);
-    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].ComponentRef, __WEBPACK_IMPORTED_MODULE_1__angular_core__["r" /* ComponentRef */]);
-    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].NgModuleFactory, __WEBPACK_IMPORTED_MODULE_1__angular_core__["K" /* NgModuleFactory */]);
+    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].ComponentFactoryResolver, __WEBPACK_IMPORTED_MODULE_1__angular_core__["p" /* ComponentFactoryResolver */]);
+    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].ComponentFactory, __WEBPACK_IMPORTED_MODULE_1__angular_core__["o" /* ComponentFactory */]);
+    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].ComponentRef, __WEBPACK_IMPORTED_MODULE_1__angular_core__["q" /* ComponentRef */]);
+    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].NgModuleFactory, __WEBPACK_IMPORTED_MODULE_1__angular_core__["J" /* NgModuleFactory */]);
     map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].createModuleFactory, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_27" /* ɵcmf */]);
     map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].moduleDef, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_38" /* ɵmod */]);
     map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].moduleProviderDef, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_39" /* ɵmpd */]);
     map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].RegisterModuleFactoryFn, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_48" /* ɵregisterModuleFactory */]);
-    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].Injector, __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Injector */]);
+    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].Injector, __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* Injector */]);
     map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].ViewEncapsulation, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_11" /* ViewEncapsulation */]);
-    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].ChangeDetectionStrategy, __WEBPACK_IMPORTED_MODULE_1__angular_core__["k" /* ChangeDetectionStrategy */]);
-    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].SecurityContext, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* SecurityContext */]);
-    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].LOCALE_ID, __WEBPACK_IMPORTED_MODULE_1__angular_core__["H" /* LOCALE_ID */]);
-    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].TRANSLATIONS_FORMAT, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_6" /* TRANSLATIONS_FORMAT */]);
+    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].ChangeDetectionStrategy, __WEBPACK_IMPORTED_MODULE_1__angular_core__["j" /* ChangeDetectionStrategy */]);
+    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].SecurityContext, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_0" /* SecurityContext */]);
+    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].LOCALE_ID, __WEBPACK_IMPORTED_MODULE_1__angular_core__["G" /* LOCALE_ID */]);
+    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].TRANSLATIONS_FORMAT, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_5" /* TRANSLATIONS_FORMAT */]);
     map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].inlineInterpolate, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_32" /* ɵinlineInterpolate */]);
     map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].interpolate, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_33" /* ɵinterpolate */]);
     map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].EMPTY_ARRAY, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_22" /* ɵEMPTY_ARRAY */]);
     map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].EMPTY_MAP, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_23" /* ɵEMPTY_MAP */]);
-    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].Renderer, __WEBPACK_IMPORTED_MODULE_1__angular_core__["W" /* Renderer */]);
+    map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].Renderer, __WEBPACK_IMPORTED_MODULE_1__angular_core__["V" /* Renderer */]);
     map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].viewDef, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_52" /* ɵvid */]);
     map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].elementDef, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_30" /* ɵeld */]);
     map.set(__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["j" /* Identifiers */].anchorDef, __WEBPACK_IMPORTED_MODULE_1__angular_core__["_25" /* ɵand */]);
@@ -82110,12 +84513,12 @@ function createBuiltinExternalReferencesMap() {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var ERROR_COLLECTOR_TOKEN = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* InjectionToken */]('ErrorCollector');
+var ERROR_COLLECTOR_TOKEN = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* InjectionToken */]('ErrorCollector');
 /**
  * A default provider for {\@link PACKAGE_ROOT_URL} that maps to '/'.
  */
 var DEFAULT_PACKAGE_URL_PROVIDER = {
-    provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* PACKAGE_ROOT_URL */],
+    provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["Q" /* PACKAGE_ROOT_URL */],
     useValue: '/'
 };
 var _NO_RESOURCE_LOADER = {
@@ -82127,7 +84530,7 @@ var _NO_RESOURCE_LOADER = {
         throw new Error("No ResourceLoader implementation has been provided. Can't read the url \"" + url + "\"");
     }
 };
-var baseHtmlParser = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* InjectionToken */]('HtmlParser');
+var baseHtmlParser = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* InjectionToken */]('HtmlParser');
 var CompilerImpl = /** @class */ (function () {
     function CompilerImpl(injector, _metadataResolver, templateParser, styleCompiler, viewCompiler, ngModuleCompiler, summaryResolver, compileReflector, compilerConfig, console) {
         this._metadataResolver = _metadataResolver;
@@ -82141,7 +84544,7 @@ var CompilerImpl = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return [this._metadataResolver.getProviderMetadata(new __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["r" /* ProviderMeta */](__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Compiler */], { useValue: this }))];
+        return [this._metadataResolver.getProviderMetadata(new __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["r" /* ProviderMeta */](__WEBPACK_IMPORTED_MODULE_1__angular_core__["l" /* Compiler */], { useValue: this }))];
     };
     /**
      * @template T
@@ -82275,13 +84678,13 @@ var COMPILER_PROVIDERS = /** @type {?} */ ([
         provide: __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["i" /* I18NHtmlParser */],
         useFactory: function (parser, translations, format, config, console) {
             translations = translations || '';
-            var /** @type {?} */ missingTranslation = translations ? /** @type {?} */ ((config.missingTranslation)) : __WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* MissingTranslationStrategy */].Ignore;
+            var /** @type {?} */ missingTranslation = translations ? /** @type {?} */ ((config.missingTranslation)) : __WEBPACK_IMPORTED_MODULE_1__angular_core__["H" /* MissingTranslationStrategy */].Ignore;
             return new __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["i" /* I18NHtmlParser */](parser, translations, format, missingTranslation, console);
         },
         deps: [
             baseHtmlParser,
-            [new __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */](), new __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */](__WEBPACK_IMPORTED_MODULE_1__angular_core__["_5" /* TRANSLATIONS */])],
-            [new __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */](), new __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */](__WEBPACK_IMPORTED_MODULE_1__angular_core__["_6" /* TRANSLATIONS_FORMAT */])],
+            [new __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */](), new __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */](__WEBPACK_IMPORTED_MODULE_1__angular_core__["_4" /* TRANSLATIONS */])],
+            [new __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */](), new __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */](__WEBPACK_IMPORTED_MODULE_1__angular_core__["_5" /* TRANSLATIONS_FORMAT */])],
             [__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["c" /* CompilerConfig */]],
             [__WEBPACK_IMPORTED_MODULE_1__angular_core__["_21" /* ɵConsole */]],
         ]
@@ -82301,22 +84704,22 @@ var COMPILER_PROVIDERS = /** @type {?} */ ([
             __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["v" /* SummaryResolver */],
             __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["g" /* ElementSchemaRegistry */],
             __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["d" /* DirectiveNormalizer */], __WEBPACK_IMPORTED_MODULE_1__angular_core__["_21" /* ɵConsole */],
-            [__WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */], __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["t" /* StaticSymbolCache */]],
+            [__WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */], __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["t" /* StaticSymbolCache */]],
             __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["b" /* CompileReflector */],
-            [__WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */], ERROR_COLLECTOR_TOKEN]] },
+            [__WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */], ERROR_COLLECTOR_TOKEN]] },
     DEFAULT_PACKAGE_URL_PROVIDER,
     { provide: __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["u" /* StyleCompiler */], deps: [__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["x" /* UrlResolver */]] },
     { provide: __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["y" /* ViewCompiler */], deps: [__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["b" /* CompileReflector */]] },
     { provide: __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["n" /* NgModuleCompiler */], deps: [__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["b" /* CompileReflector */]] },
     { provide: __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["c" /* CompilerConfig */], useValue: new __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["c" /* CompilerConfig */]() },
-    { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Compiler */], useClass: CompilerImpl, deps: [__WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Injector */], __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["a" /* CompileMetadataResolver */],
+    { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["l" /* Compiler */], useClass: CompilerImpl, deps: [__WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* Injector */], __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["a" /* CompileMetadataResolver */],
             __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["w" /* TemplateParser */], __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["u" /* StyleCompiler */],
             __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["y" /* ViewCompiler */], __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["n" /* NgModuleCompiler */],
             __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["v" /* SummaryResolver */], __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["b" /* CompileReflector */], __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["c" /* CompilerConfig */],
             __WEBPACK_IMPORTED_MODULE_1__angular_core__["_21" /* ɵConsole */]] },
     { provide: __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["f" /* DomElementSchemaRegistry */], deps: [] },
     { provide: __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["g" /* ElementSchemaRegistry */], useExisting: __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["f" /* DomElementSchemaRegistry */] },
-    { provide: __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["x" /* UrlResolver */], deps: [__WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* PACKAGE_ROOT_URL */]] },
+    { provide: __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["x" /* UrlResolver */], deps: [__WEBPACK_IMPORTED_MODULE_1__angular_core__["Q" /* PACKAGE_ROOT_URL */]] },
     { provide: __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["e" /* DirectiveResolver */], deps: [__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["b" /* CompileReflector */]] },
     { provide: __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["q" /* PipeResolver */], deps: [__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["b" /* CompileReflector */]] },
     { provide: __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["o" /* NgModuleResolver */], deps: [__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["b" /* CompileReflector */]] },
@@ -82330,7 +84733,7 @@ var JitCompilerFactory = /** @class */ (function () {
         var /** @type {?} */ compilerOptions = {
             useJit: true,
             defaultEncapsulation: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_11" /* ViewEncapsulation */].Emulated,
-            missingTranslation: __WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* MissingTranslationStrategy */].Warning,
+            missingTranslation: __WEBPACK_IMPORTED_MODULE_1__angular_core__["H" /* MissingTranslationStrategy */].Warning,
             enableLegacyTemplate: false,
         };
         this._defaultOptions = [compilerOptions].concat(defaultOptions);
@@ -82346,7 +84749,7 @@ var JitCompilerFactory = /** @class */ (function () {
     function (options) {
         if (options === void 0) { options = []; }
         var /** @type {?} */ opts = _mergeOptions(this._defaultOptions.concat(options));
-        var /** @type {?} */ injector = __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Injector */].create([
+        var /** @type {?} */ injector = __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* Injector */].create([
             COMPILER_PROVIDERS, {
                 provide: __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["c" /* CompilerConfig */],
                 useFactory: function () {
@@ -82367,7 +84770,7 @@ var JitCompilerFactory = /** @class */ (function () {
             },
             /** @type {?} */ ((opts.providers))
         ]);
-        return injector.get(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Compiler */]);
+        return injector.get(__WEBPACK_IMPORTED_MODULE_1__angular_core__["l" /* Compiler */]);
     };
     return JitCompilerFactory;
 }());
@@ -82426,7 +84829,7 @@ function _mergeArrays(parts) {
  */
 var platformCoreDynamic = Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["_13" /* createPlatformFactory */])(__WEBPACK_IMPORTED_MODULE_1__angular_core__["_18" /* platformCore */], 'coreDynamic', [
     { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["i" /* COMPILER_OPTIONS */], useValue: {}, multi: true },
-    { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["n" /* CompilerFactory */], useClass: JitCompilerFactory, deps: [__WEBPACK_IMPORTED_MODULE_1__angular_core__["i" /* COMPILER_OPTIONS */]] },
+    { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* CompilerFactory */], useClass: JitCompilerFactory, deps: [__WEBPACK_IMPORTED_MODULE_1__angular_core__["i" /* COMPILER_OPTIONS */]] },
 ]);
 
 /**
@@ -82481,7 +84884,7 @@ var ResourceLoaderImpl = /** @class */ (function (_super) {
         return promise;
     };
     ResourceLoaderImpl.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     ResourceLoaderImpl.ctorParameters = function () { return []; };
@@ -82506,7 +84909,7 @@ var INTERNAL_BROWSER_DYNAMIC_PLATFORM_PROVIDERS = [
         useValue: { providers: [{ provide: __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["s" /* ResourceLoader */], useClass: ResourceLoaderImpl, deps: [] }] },
         multi: true
     },
-    { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["S" /* PLATFORM_ID */], useValue: __WEBPACK_IMPORTED_MODULE_2__angular_common__["j" /* ɵPLATFORM_BROWSER_ID */] },
+    { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* PLATFORM_ID */], useValue: __WEBPACK_IMPORTED_MODULE_2__angular_common__["j" /* ɵPLATFORM_BROWSER_ID */] },
 ];
 
 /**
@@ -82582,7 +84985,7 @@ var CachedResourceLoader = /** @class */ (function (_super) {
 /**
  * \@stable
  */
-var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_9" /* Version */]('5.2.0');
+var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_8" /* Version */]('5.2.0');
 
 /**
  * @fileoverview added by tsickle
@@ -84482,11 +86885,11 @@ var BrowserPlatformLocation = /** @class */ (function (_super) {
      */
     function () { this._history.back(); };
     BrowserPlatformLocation.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     BrowserPlatformLocation.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [DOCUMENT$1,] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [DOCUMENT$1,] },] },
     ]; };
     return BrowserPlatformLocation;
 }(__WEBPACK_IMPORTED_MODULE_0__angular_common__["i" /* PlatformLocation */]));
@@ -84688,11 +87091,11 @@ var Meta = /** @class */ (function () {
         return Object.keys(tag).every(function (key) { return _this._dom.getAttribute(elem, key) === tag[key]; });
     };
     Meta.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     Meta.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [DOCUMENT$1,] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [DOCUMENT$1,] },] },
     ]; };
     return Meta;
 }());
@@ -84712,7 +87115,7 @@ var Meta = /** @class */ (function () {
  * An id that identifies a particular application being bootstrapped, that should
  * match across the client/server boundary.
  */
-var TRANSITION_ID = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* InjectionToken */]('TRANSITION_ID');
+var TRANSITION_ID = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* InjectionToken */]('TRANSITION_ID');
 /**
  * @param {?} transitionId
  * @param {?} document
@@ -84735,7 +87138,7 @@ var SERVER_TRANSITION_PROVIDERS = [
     {
         provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["d" /* APP_INITIALIZER */],
         useFactory: appInitializerFactory,
-        deps: [TRANSITION_ID, DOCUMENT$1, __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Injector */]],
+        deps: [TRANSITION_ID, DOCUMENT$1, __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* Injector */]],
         multi: true
     },
 ];
@@ -84884,11 +87287,11 @@ var Title = /** @class */ (function () {
      */
     function (newTitle) { getDOM().setTitle(this._doc, newTitle); };
     Title.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     Title.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [DOCUMENT$1,] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [DOCUMENT$1,] },] },
     ]; };
     return Title;
 }());
@@ -84946,7 +87349,7 @@ function exportNgVar(name, value) {
  */
 var CORE_TOKENS = {
     'ApplicationRef': __WEBPACK_IMPORTED_MODULE_1__angular_core__["g" /* ApplicationRef */],
-    'NgZone': __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* NgZone */],
+    'NgZone': __WEBPACK_IMPORTED_MODULE_1__angular_core__["N" /* NgZone */],
 };
 var INSPECT_GLOBAL_NAME = 'probe';
 var CORE_TOKENS_GLOBAL_NAME = 'coreTokens';
@@ -84984,7 +87387,7 @@ var ELEMENT_PROBE_PROVIDERS = [
         provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["d" /* APP_INITIALIZER */],
         useFactory: _createNgProbe,
         deps: [
-            [__WEBPACK_IMPORTED_MODULE_1__angular_core__["N" /* NgProbeToken */], new __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */]()],
+            [__WEBPACK_IMPORTED_MODULE_1__angular_core__["M" /* NgProbeToken */], new __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */]()],
         ],
         multi: true,
     },
@@ -85004,7 +87407,7 @@ var ELEMENT_PROBE_PROVIDERS = [
 /**
  * \@stable
  */
-var EVENT_MANAGER_PLUGINS = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* InjectionToken */]('EventManagerPlugins');
+var EVENT_MANAGER_PLUGINS = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* InjectionToken */]('EventManagerPlugins');
 /**
  * \@stable
  */
@@ -85082,12 +87485,12 @@ var EventManager = /** @class */ (function () {
         throw new Error("No event manager plugin found for event " + eventName);
     };
     EventManager.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     EventManager.ctorParameters = function () { return [
-        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [EVENT_MANAGER_PLUGINS,] },] },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* NgZone */], },
+        { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [EVENT_MANAGER_PLUGINS,] },] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["N" /* NgZone */], },
     ]; };
     return EventManager;
 }());
@@ -85174,7 +87577,7 @@ var SharedStylesHost = /** @class */ (function () {
      */
     function () { return Array.from(this._stylesSet); };
     SharedStylesHost.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     SharedStylesHost.ctorParameters = function () { return []; };
@@ -85249,11 +87652,11 @@ var DomSharedStylesHost = /** @class */ (function (_super) {
      */
     function () { this._styleNodes.forEach(function (styleNode) { return getDOM().remove(styleNode); }); };
     DomSharedStylesHost.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     DomSharedStylesHost.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [DOCUMENT$1,] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [DOCUMENT$1,] },] },
     ]; };
     return DomSharedStylesHost;
 }(SharedStylesHost));
@@ -85386,7 +87789,7 @@ var DomRendererFactory2 = /** @class */ (function () {
      */
     function () { };
     DomRendererFactory2.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     DomRendererFactory2.ctorParameters = function () { return [
@@ -85611,8 +88014,8 @@ var DefaultDomRenderer2 = /** @class */ (function () {
      * @return {?}
      */
     function (el, style, value, flags) {
-        if (flags & __WEBPACK_IMPORTED_MODULE_1__angular_core__["Z" /* RendererStyleFlags2 */].DashCase) {
-            el.style.setProperty(style, value, !!(flags & __WEBPACK_IMPORTED_MODULE_1__angular_core__["Z" /* RendererStyleFlags2 */].Important) ? 'important' : '');
+        if (flags & __WEBPACK_IMPORTED_MODULE_1__angular_core__["Y" /* RendererStyleFlags2 */].DashCase) {
+            el.style.setProperty(style, value, !!(flags & __WEBPACK_IMPORTED_MODULE_1__angular_core__["Y" /* RendererStyleFlags2 */].Important) ? 'important' : '');
         }
         else {
             el.style[style] = value;
@@ -85631,7 +88034,7 @@ var DefaultDomRenderer2 = /** @class */ (function () {
      * @return {?}
      */
     function (el, style, flags) {
-        if (flags & __WEBPACK_IMPORTED_MODULE_1__angular_core__["Z" /* RendererStyleFlags2 */].DashCase) {
+        if (flags & __WEBPACK_IMPORTED_MODULE_1__angular_core__["Y" /* RendererStyleFlags2 */].DashCase) {
             el.style.removeProperty(style);
         }
         else {
@@ -85988,7 +88391,7 @@ var DomEventsPlugin = /** @class */ (function (_super) {
         var /** @type {?} */ callback = /** @type {?} */ (handler);
         // if zonejs is loaded and current zone is not ngZone
         // we keep Zone.current on target for later restoration.
-        if (zoneJsLoaded && (!__WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* NgZone */].isInAngularZone() || isBlackListedEvent(eventName))) {
+        if (zoneJsLoaded && (!__WEBPACK_IMPORTED_MODULE_1__angular_core__["N" /* NgZone */].isInAngularZone() || isBlackListedEvent(eventName))) {
             var /** @type {?} */ symbolName = symbolNames[eventName];
             if (!symbolName) {
                 symbolName = symbolNames[eventName] = __symbol__(ANGULAR + eventName + FALSE);
@@ -86072,12 +88475,12 @@ var DomEventsPlugin = /** @class */ (function (_super) {
         }
     };
     DomEventsPlugin.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     DomEventsPlugin.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [DOCUMENT$1,] },] },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* NgZone */], },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [DOCUMENT$1,] },] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["N" /* NgZone */], },
     ]; };
     return DomEventsPlugin;
 }(EventManagerPlugin));
@@ -86136,7 +88539,7 @@ var EVENT_NAMES = {
  *
  * \@experimental
  */
-var HAMMER_GESTURE_CONFIG = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* InjectionToken */]('HammerGestureConfig');
+var HAMMER_GESTURE_CONFIG = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* InjectionToken */]('HammerGestureConfig');
 /**
  * @record
  */
@@ -86167,7 +88570,7 @@ var HammerGestureConfig = /** @class */ (function () {
         return mc;
     };
     HammerGestureConfig.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     HammerGestureConfig.ctorParameters = function () { return []; };
@@ -86233,12 +88636,12 @@ var HammerGesturesPlugin = /** @class */ (function (_super) {
      */
     function (eventName) { return this._config.events.indexOf(eventName) > -1; };
     HammerGesturesPlugin.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     HammerGesturesPlugin.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [DOCUMENT$1,] },] },
-        { type: HammerGestureConfig, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [HAMMER_GESTURE_CONFIG,] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [DOCUMENT$1,] },] },
+        { type: HammerGestureConfig, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [HAMMER_GESTURE_CONFIG,] },] },
     ]; };
     return HammerGesturesPlugin;
 }(EventManagerPlugin));
@@ -86403,11 +88806,11 @@ var KeyEventsPlugin = /** @class */ (function (_super) {
         }
     };
     KeyEventsPlugin.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     KeyEventsPlugin.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [DOCUMENT$1,] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [DOCUMENT$1,] },] },
     ]; };
     return KeyEventsPlugin;
 }(EventManagerPlugin));
@@ -87015,31 +89418,31 @@ var DomSanitizerImpl = /** @class */ (function (_super) {
         if (value == null)
             return null;
         switch (ctx) {
-            case __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* SecurityContext */].NONE:
+            case __WEBPACK_IMPORTED_MODULE_1__angular_core__["_0" /* SecurityContext */].NONE:
                 return /** @type {?} */ (value);
-            case __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* SecurityContext */].HTML:
+            case __WEBPACK_IMPORTED_MODULE_1__angular_core__["_0" /* SecurityContext */].HTML:
                 if (value instanceof SafeHtmlImpl)
                     return value.changingThisBreaksApplicationSecurity;
                 this.checkNotSafeValue(value, 'HTML');
                 return sanitizeHtml(this._doc, String(value));
-            case __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* SecurityContext */].STYLE:
+            case __WEBPACK_IMPORTED_MODULE_1__angular_core__["_0" /* SecurityContext */].STYLE:
                 if (value instanceof SafeStyleImpl)
                     return value.changingThisBreaksApplicationSecurity;
                 this.checkNotSafeValue(value, 'Style');
                 return sanitizeStyle(/** @type {?} */ (value));
-            case __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* SecurityContext */].SCRIPT:
+            case __WEBPACK_IMPORTED_MODULE_1__angular_core__["_0" /* SecurityContext */].SCRIPT:
                 if (value instanceof SafeScriptImpl)
                     return value.changingThisBreaksApplicationSecurity;
                 this.checkNotSafeValue(value, 'Script');
                 throw new Error('unsafe value used in a script context');
-            case __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* SecurityContext */].URL:
+            case __WEBPACK_IMPORTED_MODULE_1__angular_core__["_0" /* SecurityContext */].URL:
                 if (value instanceof SafeResourceUrlImpl || value instanceof SafeUrlImpl) {
                     // Allow resource URLs in URL contexts, they are strictly more trusted.
                     return value.changingThisBreaksApplicationSecurity;
                 }
                 this.checkNotSafeValue(value, 'URL');
                 return sanitizeUrl(String(value));
-            case __WEBPACK_IMPORTED_MODULE_1__angular_core__["_1" /* SecurityContext */].RESOURCE_URL:
+            case __WEBPACK_IMPORTED_MODULE_1__angular_core__["_0" /* SecurityContext */].RESOURCE_URL:
                 if (value instanceof SafeResourceUrlImpl) {
                     return value.changingThisBreaksApplicationSecurity;
                 }
@@ -87113,11 +89516,11 @@ var DomSanitizerImpl = /** @class */ (function (_super) {
         return new SafeResourceUrlImpl(value);
     };
     DomSanitizerImpl.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     DomSanitizerImpl.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [DOCUMENT$1,] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [DOCUMENT$1,] },] },
     ]; };
     return DomSanitizerImpl;
 }(DomSanitizer));
@@ -87224,8 +89627,8 @@ var SafeResourceUrlImpl = /** @class */ (function (_super) {
  * found in the LICENSE file at https://angular.io/license
  */
 var INTERNAL_BROWSER_PLATFORM_PROVIDERS = [
-    { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["S" /* PLATFORM_ID */], useValue: __WEBPACK_IMPORTED_MODULE_0__angular_common__["j" /* ɵPLATFORM_BROWSER_ID */] },
-    { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["T" /* PLATFORM_INITIALIZER */], useValue: initDomAdapter, multi: true },
+    { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* PLATFORM_ID */], useValue: __WEBPACK_IMPORTED_MODULE_0__angular_common__["j" /* ɵPLATFORM_BROWSER_ID */] },
+    { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["S" /* PLATFORM_INITIALIZER */], useValue: initDomAdapter, multi: true },
     { provide: __WEBPACK_IMPORTED_MODULE_0__angular_common__["i" /* PlatformLocation */], useClass: BrowserPlatformLocation, deps: [DOCUMENT$1] },
     { provide: DOCUMENT$1, useFactory: _document, deps: [] },
 ];
@@ -87236,7 +89639,7 @@ var INTERNAL_BROWSER_PLATFORM_PROVIDERS = [
  * \@experimental
  */
 var BROWSER_SANITIZATION_PROVIDERS = [
-    { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_0" /* Sanitizer */], useExisting: DomSanitizer },
+    { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["Z" /* Sanitizer */], useExisting: DomSanitizer },
     { provide: DomSanitizer, useClass: DomSanitizerImpl, deps: [DOCUMENT$1] },
 ];
 /**
@@ -87254,7 +89657,7 @@ function initDomAdapter() {
  * @return {?}
  */
 function errorHandler() {
-    return new __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */]();
+    return new __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */]();
 }
 /**
  * @return {?}
@@ -87309,19 +89712,19 @@ var BrowserModule = /** @class */ (function () {
         };
     };
     BrowserModule.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["J" /* NgModule */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */], args: [{
                     providers: [
                         BROWSER_SANITIZATION_PROVIDERS,
-                        { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */], useFactory: errorHandler, deps: [] },
+                        { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */], useFactory: errorHandler, deps: [] },
                         { provide: EVENT_MANAGER_PLUGINS, useClass: DomEventsPlugin, multi: true },
                         { provide: EVENT_MANAGER_PLUGINS, useClass: KeyEventsPlugin, multi: true },
                         { provide: EVENT_MANAGER_PLUGINS, useClass: HammerGesturesPlugin, multi: true },
                         { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig },
                         DomRendererFactory2,
-                        { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["Y" /* RendererFactory2 */], useExisting: DomRendererFactory2 },
+                        { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["X" /* RendererFactory2 */], useExisting: DomRendererFactory2 },
                         { provide: SharedStylesHost, useExisting: DomSharedStylesHost },
                         DomSharedStylesHost,
-                        __WEBPACK_IMPORTED_MODULE_1__angular_core__["_8" /* Testability */],
+                        __WEBPACK_IMPORTED_MODULE_1__angular_core__["_7" /* Testability */],
                         EventManager,
                         ELEMENT_PROBE_PROVIDERS,
                         Meta,
@@ -87332,7 +89735,7 @@ var BrowserModule = /** @class */ (function () {
     ];
     /** @nocollapse */
     BrowserModule.ctorParameters = function () { return [
-        { type: BrowserModule, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_3" /* SkipSelf */] },] },
+        { type: BrowserModule, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* SkipSelf */] },] },
     ]; };
     return BrowserModule;
 }());
@@ -87708,7 +90111,7 @@ var TransferState = /** @class */ (function () {
         return JSON.stringify(this.store);
     };
     TransferState.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     TransferState.ctorParameters = function () { return []; };
@@ -87744,7 +90147,7 @@ var BrowserTransferStateModule = /** @class */ (function () {
     function BrowserTransferStateModule() {
     }
     BrowserTransferStateModule.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["J" /* NgModule */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */], args: [{
                     providers: [{ provide: TransferState, useFactory: initTransferState, deps: [DOCUMENT$1, __WEBPACK_IMPORTED_MODULE_1__angular_core__["c" /* APP_ID */]] }],
                 },] },
     ];
@@ -87885,7 +90288,7 @@ var By = /** @class */ (function () {
 /**
  * \@stable
  */
-var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_9" /* Version */]('5.2.0');
+var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_8" /* Version */]('5.2.0');
 
 /**
  * @fileoverview added by tsickle
@@ -89678,7 +92081,7 @@ var ApplyRedirects = /** @class */ (function () {
         this.urlTree = urlTree;
         this.config = config;
         this.allowRedirects = true;
-        this.ngModule = moduleInjector.get(__WEBPACK_IMPORTED_MODULE_1__angular_core__["M" /* NgModuleRef */]);
+        this.ngModule = moduleInjector.get(__WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModuleRef */]);
     }
     /**
      * @return {?}
@@ -92517,7 +94920,7 @@ var DefaultRouteReuseStrategy = /** @class */ (function () {
  * \@docsNotRequired
  * \@experimental
  */
-var ROUTES = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* InjectionToken */]('ROUTES');
+var ROUTES = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* InjectionToken */]('ROUTES');
 var RouterConfigLoader = /** @class */ (function () {
     function RouterConfigLoader(loader, compiler, onLoadStartListener, onLoadEndListener) {
         this.loader = loader;
@@ -92564,7 +94967,7 @@ var RouterConfigLoader = /** @class */ (function () {
         }
         else {
             return __WEBPACK_IMPORTED_MODULE_8_rxjs_operator_mergeMap__["a" /* mergeMap */].call(wrapIntoObservable(loadChildren()), function (t) {
-                if (t instanceof __WEBPACK_IMPORTED_MODULE_1__angular_core__["K" /* NgModuleFactory */]) {
+                if (t instanceof __WEBPACK_IMPORTED_MODULE_1__angular_core__["J" /* NgModuleFactory */]) {
                     return Object(__WEBPACK_IMPORTED_MODULE_5_rxjs_observable_of__["a" /* of */])(t);
                 }
                 else {
@@ -92735,7 +95138,7 @@ var Router = /** @class */ (function () {
         this.paramsInheritanceStrategy = 'emptyOnly';
         var /** @type {?} */ onLoadStart = function (r) { return _this.triggerEvent(new RouteConfigLoadStart(r)); };
         var /** @type {?} */ onLoadEnd = function (r) { return _this.triggerEvent(new RouteConfigLoadEnd(r)); };
-        this.ngModule = injector.get(__WEBPACK_IMPORTED_MODULE_1__angular_core__["M" /* NgModuleRef */]);
+        this.ngModule = injector.get(__WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModuleRef */]);
         this.resetConfig(config);
         this.currentUrlTree = createEmptyUrlTree();
         this.rawUrlTree = this.currentUrlTree;
@@ -93992,26 +96395,26 @@ var RouterLink = /** @class */ (function () {
         configurable: true
     });
     RouterLink.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{ selector: ':not(a)[routerLink]' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{ selector: ':not(a)[routerLink]' },] },
     ];
     /** @nocollapse */
     RouterLink.ctorParameters = function () { return [
         { type: Router, },
         { type: ActivatedRoute, },
         { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["h" /* Attribute */], args: ['tabindex',] },] },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["X" /* Renderer2 */], },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ElementRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["W" /* Renderer2 */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* ElementRef */], },
     ]; };
     RouterLink.propDecorators = {
-        "queryParams": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "fragment": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "queryParamsHandling": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "preserveFragment": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "skipLocationChange": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "replaceUrl": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "routerLink": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "preserveQueryParams": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "onClick": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* HostListener */], args: ['click',] },],
+        "queryParams": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "fragment": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "queryParamsHandling": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "preserveFragment": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "skipLocationChange": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "replaceUrl": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "routerLink": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "preserveQueryParams": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "onClick": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["y" /* HostListener */], args: ['click',] },],
     };
     return RouterLink;
 }());
@@ -94138,7 +96541,7 @@ var RouterLinkWithHref = /** @class */ (function () {
         configurable: true
     });
     RouterLinkWithHref.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{ selector: 'a[routerLink]' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{ selector: 'a[routerLink]' },] },
     ];
     /** @nocollapse */
     RouterLinkWithHref.ctorParameters = function () { return [
@@ -94147,17 +96550,17 @@ var RouterLinkWithHref = /** @class */ (function () {
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_common__["g" /* LocationStrategy */], },
     ]; };
     RouterLinkWithHref.propDecorators = {
-        "target": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["y" /* HostBinding */], args: ['attr.target',] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "queryParams": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "fragment": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "queryParamsHandling": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "preserveFragment": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "skipLocationChange": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "replaceUrl": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "href": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["y" /* HostBinding */] },],
-        "routerLink": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "preserveQueryParams": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "onClick": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* HostListener */], args: ['click', ['$event.button', '$event.ctrlKey', '$event.metaKey', '$event.shiftKey'],] },],
+        "target": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* HostBinding */], args: ['attr.target',] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "queryParams": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "fragment": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "queryParamsHandling": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "preserveFragment": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "skipLocationChange": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "replaceUrl": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "href": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* HostBinding */] },],
+        "routerLink": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "preserveQueryParams": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "onClick": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["y" /* HostListener */], args: ['click', ['$event.button', '$event.ctrlKey', '$event.metaKey', '$event.shiftKey'],] },],
     };
     return RouterLinkWithHref;
 }());
@@ -94348,7 +96751,7 @@ var RouterLinkActive = /** @class */ (function () {
             this.linksWithHrefs.some(this.isLinkActive(this.router));
     };
     RouterLinkActive.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{
                     selector: '[routerLinkActive]',
                     exportAs: 'routerLinkActive',
                 },] },
@@ -94356,15 +96759,15 @@ var RouterLinkActive = /** @class */ (function () {
     /** @nocollapse */
     RouterLinkActive.ctorParameters = function () { return [
         { type: Router, },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ElementRef */], },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["X" /* Renderer2 */], },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["l" /* ChangeDetectorRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* ElementRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["W" /* Renderer2 */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["k" /* ChangeDetectorRef */], },
     ]; };
     RouterLinkActive.propDecorators = {
-        "links": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* ContentChildren */], args: [RouterLink, { descendants: true },] },],
-        "linksWithHrefs": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* ContentChildren */], args: [RouterLinkWithHref, { descendants: true },] },],
-        "routerLinkActiveOptions": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
-        "routerLinkActive": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["E" /* Input */] },],
+        "links": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["r" /* ContentChildren */], args: [RouterLink, { descendants: true },] },],
+        "linksWithHrefs": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["r" /* ContentChildren */], args: [RouterLinkWithHref, { descendants: true },] },],
+        "routerLinkActiveOptions": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
+        "routerLinkActive": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Input */] },],
     };
     return RouterLinkActive;
 }());
@@ -94546,8 +96949,8 @@ var RouterOutlet = /** @class */ (function () {
         this.changeDetector = changeDetector;
         this.activated = null;
         this._activatedRoute = null;
-        this.activateEvents = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["w" /* EventEmitter */]();
-        this.deactivateEvents = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["w" /* EventEmitter */]();
+        this.activateEvents = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* EventEmitter */]();
+        this.deactivateEvents = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* EventEmitter */]();
         this.name = name || PRIMARY_OUTLET;
         parentContexts.onChildOutletCreated(this.name, this);
     }
@@ -94709,19 +97112,19 @@ var RouterOutlet = /** @class */ (function () {
         this.activateEvents.emit(this.activated.instance);
     };
     RouterOutlet.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["t" /* Directive */], args: [{ selector: 'router-outlet', exportAs: 'outlet' },] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["s" /* Directive */], args: [{ selector: 'router-outlet', exportAs: 'outlet' },] },
     ];
     /** @nocollapse */
     RouterOutlet.ctorParameters = function () { return [
         { type: ChildrenOutletContexts, },
         { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_10" /* ViewContainerRef */], },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["q" /* ComponentFactoryResolver */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["p" /* ComponentFactoryResolver */], },
         { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["h" /* Attribute */], args: ['name',] },] },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["l" /* ChangeDetectorRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["k" /* ChangeDetectorRef */], },
     ]; };
     RouterOutlet.propDecorators = {
-        "activateEvents": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["Q" /* Output */], args: ['activate',] },],
-        "deactivateEvents": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["Q" /* Output */], args: ['deactivate',] },],
+        "activateEvents": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Output */], args: ['activate',] },],
+        "deactivateEvents": [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Output */], args: ['deactivate',] },],
     };
     return RouterOutlet;
 }());
@@ -94868,7 +97271,7 @@ var RouterPreloader = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        var /** @type {?} */ ngModule = this.injector.get(__WEBPACK_IMPORTED_MODULE_1__angular_core__["M" /* NgModuleRef */]);
+        var /** @type {?} */ ngModule = this.injector.get(__WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModuleRef */]);
         return this.processRoutes(ngModule, this.router.config);
     };
     // TODO(jasonaden): This class relies on code external to the class to call setUpPreloading. If
@@ -94932,14 +97335,14 @@ var RouterPreloader = /** @class */ (function () {
         });
     };
     RouterPreloader.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     RouterPreloader.ctorParameters = function () { return [
         { type: Router, },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModuleFactoryLoader */], },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Compiler */], },
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Injector */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["K" /* NgModuleFactoryLoader */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["l" /* Compiler */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* Injector */], },
         { type: PreloadingStrategy, },
     ]; };
     return RouterPreloader;
@@ -94965,11 +97368,11 @@ var ROUTER_DIRECTIVES = [RouterOutlet, RouterLink, RouterLinkWithHref, RouterLin
  * \@whatItDoes Is used in DI to configure the router.
  * \@stable
  */
-var ROUTER_CONFIGURATION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* InjectionToken */]('ROUTER_CONFIGURATION');
+var ROUTER_CONFIGURATION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* InjectionToken */]('ROUTER_CONFIGURATION');
 /**
  * \@docsNotRequired
  */
-var ROUTER_FORROOT_GUARD = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* InjectionToken */]('ROUTER_FORROOT_GUARD');
+var ROUTER_FORROOT_GUARD = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* InjectionToken */]('ROUTER_FORROOT_GUARD');
 var ROUTER_PROVIDERS = [
     __WEBPACK_IMPORTED_MODULE_0__angular_common__["f" /* Location */],
     { provide: UrlSerializer, useClass: DefaultUrlSerializer },
@@ -94977,14 +97380,14 @@ var ROUTER_PROVIDERS = [
         provide: Router,
         useFactory: setupRouter,
         deps: [
-            __WEBPACK_IMPORTED_MODULE_1__angular_core__["g" /* ApplicationRef */], UrlSerializer, ChildrenOutletContexts, __WEBPACK_IMPORTED_MODULE_0__angular_common__["f" /* Location */], __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Injector */],
-            __WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModuleFactoryLoader */], __WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Compiler */], ROUTES, ROUTER_CONFIGURATION,
-            [UrlHandlingStrategy, new __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */]()], [RouteReuseStrategy, new __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */]()]
+            __WEBPACK_IMPORTED_MODULE_1__angular_core__["g" /* ApplicationRef */], UrlSerializer, ChildrenOutletContexts, __WEBPACK_IMPORTED_MODULE_0__angular_common__["f" /* Location */], __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* Injector */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_core__["K" /* NgModuleFactoryLoader */], __WEBPACK_IMPORTED_MODULE_1__angular_core__["l" /* Compiler */], ROUTES, ROUTER_CONFIGURATION,
+            [UrlHandlingStrategy, new __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */]()], [RouteReuseStrategy, new __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */]()]
         ]
     },
     ChildrenOutletContexts,
     { provide: ActivatedRoute, useFactory: rootRoute, deps: [Router] },
-    { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModuleFactoryLoader */], useClass: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_4" /* SystemJsNgModuleLoader */] },
+    { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["K" /* NgModuleFactoryLoader */], useClass: __WEBPACK_IMPORTED_MODULE_1__angular_core__["_3" /* SystemJsNgModuleLoader */] },
     RouterPreloader,
     NoPreloading,
     PreloadAllModules,
@@ -94994,7 +97397,7 @@ var ROUTER_PROVIDERS = [
  * @return {?}
  */
 function routerNgProbeToken() {
-    return new __WEBPACK_IMPORTED_MODULE_1__angular_core__["N" /* NgProbeToken */]('Router', Router);
+    return new __WEBPACK_IMPORTED_MODULE_1__angular_core__["M" /* NgProbeToken */]('Router', Router);
 }
 /**
  * \@whatItDoes Adds router directives and providers.
@@ -95108,14 +97511,14 @@ var RouterModule = /** @class */ (function () {
                 {
                     provide: ROUTER_FORROOT_GUARD,
                     useFactory: provideForRootGuard,
-                    deps: [[Router, new __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */](), new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_3" /* SkipSelf */]()]]
+                    deps: [[Router, new __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */](), new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_2" /* SkipSelf */]()]]
                 },
                 { provide: ROUTER_CONFIGURATION, useValue: config ? config : {} },
                 {
                     provide: __WEBPACK_IMPORTED_MODULE_0__angular_common__["g" /* LocationStrategy */],
                     useFactory: provideLocationStrategy,
                     deps: [
-                        __WEBPACK_IMPORTED_MODULE_0__angular_common__["i" /* PlatformLocation */], [new __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */](__WEBPACK_IMPORTED_MODULE_0__angular_common__["a" /* APP_BASE_HREF */]), new __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */]()], ROUTER_CONFIGURATION
+                        __WEBPACK_IMPORTED_MODULE_0__angular_common__["i" /* PlatformLocation */], [new __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */](__WEBPACK_IMPORTED_MODULE_0__angular_common__["a" /* APP_BASE_HREF */]), new __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */]()], ROUTER_CONFIGURATION
                     ]
                 },
                 {
@@ -95123,7 +97526,7 @@ var RouterModule = /** @class */ (function () {
                     useExisting: config && config.preloadingStrategy ? config.preloadingStrategy :
                         NoPreloading
                 },
-                { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["N" /* NgProbeToken */], multi: true, useFactory: routerNgProbeToken },
+                { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["M" /* NgProbeToken */], multi: true, useFactory: routerNgProbeToken },
                 provideRouterInitializer(),
             ],
         };
@@ -95145,12 +97548,12 @@ var RouterModule = /** @class */ (function () {
         return { ngModule: RouterModule, providers: [provideRoutes(routes)] };
     };
     RouterModule.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["J" /* NgModule */], args: [{ declarations: ROUTER_DIRECTIVES, exports: ROUTER_DIRECTIVES },] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */], args: [{ declarations: ROUTER_DIRECTIVES, exports: ROUTER_DIRECTIVES },] },
     ];
     /** @nocollapse */
     RouterModule.ctorParameters = function () { return [
-        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Inject */], args: [ROUTER_FORROOT_GUARD,] },] },
-        { type: Router, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["P" /* Optional */] },] },
+        { type: undefined, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] }, { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* Inject */], args: [ROUTER_FORROOT_GUARD,] },] },
+        { type: Router, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["O" /* Optional */] },] },
     ]; };
     return RouterModule;
 }());
@@ -95365,11 +97768,11 @@ var RouterInitializer = /** @class */ (function () {
         return opts.initialNavigation === 'legacy_disabled' || opts.initialNavigation === false;
     };
     RouterInitializer.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* Injectable */] },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */] },
     ];
     /** @nocollapse */
     RouterInitializer.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["D" /* Injector */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* Injector */], },
     ]; };
     return RouterInitializer;
 }());
@@ -95392,7 +97795,7 @@ function getBootstrapListener(r) {
  *
  * \@experimental
  */
-var ROUTER_INITIALIZER = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* InjectionToken */]('Router Initializer');
+var ROUTER_INITIALIZER = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["B" /* InjectionToken */]('Router Initializer');
 /**
  * @return {?}
  */
@@ -95424,7 +97827,7 @@ function provideRouterInitializer() {
 /**
  * \@stable
  */
-var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_9" /* Version */]('5.2.0');
+var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_8" /* Version */]('5.2.0');
 
 /**
  * @fileoverview added by tsickle

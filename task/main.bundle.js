@@ -60,7 +60,7 @@ var AppComponent = /** @class */ (function () {
         this.title = 'app';
     }
     AppComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-root',
             template: __webpack_require__("../../../../../src/app/app.component.html"),
             styles: [__webpack_require__("../../../../../src/app/app.component.css")]
@@ -95,7 +95,11 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/map.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_rxjs_add_operator_toPromise__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/toPromise.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_rxjs_add_operator_toPromise__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_brmasker4__ = __webpack_require__("../../../../brmasker4/dist/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_rxjs_add_operator_debounceTime__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/debounceTime.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_rxjs_add_operator_distinctUntilChanged__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/distinctUntilChanged.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_rxjs_add_operator_switchMap__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/switchMap.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_mydatepicker__ = __webpack_require__("../../../../mydatepicker/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__autocomplete_auto_component__ = __webpack_require__("../../../../../src/app/autocomplete/auto.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -119,11 +123,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
+
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["J" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_8__home_home_component__["a" /* HomeComponent */],
@@ -131,13 +139,14 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_9__rodape_rodape_component__["a" /* RodapeComponent */],
                 __WEBPACK_IMPORTED_MODULE_10__employee_create_component__["a" /* CreateComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__employee_upload_component__["a" /* UploadComponent */],
-                __WEBPACK_IMPORTED_MODULE_12__employee_employee_component__["a" /* EmployeeComponent */]
+                __WEBPACK_IMPORTED_MODULE_12__employee_employee_component__["a" /* EmployeeComponent */],
+                __WEBPACK_IMPORTED_MODULE_20__autocomplete_auto_component__["a" /* AutoComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_13__angular_forms__["a" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_16_brmasker4__["a" /* BrMasker4Module */],
+                __WEBPACK_IMPORTED_MODULE_19_mydatepicker__["MyDatePickerModule"],
                 __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["b" /* HttpClientModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_router__["c" /* RouterModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_routes__["a" /* ROUTES */])
             ],
@@ -161,6 +170,8 @@ var AppModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__employee_create_component__ = __webpack_require__("../../../../../src/app/employee/create.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__employee_upload_component__ = __webpack_require__("../../../../../src/app/employee/upload.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__employee_employee_component__ = __webpack_require__("../../../../../src/app/employee/employee.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__autocomplete_auto_component__ = __webpack_require__("../../../../../src/app/autocomplete/auto.component.ts");
+
 
 
 
@@ -169,9 +180,91 @@ var ROUTES = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_0__home_home_component__["a" /* HomeComponent */] },
     { path: 'employee', component: __WEBPACK_IMPORTED_MODULE_3__employee_employee_component__["a" /* EmployeeComponent */] },
     { path: 'create', component: __WEBPACK_IMPORTED_MODULE_1__employee_create_component__["a" /* CreateComponent */] },
+    { path: 'auto', component: __WEBPACK_IMPORTED_MODULE_4__autocomplete_auto_component__["a" /* AutoComponent */] },
     { path: 'create/:id', component: __WEBPACK_IMPORTED_MODULE_1__employee_create_component__["a" /* CreateComponent */] },
     { path: 'upload/:id', component: __WEBPACK_IMPORTED_MODULE_2__employee_upload_component__["a" /* UploadComponent */] }
 ];
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/autocomplete/auto.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/autocomplete/auto.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\r\n  <br /> \r\n  <h2>Employee Autocomplete</h2>\r\n  <br /> \r\n  <br />\r\n  <input\r\n    (keyup)=\"searchTerm$.next($event.target.value)\" [(ngModel)]=\"name\">\r\n  <ul *ngIf=\"results\">\r\n    <li *ngFor=\"let result of results | slice:0:9\" (click)=\"setName(result)\">    \r\n        {{ result.name }}\r\n    </li>\r\n  </ul>\r\n  <br /> \r\n  <br />\r\n  <button class=\"btn btn-space btn-outline-success\" (click)=\"goToEmployee()\" >Employee List</button><br /><br />\r\n  <button class=\"btn btn-space btn-outline-success\" (click)=\"goToAdd()\" >Add Employee</button><br />\r\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/autocomplete/auto.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AutoComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search_service__ = __webpack_require__("../../../../../src/app/search.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__ = __webpack_require__("../../../../rxjs/_esm5/Subject.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var AutoComponent = /** @class */ (function () {
+    function AutoComponent(router, searchService) {
+        var _this = this;
+        this.router = router;
+        this.searchService = searchService;
+        this.searchTerm$ = new __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__["a" /* Subject */]();
+        this.searchService.search(this.searchTerm$)
+            .subscribe(function (results) {
+            _this.results = results.results;
+        });
+    }
+    AutoComponent.prototype.ngOnInit = function () {
+    };
+    AutoComponent.prototype.setName = function (result) {
+        this.name = result.name;
+    };
+    AutoComponent.prototype.goToAdd = function () { this.router.navigate(['create']); };
+    AutoComponent.prototype.goToEmployee = function () { this.router.navigate(['employee']); };
+    AutoComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-auto',
+            template: __webpack_require__("../../../../../src/app/autocomplete/auto.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/autocomplete/auto.component.css")],
+            providers: [__WEBPACK_IMPORTED_MODULE_2__search_service__["a" /* SearchService */]]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_2__search_service__["a" /* SearchService */]])
+    ], AutoComponent);
+    return AutoComponent;
+}());
+
 
 
 /***/ }),
@@ -221,7 +314,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/employee/create.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n    <br /> \r\n    <h2>Employee Registration</h2>\r\n    <br /> \r\n    <form>\r\n        <div class=\"form-group\">\r\n            <label for=\"formGroupExampleInput\">First Name</label>\r\n            <input type=\"text\" [(ngModel)]=\"employee.first_name\" name=\"first_name\" class=\"form-control\" id=\"formGroupExampleInput\" placeholder=\"Name\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"formGroupExampleInput2\">Surname</label>\r\n            <input type=\"text\" [(ngModel)]=\"employee.surname\" name=\"surname\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Surname\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"formGroupExampleInput2\">Position</label>\r\n            <input type=\"text\" [(ngModel)]=\"employee.position\" name=\"position\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Position\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"formGroupExampleInput2\">Mobile Phone</label>\r\n            <input type=\"text\" [(ngModel)]=\"employee.mobile_phone\" name=\"mobile_phone\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Mobile Phone\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n        <label for=\"exampleInputEmail1\">Email address</label>\r\n        <input type=\"email\" [(ngModel)]=\"employee.email\" name=\"email\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" placeholder=\"Enter email\">\r\n        <small id=\"emailHelp\" class=\"form-text text-muted\">We'll never share your email with anyone else.</small>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"formGroupExampleInput2\">Date of birth</label>\r\n            <input type=\"text\" [brmasker]=\"{mask:'00/00/0000', len:10}\"  [(ngModel)]=\"employee.date_birth\" name=\"date_birth\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Date of birth\">\r\n        </div>\r\n        <button type=\"submit\" (click)=\"submit()\" class=\"btn btn-primary\">Submit</button>\r\n    </form>\r\n</div> \r\n  "
+module.exports = "<div class=\"container\">\r\n    <br /> \r\n    <h2>Employee Registration</h2>\r\n        <br /> \r\n    <div class=\"w-50 p-3\">\r\n        <form>\r\n            <div class=\"form-group\">\r\n                <label for=\"formGroupExampleInput\">First Name</label>\r\n                <input type=\"text\" [(ngModel)]=\"employee.first_name\" name=\"first_name\" class=\"form-control\" id=\"formGroupExampleInput\" placeholder=\"Name\">\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"formGroupExampleInput2\">Surname</label>\r\n                <input type=\"text\" [(ngModel)]=\"employee.surname\" name=\"surname\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Surname\">\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"formGroupExampleInput2\">Position</label>\r\n                <input type=\"text\" [(ngModel)]=\"employee.position\" name=\"position\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Position\">\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"formGroupExampleInput2\">Mobile Phone</label>\r\n                <input type=\"text\" [(ngModel)]=\"employee.mobile_phone\" name=\"mobile_phone\" class=\"form-control\" id=\"formGroupExampleInput2\" placeholder=\"Mobile Phone\">\r\n            </div>\r\n            <div class=\"form-group\">\r\n            <label for=\"exampleInputEmail1\">Email address</label>\r\n            <input type=\"email\" [(ngModel)]=\"employee.email\" name=\"email\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" placeholder=\"Enter email\">\r\n            <small id=\"emailHelp\" class=\"form-text text-muted\">We'll never share your email with anyone else.</small>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"formGroupExampleInput2\">Date of birth</label>\r\n                <my-date-picker name=\"mydate\" (dateChanged)=\"onDateChanged($event)\" [options]=\"myDatePickerOptions\"\r\n                [(ngModel)]=\"model\" required></my-date-picker>\r\n            </div>\r\n            <button type=\"submit\" (click)=\"submit()\" class=\"btn btn-primary\">Submit</button>\r\n        </form>\r\n    </div>\r\n</div> \r\n  "
 
 /***/ }),
 
@@ -252,6 +345,10 @@ var CreateComponent = /** @class */ (function () {
     function CreateComponent(http, router, rout) {
         this.router = router;
         this.rout = rout;
+        this.myDatePickerOptions = {
+            // other options...
+            dateFormat: 'dd/mm/yyyy',
+        };
         this.data = {};
         this.data.response = '';
         this.http = http;
@@ -272,7 +369,6 @@ var CreateComponent = /** @class */ (function () {
         if (!this.employee.first_name ||
             !this.employee.surname ||
             !this.employee.email ||
-            !this.employee.date_birth ||
             !this.employee.mobile_phone ||
             !this.employee.position) {
             alert("All fields are riquered on this form!");
@@ -287,6 +383,7 @@ var CreateComponent = /** @class */ (function () {
                 var link = 'http://marmita.idsgeo.com/index.php/employee/add';
             }
             var data = JSON.stringify(this.employee);
+            console.log(data);
             this.http.post(link, data)
                 .subscribe(function (data) {
                 _this.data.response = data._body;
@@ -298,6 +395,10 @@ var CreateComponent = /** @class */ (function () {
                 console.log("Error!");
             });
         }
+    };
+    CreateComponent.prototype.onDateChanged = function (event) {
+        this.employee.date_birth = event.formatted;
+        console.log('onDateChanged(): ', event.date, ' - jsdate: ', new Date(event.jsdate).toLocaleDateString(), ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
     };
     CreateComponent.prototype.requestHttpEmployee = function () {
         var _this = this;
@@ -315,7 +416,7 @@ var CreateComponent = /** @class */ (function () {
         });
     };
     CreateComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-create',
             template: __webpack_require__("../../../../../src/app/employee/create.component.html"),
             styles: [__webpack_require__("../../../../../src/app/employee/create.component.css")]
@@ -350,7 +451,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/employee/employee.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">  \r\n    <hr />\r\n    <div *ngFor=\"let employee of employees\">\r\n      <div class=\"row\">\r\n        <div class=\"col-md-4\">\r\n          <img src=\"http://marmita.idsgeo.com/img/{{employee.img}}\" class=\"img-fluid\" />\r\n        </div>\r\n        <div class=\"col-md-8\">\r\n          <div class=\"row\">\r\n            <h4>{{ employee.first_name }}</h4>\r\n          </div>\r\n          <div class=\"row\">\r\n            <h5>{{ employee.surname }}</h5>\r\n          </div>\r\n          <div class=\"row\">\r\n            <p>{{ employee.position }}</p>\r\n          </div>\r\n          <div class=\"row\">\r\n            <p>{{ employee.mobile_phone }}</p>\r\n          </div>\r\n          <div class=\"row\">\r\n            <p>{{ employee.email }}</p>\r\n          </div>\r\n          <div class=\"row\">\r\n            <p>{{ employee.date_birth }}</p>\r\n          </div>\r\n          <div class=\"row\">\r\n            <button class=\"btn btn-space btn-outline-success\" (click)=\"editEmployee(employee)\" >Edit</button>\r\n            <button class=\"btn btn-space btn btn-danger\" (click)=\"deleteEmployee(employee)\" >Delete</button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n    </div>\r\n    <br />\r\n  </div>"
+module.exports = "<div class=\"container\">  \r\n    <hr />\r\n    <div *ngFor=\"let employee of employees\">\r\n      <div class=\"row\">\r\n        <div class=\"col-md-4\">\r\n          <img src=\"http://marmita.idsgeo.com/img/{{employee.img}}\" class=\"img-fluid\" />\r\n        </div>\r\n        <div class=\"col-md-8\">\r\n          <div class=\"row\">\r\n            <h4>Name: {{ employee.first_name }}</h4>\r\n          </div>\r\n          <div class=\"row\">\r\n            <h5>Surname: {{ employee.surname }}</h5>\r\n          </div>\r\n          <div class=\"row\">\r\n            <p>Position: {{ employee.position }}</p>\r\n          </div>\r\n          <div class=\"row\">\r\n            <p>Mobile Phone: {{ employee.mobile_phone }}</p>\r\n          </div>\r\n          <div class=\"row\">\r\n            <p>Email: {{ employee.email }}</p>\r\n          </div>\r\n          <div class=\"row\">\r\n            <p>Date of birth: {{ employee.date_birth }}</p>\r\n          </div>\r\n          <div class=\"row\">\r\n            <button class=\"btn btn-space btn-outline-success\" (click)=\"editEmployee(employee)\" >Edit</button>\r\n            <button class=\"btn btn-space btn btn-danger\" (click)=\"deleteEmployee(employee)\" >Delete</button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <hr />\r\n    </div>\r\n    <br />\r\n  </div>"
 
 /***/ }),
 
@@ -418,7 +519,7 @@ var EmployeeComponent = /** @class */ (function () {
         this.router.navigate(['create', employee.id]);
     };
     EmployeeComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-employee',
             template: __webpack_require__("../../../../../src/app/employee/employee.component.html"),
             styles: [__webpack_require__("../../../../../src/app/employee/employee.component.css")]
@@ -478,9 +579,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var UploadComponent = /** @class */ (function () {
-    function UploadComponent(http, router) {
+    function UploadComponent(http, route, router) {
         this.http = http;
+        this.route = route;
         this.router = router;
         this.selectedFile = null;
         this.id = router.snapshot.params['id'];
@@ -492,6 +595,7 @@ var UploadComponent = /** @class */ (function () {
         this.selectedFile = event.target.files[0];
     };
     UploadComponent.prototype.onUpload = function () {
+        var _this = this;
         var fd = new FormData();
         var d = new Date();
         var n = d.getTime();
@@ -500,16 +604,17 @@ var UploadComponent = /** @class */ (function () {
         fd.append('image', this.selectedFile, name);
         this.http.post("http://www.softwareon.com.br/upload/image.php", fd)
             .subscribe(function (res) {
+            _this.route.navigate(['employee']);
             console.log(res);
         });
     };
     UploadComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-upload',
             template: __webpack_require__("../../../../../src/app/employee/upload.component.html"),
             styles: [__webpack_require__("../../../../../src/app/employee/upload.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]])
     ], UploadComponent);
     return UploadComponent;
 }());
@@ -570,7 +675,7 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.goToAdd = function () { this.router.navigate(['create']); };
     HomeComponent.prototype.goToEmployee = function () { this.router.navigate(['employee']); };
     HomeComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-home',
             template: __webpack_require__("../../../../../src/app/home/home.component.html"),
             styles: [__webpack_require__("../../../../../src/app/home/home.component.css")]
@@ -631,7 +736,7 @@ var RodapeComponent = /** @class */ (function () {
     RodapeComponent.prototype.ngOnInit = function () {
     };
     RodapeComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-rodape',
             template: __webpack_require__("../../../../../src/app/rodape/rodape.component.html"),
             styles: [__webpack_require__("../../../../../src/app/rodape/rodape.component.css")]
@@ -639,6 +744,70 @@ var RodapeComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], RodapeComponent);
     return RodapeComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/search.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_debounceTime__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/debounceTime.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_distinctUntilChanged__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/distinctUntilChanged.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_switchMap__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/switchMap.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var SearchService = /** @class */ (function () {
+    //baseUrl: string = 'https://api.cdnjs.com/libraries';
+    //queryUrl: string = '?search=';
+    function SearchService(http) {
+        this.http = http;
+        this.baseUrl = 'http://marmita.idsgeo.com/index.php/employee/get_like';
+        this.queryUrl = '/';
+    }
+    SearchService.prototype.search = function (terms) {
+        var _this = this;
+        return terms.debounceTime(400)
+            .distinctUntilChanged()
+            .switchMap(function (term) { return _this.searchEntries(term); });
+    };
+    SearchService.prototype.searchEntries = function (term) {
+        if (term == "") {
+            term = "00000000000";
+            return this.http
+                .get(this.baseUrl + this.queryUrl + term)
+                .map(function (res) { return res.json(); });
+        }
+        else {
+            return this.http
+                .get(this.baseUrl + this.queryUrl + term)
+                .map(function (res) { return res.json(); });
+        }
+    };
+    SearchService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
+    ], SearchService);
+    return SearchService;
 }());
 
 
@@ -666,7 +835,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/topo/topo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"\">\r\n  <nav class=\"navbar navbar-light bg-faded\">\r\n    <div class=\"container\">\r\n      <a class=\"navbar-brand\" routerLink=\"\">\r\n        <img src=\"http://www.softwareon.com.br/angular/task/assets/logo.jpg\" width=\"50px\" high=\"50px\" />\r\n      </a>      \r\n    </div>\r\n  </nav>\r\n  <div class=\"menu\">\r\n    <div class=\"container\">\r\n      <ul class=\"nav\">\r\n        <li class=\"nav-item\">\r\n            <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/\">Home</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/employee\">Employees</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/create\">Add Employee</a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"\">\r\n  <nav class=\"navbar navbar-light bg-faded\">\r\n    <div class=\"container\">\r\n      <a class=\"navbar-brand\" routerLink=\"\">\r\n        <img src=\"http://www.softwareon.com.br/angular/task/assets/logo.jpg\" width=\"50px\" high=\"50px\" />\r\n      </a>      \r\n    </div>\r\n  </nav>\r\n  <div class=\"menu\">\r\n    <div class=\"container\">\r\n      <ul class=\"nav\">\r\n        <li class=\"nav-item\">\r\n            <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/\">Home</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/employee\">Employees</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/create\">Add Employee</a>\r\n        </li>\r\n        <li class=\"nav-item\">\r\n          <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/auto\">Auto Complete</a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -692,7 +861,7 @@ var TopoComponent = /** @class */ (function () {
     TopoComponent.prototype.ngOnInit = function () {
     };
     TopoComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-topo',
             template: __webpack_require__("../../../../../src/app/topo/topo.component.html"),
             styles: [__webpack_require__("../../../../../src/app/topo/topo.component.css")]
