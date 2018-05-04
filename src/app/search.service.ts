@@ -7,15 +7,11 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import { Employee } from './domain/employee/employee';
 
-
 @Injectable()
 export class SearchService {
 
   baseUrl: string = 'http://marmita.idsgeo.com/index.php/employee/get_like';
   queryUrl: string = '/';
-  //baseUrl: string = 'https://api.cdnjs.com/libraries';
-  //queryUrl: string = '?search=';
-
   constructor(private http: Http) { }
 
   searchEntries(term: string): Observable<any> {

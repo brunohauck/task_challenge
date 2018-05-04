@@ -21,28 +21,23 @@ export class AutoComponent implements OnInit {
   results: Object;
   searchTerm$ = new Subject<string>();
   name: String;
-
   constructor(private router: Router, private searchService: SearchService) {
   }
-
   ngOnInit() {
     this.search()
       .subscribe(results => {
         this.results = results.results;
       });
   }
-
   search(): Observable<any> {
     return this.searchTerm$
       .debounceTime(400)
       .distinctUntilChanged()
       .switchMap(term => this.searchService.searchEntries(term));
   }
-
   onSearchKey(key: string) {
     this.searchTerm$.next(key)
   }
-
   setName(result){
     this.name = result.name;
   }
