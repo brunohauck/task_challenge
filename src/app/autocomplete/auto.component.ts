@@ -1,8 +1,13 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { Http } from '@angular/http';
 import { SearchService } from '../search.service';
 import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
 
 
 @Component({
@@ -18,16 +23,31 @@ export class AutoComponent implements OnInit {
   name: String;
 
   constructor(private router: Router, private searchService: SearchService) {
-    this.searchService.search(this.searchTerm$)
+  }
+
+  ngOnInit() {
+    this.search()
       .subscribe(results => {
         this.results = results.results;
       });
   }
-  ngOnInit() {
+
+  search(): Observable<any> {
+    return this.searchTerm$
+      .debounceTime(400)
+      .distinctUntilChanged()
+      .switchMap(term => this.searchService.searchEntries(term));
   }
+
+  onSearchKey(key: string) {
+    this.searchTerm$.next(key)
+  }
+
   setName(result){
     this.name = result.name;
   }
+
   goToAdd(){ this.router.navigate(['create']); }
+
   goToEmployee(){ this.router.navigate(['employee']); }
 }
